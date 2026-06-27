@@ -1,0 +1,36 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Logo" subtitle="The Salesforce cloud — primary mark, lock-up & on-brand" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px 22px; background: var(--slds-g-color-surface-container-1); display:flex; gap: 18px; align-items:stretch; }
+  .tile { flex:1; border-radius: var(--slds-g-radius-border-4); border: 1px solid var(--slds-g-color-border-1); display:flex; flex-direction:column; align-items:center; justify-content:center; gap: 12px; padding: 18px; }
+  .tile img { height: 40px; display:block; }
+  .lockup { display:flex; align-items:center; gap: 10px; }
+  .lockup img { height: 30px; }
+  .wordmark { font-size: 22px; font-weight: 700; letter-spacing: -.02em; color: var(--slds-g-color-on-surface-1); }
+  .cap { font-size: 11px; color: var(--slds-g-color-on-surface-3); }
+  .on-blue { background: var(--slds-g-color-accent-1); }
+  .on-blue .cap { color: rgba(255,255,255,.85); }
+</style>
+</head>
+<body>
+  <div class="tile">
+    <div class="lockup">
+      <img src="../assets/salesforce-cloud.svg" alt="Salesforce">
+      <span class="wordmark">salesforce</span>
+    </div>
+    <span class="cap">Primary lock-up on light</span>
+  </div>
+  <div class="tile">
+    <img src="../assets/salesforce-cloud.svg" alt="Salesforce cloud">
+    <span class="cap">Cloud mark · #00A1E0</span>
+  </div>
+  <div class="tile on-blue">
+    <img src="../assets/salesforce-cloud.svg" alt="Salesforce cloud" style="filter:brightness(0) invert(1)">
+    <span class="cap">Reversed on brand blue</span>
+  </div>
+</body>
+</html>

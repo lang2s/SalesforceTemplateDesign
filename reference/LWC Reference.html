@@ -1,0 +1,1285 @@
+<!-- @dsCard group="Reference" viewport="1200x780" name="LWC Component Reference" subtitle="The full lightning base-component catalog — built in this kit & documented" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLDS 2 — LWC Component Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto+Mono:wght@400;500&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=swap">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--slds-g-color-surface-1); color: var(--slds-g-color-on-surface-1); }
+  #app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+
+  .side {
+    position: sticky; top: 0; align-self: start; height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column;
+    border-right: 1px solid var(--slds-g-color-border-1);
+    background: var(--slds-g-color-surface-container-1);
+  }
+  .side-head { padding: 1rem 1rem 0.75rem; border-bottom: 1px solid var(--slds-g-color-border-1); }
+  .eyebrow { display: flex; align-items: center; gap: 0.4rem; font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-2); margin-bottom: 0.625rem; }
+  .eyebrow .bolt { color: #5867e8; font-size: 18px; }
+  .side-head h1 { font-size: var(--slds-g-text-heading-small); font-weight: var(--slds-g-font-weight-bold); margin: 0 0 0.75rem; line-height: 1.2; color: var(--slds-g-color-on-surface-1); }
+  .search { display: flex; align-items: center; gap: 0.45rem; height: 2.25rem; padding: 0 0.5rem; border: 1px solid var(--slds-g-color-border-2); border-radius: var(--slds-g-radius-border-2); background: var(--slds-g-color-surface-container-1); }
+  .search:focus-within { border-color: var(--slds-g-color-accent-1); box-shadow: 0 0 0 1px var(--slds-g-color-accent-1); }
+  .search input { flex: 1; border: 0; outline: none; background: transparent; font-size: var(--slds-g-text-body-regular); color: var(--slds-g-color-on-surface-1); }
+  .search .kbd { font-size: 11px; color: var(--slds-g-color-on-surface-3); border: 1px solid var(--slds-g-color-border-2); border-radius: 4px; padding: 1px 5px; }
+  .navlist { flex: 1; overflow-y: auto; padding: 0.5rem; }
+  .navlist a {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.5rem; border-radius: var(--slds-g-radius-border-2);
+    font-size: var(--slds-g-text-body-regular); color: var(--slds-g-color-accent-1);
+    text-decoration: none;
+  }
+  .navlist a:hover { background: var(--slds-g-color-surface-3); }
+  .navlist a .sdot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+  .navlist a .sdot.built { background: var(--slds-g-color-success-1); }
+  .navlist a .sdot.doc { background: var(--slds-g-color-on-surface-3); }
+  .navlist .empty-nav { padding: 0.75rem 0.5rem; font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-3); }
+  .navlist .cat-label { padding: 0.75rem 0.5rem 0.25rem; font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--slds-g-color-on-surface-3); }
+
+  .main { padding: 2rem 2.25rem 5rem; max-width: 1600px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .lede { margin: 0 0 2rem; }
+  .lede h2 { font-size: var(--slds-g-text-display-medium); margin: 0 0 0.5rem; letter-spacing: var(--slds-g-font-letterspacing-display); }
+  .lede p { font-size: var(--slds-g-text-body-large); color: var(--slds-g-color-on-surface-2); max-width: 70ch; line-height: 1.5; }
+  .legend { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+
+  section.cat { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+  section.cat > h3 {
+    font-size: var(--slds-g-text-heading-large); margin: 0 0 0.25rem;
+    padding-bottom: 0.5rem; border-bottom: 2px solid var(--slds-g-color-border-1);
+  }
+  section.cat > .catdesc { font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-3); margin: 0.5rem 0 1.25rem; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+  .entry {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--slds-g-color-border-1); border-radius: var(--slds-g-radius-border-4);
+    background: var(--slds-g-color-surface-container-1); overflow: hidden;
+  }
+  .entry.wide { grid-column: 1 / -1; }
+  .entry header { padding: 0.75rem 0.875rem 0.625rem; border-bottom: 1px solid var(--slds-g-color-border-1); }
+  .entry .nm { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .entry .nm strong { font-size: var(--slds-g-text-heading-small); }
+  .entry .nm code { font-size: 11px; color: var(--slds-g-color-on-surface-3); background: var(--slds-g-color-surface-3); padding: 1px 5px; border-radius: 4px; }
+  .entry .desc { font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-2); margin: 0.375rem 0 0; line-height: 1.45; }
+  .entry .props { font-size: 11.5px; color: var(--slds-g-color-on-surface-3); margin: 0.375rem 0 0; font-family: var(--slds-g-font-family-mono); }
+  .entry .demo { padding: 1rem 0.875rem; flex: 1; display: flex; align-items: center; }
+  .entry .demo.block { display: block; }
+  .entry .demo.empty { color: var(--slds-g-color-on-surface-3); font-size: var(--slds-g-text-body-small); }
+
+  .pill { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 10.5px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: 2px 7px; border-radius: var(--slds-g-radius-border-pill); }
+  .pill.built { color: var(--slds-g-color-success-1); background: var(--slds-g-color-success-container-1); }
+  .pill.doc { color: var(--slds-g-color-on-surface-2); background: var(--slds-g-color-surface-3); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.built { background: var(--slds-g-color-success-1); }
+  .dot.doc { background: var(--slds-g-color-border-3); }
+  .lg-item { display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-2); }
+
+  /* variant showcase inside each demo */
+  .vstack { display: flex; flex-direction: column; gap: 0.875rem; width: 100%; }
+  .vrow { display: flex; flex-direction: column; gap: 0.4rem; }
+  .vlabel { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--slds-g-color-on-surface-3); }
+  .vdemo { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .vdemo.col { flex-direction: column; align-items: stretch; }
+  /* wide cards: lay the variant groups out across the available width */
+  .entry.wide .vstack { flex-direction: row; flex-wrap: wrap; gap: 1.25rem 2.5rem; align-items: flex-start; }
+  .entry.wide .vrow { min-width: 200px; }
+
+  /* dynamic-icon animations */
+  .di { display:inline-flex; align-items:center; justify-content:center; }
+  @keyframes di-ellie { 0%{transform:scale(.7);opacity:.5} 60%{transform:scale(1);opacity:1} 100%{transform:scale(1.15);opacity:0} }
+  .di-ellie span { width:18px;height:18px;border-radius:50%;background:var(--slds-g-color-accent-1);animation:di-ellie 1.6s var(--slds-g-ease-out) infinite; }
+  @keyframes di-eq { 0%,100%{height:20%} 50%{height:100%} }
+  .di-eq { display:inline-flex;align-items:flex-end;gap:3px;height:22px; }
+  .di-eq i { width:5px;background:var(--slds-g-color-accent-1);border-radius:1px;animation:di-eq 0.9s ease-in-out infinite; }
+  .di-eq i:nth-child(2){animation-delay:.3s} .di-eq i:nth-child(3){animation-delay:.6s}
+  @keyframes di-strength { 0%,100%{opacity:.35} 50%{opacity:1} }
+  .di-strength { display:inline-flex;gap:4px; }
+  .di-strength i { width:12px;height:12px;border-radius:50%;animation:di-strength 1.2s ease-in-out infinite; }
+  .di-strength i:nth-child(2){animation-delay:.2s} .di-strength i:nth-child(3){animation-delay:.4s}
+  .di-waffle { display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:3px;border-radius:4px;transition:background var(--slds-g-duration-promptly) var(--slds-g-ease-out); }
+  .di-waffle:hover { background:var(--slds-g-color-surface-3); }
+  .di-waffle i { width:6px;height:6px;border-radius:50%;background:var(--slds-g-color-on-surface-2);transition:transform var(--slds-g-duration-promptly) var(--slds-g-ease-out); }
+  .di-waffle:hover i { transform:scale(1.25);background:var(--slds-g-color-accent-1); }
+  @media (prefers-reduced-motion: reduce){ .di-ellie span,.di-eq i,.di-strength i{animation:none} }
+</style>
+</head>
+<body>
+  <template id="__bundler_thumbnail">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="16" fill="#0176d3"/>
+      <rect x="22" y="26" width="56" height="10" rx="3" fill="#fff"/>
+      <rect x="22" y="44" width="40" height="7" rx="2.5" fill="#cfe6fb"/>
+      <rect x="22" y="56" width="48" height="7" rx="2.5" fill="#cfe6fb"/>
+      <rect x="22" y="68" width="34" height="7" rx="2.5" fill="#cfe6fb"/>
+    </svg>
+  </template>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../_ds_bundle.js"></script>
+
+  <script type="text/babel">
+    const C = window.SalesforceSLDS2DesignSystem_2eee88;
+    const {
+      Button, ButtonIcon, ButtonGroup, ButtonMenu, ButtonStateful,
+      Input, Select, Textarea, Slider, Combobox, Checkbox, CheckboxGroup, RadioGroup, Toggle, DualListbox, FileUpload,
+      Card, Badge, Avatar, Pill, Icon, EmptyState, Helptext,
+      Accordion, Tile, Carousel, Layout, LayoutItem,
+      Tabs, Alert, Toast, Spinner,
+      Modal, Breadcrumbs, VerticalNavigation,
+      ProgressIndicator, ProgressBar, ProgressRing,
+      Datatable, Tree,
+    } = C;
+
+    /* ---- additional SLDS variant TYPES not built into the kit (composed here from tokens) ---- */
+    function pillBtn(extra) { return { display:'inline-flex', alignItems:'center', justifyContent:'center', gap:'0.375rem', height:'2rem', padding:'0 1rem', font:'inherit', fontSize:'var(--slds-g-text-body-regular)', fontWeight:'var(--slds-g-font-weight-semibold)', lineHeight:1, borderRadius:'var(--slds-g-radius-border-3)', cursor:'pointer', whiteSpace:'nowrap', transition:'background var(--slds-g-duration-quickly) var(--slds-g-ease-out)', ...extra }; }
+    function Dark({ children }) { return <div style={{display:'inline-flex',gap:8,alignItems:'center',padding:'10px 14px',borderRadius:'var(--slds-g-radius-border-3)',background:'var(--slds-g-color-on-surface-1)'}}>{children}</div>; }
+    const XBTN = { base:{color:'var(--slds-g-color-accent-1)',background:'transparent',border:'1px solid transparent',hover:'var(--slds-g-color-surface-3)'}, 'destructive-text':{color:'var(--slds-g-color-error-1)',background:'transparent',border:'1px solid transparent',hover:'var(--slds-g-color-error-container-1)'}, inverse:{color:'#fff',background:'transparent',border:'1px solid rgba(255,255,255,.55)',hover:'rgba(255,255,255,.16)'} };
+    function XBtn({ variant='base', label }) { const v=XBTN[variant]||XBTN.base; return <button style={pillBtn({color:v.color,background:v.background,border:v.border})} onMouseEnter={e=>e.currentTarget.style.background=v.hover} onMouseLeave={e=>e.currentTarget.style.background=v.background}>{label}</button>; }
+    function XBtnIcon({ variant='border-inverse', iconName='utility:settings' }) { const border=variant==='border-inverse'; return <button title={variant} style={{width:'2rem',height:'2rem',display:'inline-flex',alignItems:'center',justifyContent:'center',borderRadius:'var(--slds-g-radius-border-3)',background:'transparent',border:border?'1px solid rgba(255,255,255,.55)':'1px solid transparent',color:'#fff',cursor:'pointer'}} onMouseEnter={e=>e.currentTarget.style.background='rgba(255,255,255,.16)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'}><Icon iconName={iconName} size="x-small" variant="inverse" style={{color:'inherit'}} /></button>; }
+    function ScopedTabs({ tabs, defaultValue }) {
+      const [cur,setCur]=React.useState(defaultValue||tabs[0].value);
+      const active=tabs.find(t=>t.value===cur)||tabs[0];
+      return <div style={{border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-2)',overflow:'hidden',width:'100%'}}>
+        <div role="tablist" style={{display:'flex',background:'var(--slds-g-color-surface-3)',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>
+          {tabs.map(t=>{const on=cur===t.value; return <button key={t.value} onClick={()=>setCur(t.value)} style={{padding:'0.5rem 1rem',font:'inherit',fontSize:'var(--slds-g-text-body-regular)',fontWeight:on?'var(--slds-g-font-weight-bold)':'var(--slds-g-font-weight-regular)',color:on?'var(--slds-g-color-accent-1)':'var(--slds-g-color-on-surface-2)',background:on?'var(--slds-g-color-surface-container-1)':'transparent',border:0,borderRight:'1px solid var(--slds-g-color-border-1)',borderTop:on?'2px solid var(--slds-g-color-accent-1)':'2px solid transparent',marginBottom:'-1px',cursor:'pointer'}}>{t.label}</button>;})}
+        </div>
+        <div style={{padding:'0.875rem 1rem',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-2)',background:'var(--slds-g-color-surface-container-1)'}}>{active.panel}</div>
+      </div>;
+    }
+    function VerticalTabs({ tabs, defaultValue }) {
+      const [cur,setCur]=React.useState(defaultValue||tabs[0].value);
+      const active=tabs.find(t=>t.value===cur)||tabs[0];
+      return <div style={{display:'flex',border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-2)',overflow:'hidden',width:'100%'}}>
+        <div role="tablist" style={{display:'flex',flexDirection:'column',borderRight:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-container-1)',minWidth:140}}>
+          {tabs.map(t=>{const on=cur===t.value; return <button key={t.value} onClick={()=>setCur(t.value)} style={{textAlign:'left',padding:'0.5rem 0.875rem',font:'inherit',fontSize:'var(--slds-g-text-body-regular)',fontWeight:on?'var(--slds-g-font-weight-bold)':'var(--slds-g-font-weight-regular)',color:on?'var(--slds-g-color-accent-1)':'var(--slds-g-color-on-surface-2)',background:on?'var(--slds-g-color-surface-3)':'transparent',border:0,borderRight:on?'2px solid var(--slds-g-color-accent-1)':'2px solid transparent',marginRight:'-1px',cursor:'pointer'}}>{t.label}</button>;})}
+        </div>
+        <div style={{padding:'0.875rem 1rem',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-2)',flex:1}}>{active.panel}</div>
+      </div>;
+    }
+    function XVertNav({ variant='shaded' }) {
+      const items=[{id:'recent',label:'Recent',iconName:'utility:clock',badge:12},{id:'created',label:'Created by Me',iconName:'utility:user'},{id:'shared',label:'Shared with Me',iconName:'utility:share',badge:3}];
+      const [cur,setCur]=React.useState('recent');
+      const compact=variant==='compact', shaded=variant==='shaded';
+      return <nav style={{minWidth:'12rem',background:shaded?'var(--slds-g-color-surface-2)':'transparent',borderRadius:shaded?'var(--slds-g-radius-border-3)':0,padding:shaded?'0.5rem 0':0}}>
+        <ul style={{listStyle:'none',margin:0,padding:0}}>
+          {items.map(it=>{const on=it.id===cur; return <li key={it.id}><a href="#" onClick={e=>{e.preventDefault();setCur(it.id);}} style={{display:'flex',alignItems:'center',gap:'0.5rem',padding:compact?'0.3rem 0.75rem':'0.5rem 0.75rem',borderLeft:'3px solid '+(on?'var(--slds-g-color-accent-1)':'transparent'),background:on?(shaded?'var(--slds-g-color-surface-container-1)':'var(--slds-g-color-surface-3)'):'transparent',color:on?'var(--slds-g-color-on-surface-1)':'var(--slds-g-color-on-surface-2)',fontSize:compact?'var(--slds-g-text-body-small)':'var(--slds-g-text-body-regular)',fontWeight:on?'var(--slds-g-font-weight-semibold)':'var(--slds-g-font-weight-regular)',textDecoration:'none',cursor:'pointer'}}><Icon iconName={it.iconName} size="x-small" style={{color:'inherit',flex:'none'}} /><span style={{flex:1}}>{it.label}</span>{it.badge!=null && <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>{it.badge}</span>}</a></li>;})}
+        </ul>
+      </nav>;
+    }
+
+    /* lightning-barcode-scanner (mobile-only) — composed here as a faithful SLDS demo */
+    const BC_ICON_SZ = { small:'1.25rem', medium:'1.5rem', large:'2rem' };
+    function ScannerIcon({ size='medium', disabled=false, custom=false, onClick }) {
+      const px = BC_ICON_SZ[size]||BC_ICON_SZ.medium;
+      return <button onClick={disabled?undefined:onClick} disabled={disabled} title={disabled?'Barcode scanner (disabled)':'Open barcode scanner'} style={{display:'inline-flex',alignItems:'center',justifyContent:'center',width:'2.75rem',height:'2.75rem',borderRadius:'var(--slds-g-radius-border-3)',border:'1px solid var(--slds-g-color-border-2)',background:custom?'var(--slds-g-color-accent-container-1)':'var(--slds-g-color-surface-container-1)',color:disabled?'var(--slds-g-color-on-surface-3)':(custom?'var(--slds-g-color-accent-1)':'var(--slds-g-color-on-surface-1)'),opacity:disabled?0.5:1,cursor:disabled?'not-allowed':'pointer',transition:'background var(--slds-g-duration-quickly) var(--slds-g-ease-out)'}}><span style={{fontSize:px,lineHeight:1}}><Icon iconName={custom?'utility:photo_camera':'utility:qr_code_scanner'} size={size==='large'?'medium':'small'} style={{color:'inherit'}} /></span></button>;
+    }
+    function ScannerView({ mode, onClose, onScan }) {
+      return <div style={{width:'100%',maxWidth:280,borderRadius:'var(--slds-g-radius-border-4)',overflow:'hidden',border:'1px solid var(--slds-g-color-border-1)',boxShadow:'var(--slds-g-shadow-3)'}}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0.5rem 0.75rem',background:'var(--slds-g-color-on-surface-1)',color:'#fff'}}>
+          <span style={{fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-semibold)'}}>{mode==='continuous'?'Continuous Scan':'Single Scan'}</span>
+          <button onClick={onClose} title="Close" style={{display:'inline-flex',background:'transparent',border:0,color:'#fff',cursor:'pointer',padding:2}}><Icon iconName="utility:close" size="x-small" style={{color:'inherit'}} /></button>
+        </div>
+        <div style={{position:'relative',height:150,display:'flex',alignItems:'center',justifyContent:'center',background:'repeating-linear-gradient(135deg,#141414 0 12px,#191919 12px 24px)'}}>
+          <div style={{width:'72%',height:'56%',border:'2px solid var(--slds-g-color-accent-1)',borderRadius:'var(--slds-g-radius-border-2)',boxShadow:'0 0 0 9999px rgba(0,0,0,.35)'}}></div>
+          <div style={{position:'absolute',left:'14%',right:'14%',height:2,background:'var(--slds-g-color-error-1)',boxShadow:'0 0 8px var(--slds-g-color-error-1)'}}></div>
+        </div>
+        <div style={{display:'flex',gap:8,padding:'0.625rem 0.75rem',background:'var(--slds-g-color-on-surface-1)'}}>
+          <Button variant="brand" size="small" label={mode==='continuous'?'Capture':'Scan'} onClick={onScan} />
+          {mode==='continuous' && <Button variant="neutral" size="small" label="Done" onClick={onClose} />}
+        </div>
+      </div>;
+    }
+    function BarcodeScanner() {
+      const [open,setOpen]=React.useState(null);
+      const [codes,setCodes]=React.useState([]);
+      const scan=(mode)=>{ const v='9'+Math.floor(100000000000+Math.random()*899999999999); setCodes(c=>[v,...c].slice(0,4)); if(mode==='single') setOpen(null); };
+      return <VStack>
+        <VRow label="Icon sizes (enabled) · disabled">
+          <ScannerIcon size="small" onClick={()=>setOpen('single')} />
+          <ScannerIcon size="medium" onClick={()=>setOpen('single')} />
+          <ScannerIcon size="large" onClick={()=>setOpen('single')} />
+          <ScannerIcon size="medium" disabled />
+        </VRow>
+        <VRow label="Custom icon">
+          <ScannerIcon size="medium" custom onClick={()=>setOpen('single')} />
+        </VRow>
+        <VRow label="Scanning modes (tap to launch)" col>
+          <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+            <Button variant="neutral" size="small" label="Single scan" iconName="utility:qr_code_scanner" onClick={()=>setOpen('single')} />
+            <Button variant="neutral" size="small" label="Continuous scan" iconName="utility:qr_code_scanner" onClick={()=>setOpen('continuous')} />
+          </div>
+          {open && <ScannerView mode={open} onScan={()=>scan(open)} onClose={()=>setOpen(null)} />}
+          {codes.length>0 && <div style={{display:'flex',flexWrap:'wrap',gap:6}}>{codes.map((c,i)=><span key={i} style={{fontFamily:'var(--slds-g-font-family-mono, monospace)',fontSize:'var(--slds-g-text-body-small)',padding:'2px 8px',borderRadius:'var(--slds-g-radius-border-pill)',background:'var(--slds-g-color-success-container-1)',color:'var(--slds-g-color-success-1)'}}>{c}</span>)}</div>}
+        </VRow>
+      </VStack>;
+    }
+
+    /* lightning-button-icon-stateful — stateful (toggle) icon-only button */
+    const BIS_BTN = { 'xx-small':16, 'x-small':20, small:24, medium:32 };
+    const BIS_GLYPH = { 'xx-small':'xx-small', 'x-small':'x-small', small:'x-small', medium:'x-small' };
+    function StatefulIconBtn({ iconName='utility:favorite', variant='border', size='medium', selected, onClick, title }) {
+      const dim = BIS_BTN[size]||32; const inverse = variant==='border-inverse';
+      let bg='transparent', bd='1px solid var(--slds-g-color-border-2)', col='var(--slds-g-color-on-surface-2)';
+      if (variant==='border-filled') { bg='var(--slds-g-color-surface-container-1)'; }
+      if (inverse) { bd='1px solid rgba(255,255,255,.55)'; col='#fff'; }
+      if (selected) {
+        if (inverse) { bg='#fff'; col='var(--slds-g-color-accent-1)'; bd='1px solid #fff'; }
+        else { bg='var(--slds-g-color-accent-1)'; col='#fff'; bd='1px solid var(--slds-g-color-accent-1)'; }
+      }
+      return <button title={title} aria-pressed={!!selected} onClick={onClick} style={{display:'inline-flex',alignItems:'center',justifyContent:'center',width:dim,height:dim,borderRadius:'var(--slds-g-radius-border-3)',background:bg,border:bd,color:col,cursor:'pointer',padding:0,transition:'background var(--slds-g-duration-quickly) var(--slds-g-ease-out)'}}><Icon iconName={iconName} size={BIS_GLYPH[size]} filled={!!selected} variant={inverse&&!selected?'inverse':'default'} style={{color:'inherit'}} /></button>;
+    }
+    function ButtonIconStateful() {
+      const [v,setV]=React.useState({border:true,'border-filled':false});
+      const [sz,setSz]=React.useState('medium');
+      const [fb,setFb]=React.useState('like');
+      return <VStack>
+        <VRow label="Variants (border · border-filled · border-inverse)">
+          <StatefulIconBtn variant="border" selected={v.border} title="border" onClick={()=>setV(s=>({...s,border:!s.border}))} />
+          <StatefulIconBtn variant="border-filled" selected={v['border-filled']} title="border-filled" onClick={()=>setV(s=>({...s,'border-filled':!s['border-filled']}))} />
+          <Dark><StatefulIconBtn variant="border-inverse" selected title="border-inverse (selected)" onClick={()=>{}} /><StatefulIconBtn variant="border-inverse" title="border-inverse" onClick={()=>{}} /></Dark>
+        </VRow>
+        <VRow label="Sizes (xx-small · x-small · small · medium)">
+          {['xx-small','x-small','small','medium'].map(s=><StatefulIconBtn key={s} size={s} variant="border" selected={sz===s} title={s} onClick={()=>setSz(s)} />)}
+        </VRow>
+        <VRow label="Like / Dislike (selecting one deselects the other)">
+          <StatefulIconBtn iconName="utility:thumb_up" variant="border" selected={fb==='like'} title="Like" onClick={()=>setFb(f=>f==='like'?null:'like')} />
+          <StatefulIconBtn iconName="utility:thumb_down" variant="border" selected={fb==='dislike'} title="Dislike" onClick={()=>setFb(f=>f==='dislike'?null:'dislike')} />
+        </VRow>
+      </VStack>;
+    }
+
+    /* lightning-click-to-dial — formatted phone rendered as click-to-dial link (enabled) or plain text (disabled) */
+    function ClickToDial({ number='123 456 7890', enabled=true, record }) {
+      const [dialing,setDialing]=React.useState(false);
+      if (!enabled) return <span style={{display:'inline-flex',alignItems:'center',gap:'0.4rem',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-2)'}}><Icon iconName="utility:call" size="x-small" style={{color:'var(--slds-g-color-on-surface-3)'}} />{number}</span>;
+      return <button onClick={()=>{setDialing(true);setTimeout(()=>setDialing(false),1600);}} style={{display:'inline-flex',alignItems:'center',gap:'0.4rem',background:'transparent',border:0,padding:0,cursor:'pointer',font:'inherit',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)'}}>
+        <Icon iconName="utility:call" size="x-small" variant="brand" style={{color:'inherit'}} />
+        <span style={{textDecoration:'underline'}}>{number}</span>
+        {record && <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>· {record}</span>}
+        {dialing && <span style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-success-1)'}}><span style={{width:6,height:6,borderRadius:'50%',background:'var(--slds-g-color-success-1)'}}></span>Dialing…</span>}
+      </button>;
+    }
+    function ClickToDialDemo() {
+      return <VStack>
+        <VRow label="Enabled (click to dial)" col>
+          <ClickToDial number="415 555 0132" />
+          <ClickToDial number="312 555 7788" record="Acme Corporation" />
+        </VRow>
+        <VRow label="Disabled (plain formatted number)" col>
+          <ClickToDial number="206 555 0101" enabled={false} />
+        </VRow>
+      </VStack>;
+    }
+
+    /* lightning-flow — screen flow interview runner with Back / Next / Pause / Finish + status */
+    function FlowDemo() {
+      const screens=[
+        {title:'Contact Details', body:<div style={{display:'flex',flexDirection:'column',gap:10}}><Input label="First Name" defaultValue="Jane" /><Input label="Last Name" defaultValue="Doe" /></div>},
+        {title:'Company', body:<div style={{display:'flex',flexDirection:'column',gap:10}}><Input label="Account" defaultValue="Acme Corporation" /><Select label="Industry" options={['Technology','Finance','Healthcare']} /></div>},
+        {title:'Review', body:<div style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-2)'}}>Jane Doe · Acme Corporation. Click <strong>Finish</strong> to submit.</div>},
+      ];
+      const [i,setI]=React.useState(0);
+      const [status,setStatus]=React.useState('STARTED');
+      const last=i===screens.length-1;
+      const STC={STARTED:['brand','In progress'],PAUSED:['warning','Paused'],FINISHED:['success','Finished']};
+      const [sv,sl]=STC[status];
+      const restart=()=>{setI(0);setStatus('STARTED');};
+      return <VStack><VRow label="Screen flow interview" col>
+        <div style={{width:'100%',maxWidth:380,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-4)',boxShadow:'var(--slds-g-shadow-2)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+          <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0.625rem 0.875rem',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>
+            <strong style={{fontSize:'var(--slds-g-text-heading-x-small,1rem)'}}>New Contact Flow</strong>
+            <Badge variant={sv} label={sl} />
+          </div>
+          <div style={{padding:'0.875rem'}}>
+            <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:'0.75rem'}}>{screens.map((s,n)=><span key={n} style={{flex:1,height:4,borderRadius:2,background:n<=i?'var(--slds-g-color-accent-1)':'var(--slds-g-color-border-1)'}}></span>)}</div>
+            {status==='FINISHED' ? <div style={{textAlign:'center',padding:'1rem 0'}}><Icon iconName="utility:success" size="medium" variant="success" /><p style={{margin:'0.5rem 0 0',fontSize:'var(--slds-g-text-body-regular)'}}>Your flow finished.</p></div>
+              : <React.Fragment><div style={{fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-semibold)',color:'var(--slds-g-color-on-surface-2)',marginBottom:8}}>{screens[i].title}</div><div key={i}>{screens[i].body}</div></React.Fragment>}
+          </div>
+          <div style={{display:'flex',gap:8,justifyContent:'flex-end',padding:'0.625rem 0.875rem',borderTop:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)'}}>
+            {status==='FINISHED' ? <Button variant="neutral" size="small" label="Restart" onClick={restart} />
+              : <React.Fragment>
+                <Button variant="neutral" size="small" label="Back" disabled={i===0} onClick={()=>setI(n=>Math.max(0,n-1))} />
+                <Button variant="neutral" size="small" label="Pause" onClick={()=>setStatus(s=>s==='PAUSED'?'STARTED':'PAUSED')} />
+                {last ? <Button variant="brand" size="small" label="Finish" onClick={()=>setStatus('FINISHED')} />
+                  : <Button variant="brand" size="small" label="Next" onClick={()=>{setStatus('STARTED');setI(n=>n+1);}} />}
+              </React.Fragment>}
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* lightning-tree-grid — datatable with expandable nested rows (chevron + checkbox + typed cells) */
+    const TG_DATA = [
+      { id:'1', name:'Acme Corporation', owner:'Austin Guevara', phone:'415 555 0132', amount:1250000, _children:[
+        { id:'1a', name:'Acme — West Region', owner:'Lando Voss', phone:'415 555 0144', amount:680000, _children:[
+          { id:'1a1', name:'Acme — Bay Area', owner:'Lando Voss', phone:'415 555 0155', amount:320000 },
+          { id:'1a2', name:'Acme — Pacific NW', owner:'Mei Lin', phone:'206 555 0101', amount:360000 },
+        ]},
+        { id:'1b', name:'Acme — East Region', owner:'Priya Nadar', phone:'212 555 0198', amount:570000 },
+      ]},
+      { id:'2', name:'Global Media', owner:'Sofia Park', phone:'312 555 7788', amount:842000, _children:[
+        { id:'2a', name:'Global Media — EMEA', owner:'Tom Becker', phone:'212 555 3321', amount:842000 },
+      ]},
+      { id:'3', name:'Northwind Trading', owner:'Dana Cole', phone:'617 555 2244', amount:415000 },
+    ];
+    const fmtUSD = n => '$'+n.toLocaleString('en-US');
+    function TGRow({ node, level, expanded, sel, toggle, select }) {
+      const kids = node._children && node._children.length;
+      const open = expanded.has(node.id);
+      return <React.Fragment>
+        <tr style={{borderBottom:'1px solid var(--slds-g-color-border-1)'}}>
+          <td style={{width:32,padding:'0 0 0 8px',textAlign:'center'}}><input type="checkbox" checked={sel.has(node.id)} onChange={()=>select(node.id)} style={{accentColor:'var(--slds-g-color-accent-1)',cursor:'pointer'}} /></td>
+          <td style={{padding:'0.5rem 0.75rem'}}>
+            <span style={{display:'inline-flex',alignItems:'center',gap:4,paddingLeft:level*22}}>
+              {kids ? <button onClick={()=>toggle(node.id)} title={open?'Collapse':'Expand'} style={{display:'inline-flex',background:'transparent',border:0,cursor:'pointer',padding:0,color:'var(--slds-g-color-on-surface-2)',transform:open?'rotate(90deg)':'none',transition:'transform var(--slds-g-duration-quickly) var(--slds-g-ease-out)'}}><Icon iconName="utility:chevronright" size="xx-small" style={{color:'inherit'}} /></button> : <span style={{width:14,display:'inline-block'}}></span>}
+              <a href="#" onClick={e=>e.preventDefault()} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none',fontSize:'var(--slds-g-text-body-regular)'}}>{node.name}</a>
+            </span>
+          </td>
+          <td style={{padding:'0.5rem 0.75rem',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-2)'}}>{node.owner}</td>
+          <td style={{padding:'0.5rem 0.75rem'}}><a href={'tel:'+node.phone.replace(/ /g,'')} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none',fontSize:'var(--slds-g-text-body-regular)'}}>{node.phone}</a></td>
+          <td style={{padding:'0.5rem 0.75rem',textAlign:'right',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',fontVariantNumeric:'tabular-nums'}}>{fmtUSD(node.amount)}</td>
+        </tr>
+        {kids && open && node._children.map(c=><TGRow key={c.id} node={c} level={level+1} expanded={expanded} sel={sel} toggle={toggle} select={select} />)}
+      </React.Fragment>;
+    }
+    function TreeGrid() {
+      const [expanded,setExpanded]=React.useState(new Set(['1','1a']));
+      const [sel,setSel]=React.useState(new Set());
+      const allIds=(()=>{const a=[];const walk=ns=>ns.forEach(n=>{if(n._children){a.push(n.id);walk(n._children);}});walk(TG_DATA);return a;})();
+      const toggle=id=>setExpanded(s=>{const n=new Set(s);n.has(id)?n.delete(id):n.add(id);return n;});
+      const select=id=>setSel(s=>{const n=new Set(s);n.has(id)?n.delete(id):n.add(id);return n;});
+      const th={textAlign:'left',padding:'0.5rem 0.75rem',fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-bold)',color:'var(--slds-g-color-on-surface-2)',borderBottom:'1px solid var(--slds-g-color-border-2)',whiteSpace:'nowrap'};
+      return <VStack><VRow label="Account hierarchy (expand / collapse · selectable rows)" col>
+        <div style={{display:'flex',gap:8,marginBottom:8}}>
+          <Button variant="neutral" size="small" label="Expand all" onClick={()=>setExpanded(new Set(allIds))} />
+          <Button variant="neutral" size="small" label="Collapse all" onClick={()=>setExpanded(new Set())} />
+        </div>
+        <div style={{border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+          <table style={{width:'100%',borderCollapse:'collapse'}}>
+            <thead><tr style={{background:'var(--slds-g-color-surface-2)'}}><th style={{...th,width:32}}></th><th style={th}>Account Name</th><th style={th}>Account Owner</th><th style={th}>Phone</th><th style={{...th,textAlign:'right'}}>Annual Revenue</th></tr></thead>
+            <tbody>{TG_DATA.map(n=><TGRow key={n.id} node={n} level={0} expanded={expanded} sel={sel} toggle={toggle} select={select} />)}</tbody>
+          </table>
+        </div>
+        {sel.size>0 && <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>{sel.size} row{sel.size>1?'s':''} selected</div>}
+      </VRow></VStack>;
+    }
+
+    /* lightning-quick-action-panel (beta) — record quick action built on the Modal blueprint (header + body + footer slot) */
+    function QuickActionPanel() {
+      const [open,setOpen]=React.useState(null); // 'call' | 'edit' | null
+      return <VStack><VRow label="Record quick actions (open a panel)" col>
+        <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+          <Button variant="neutral" size="small" iconName="utility:call" label="Log a Call" onClick={()=>setOpen('call')} />
+          <Button variant="neutral" size="small" iconName="utility:edit" label="Edit Account" onClick={()=>setOpen('edit')} />
+        </div>
+        <Modal isOpen={open==='call'} size="small" onClose={()=>setOpen(null)} title="Log a Call"
+          footer={<React.Fragment><Button variant="neutral" label="Cancel" onClick={()=>setOpen(null)} /><Button variant="brand" label="Save" onClick={()=>setOpen(null)} /></React.Fragment>}>
+          <div style={{display:'flex',flexDirection:'column',gap:12}}>
+            <Input label="Subject" defaultValue="Call — Acme Corporation" />
+            <Textarea label="Comments" rows={3} placeholder="Add call notes…" />
+            <Select label="Type" options={['Outbound','Inbound','Voicemail']} />
+          </div>
+        </Modal>
+        <Modal isOpen={open==='edit'} size="small" onClose={()=>setOpen(null)} title="Edit Account">
+          <div style={{display:'flex',flexDirection:'column',gap:12}}>
+            <Input label="Account Name" defaultValue="Acme Corporation" />
+            <Input label="Phone" defaultValue="415 555 0132" />
+            <Select label="Industry" options={['Technology','Finance','Healthcare']} />
+            <div style={{display:'flex',gap:8,justifyContent:'flex-end',marginTop:4}}>
+              <Button variant="neutral" label="Cancel" onClick={()=>setOpen(null)} />
+              <Button variant="brand" label="Save" onClick={()=>setOpen(null)} />
+            </div>
+            <p style={{margin:0,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Record-form style — buttons sit in the body, no footer slot.</p>
+          </div>
+        </Modal>
+      </VRow></VStack>;
+    }
+
+    /* lightning-dynamic-icon — animated state icons: ellie, eq, score, strength, trend, waffle */
+    function DI({ type, option }) {
+      const G='var(--slds-g-color-success-1)', R='var(--slds-g-color-error-1)';
+      if (type==='ellie') return <span className="di di-ellie"><span></span></span>;
+      if (type==='eq') return <span className="di-eq"><i></i><i></i><i></i></span>;
+      if (type==='score') return <span className="di" style={{width:18,height:18,borderRadius:'50%',border:'2px solid '+(option==='positive'?G:R),background:option==='positive'?G:'transparent'}}></span>;
+      if (type==='strength') { const cols=option==='weak'?[R,R,R]:option==='medium'?[G,G,R]:[G,G,G]; return <span className="di-strength">{cols.map((c,i)=><i key={i} style={{background:c}}></i>)}</span>; }
+      if (type==='trend') { const m={up:['north',G],down:['south',R],neutral:['east','var(--slds-g-color-on-surface-3)']}; const [g,c]=m[option]||m.neutral; return <span className="di" style={{color:c}}><span className="material-symbols-rounded" style={{fontSize:20,color:'inherit'}}>{'trending_'+(option==='up'?'up':option==='down'?'down':'flat')}</span></span>; }
+      if (type==='waffle') return <span className="di-waffle" title="App Launcher">{Array.from({length:9}).map((_,i)=><i key={i}></i>)}</span>;
+      return null;
+    }
+    function DynamicIcon() {
+      return <VStack>
+        <VRow label="ellie (pulse) · eq (graph) · waffle (hover)">
+          <span style={{display:'inline-flex',flexDirection:'column',alignItems:'center',gap:4}}><DI type="ellie" /><span className="vlabel">ellie</span></span>
+          <span style={{display:'inline-flex',flexDirection:'column',alignItems:'center',gap:4}}><DI type="eq" /><span className="vlabel">eq</span></span>
+          <span style={{display:'inline-flex',flexDirection:'column',alignItems:'center',gap:4}}><DI type="waffle" /><span className="vlabel">waffle</span></span>
+        </VRow>
+        <VRow label="score (positive / negative)">
+          <span style={{display:'inline-flex',alignItems:'center',gap:6}}><DI type="score" option="positive" /><span className="vlabel">positive</span></span>
+          <span style={{display:'inline-flex',alignItems:'center',gap:6}}><DI type="score" option="negative" /><span className="vlabel">negative</span></span>
+        </VRow>
+        <VRow label="strength (weak / medium / strong)">
+          <span style={{display:'inline-flex',alignItems:'center',gap:6}}><DI type="strength" option="weak" /><span className="vlabel">weak</span></span>
+          <span style={{display:'inline-flex',alignItems:'center',gap:6}}><DI type="strength" option="medium" /><span className="vlabel">medium</span></span>
+          <span style={{display:'inline-flex',alignItems:'center',gap:6}}><DI type="strength" option="strong" /><span className="vlabel">strong</span></span>
+        </VRow>
+        <VRow label="trend (up / down / neutral)">
+          <span style={{display:'inline-flex',alignItems:'center',gap:6}}><DI type="trend" option="up" /><span className="vlabel">up</span></span>
+          <span style={{display:'inline-flex',alignItems:'center',gap:6}}><DI type="trend" option="down" /><span className="vlabel">down</span></span>
+          <span style={{display:'inline-flex',alignItems:'center',gap:6}}><DI type="trend" option="neutral" /><span className="vlabel">neutral</span></span>
+        </VRow>
+      </VStack>;
+    }
+
+    /* lightning-illustration (beta) — SLDS empty-state SVG illustration, icon-only (no supporting text) */
+    const ILLUS = {
+      'cart:noitems':['utility:cart','var(--slds-g-color-accent-1)','Empty cart'],
+      'error:connectionissue':['utility:power_off','var(--slds-g-color-error-1)','Connection issue'],
+      'noresults:search':['utility:search','var(--slds-g-color-on-surface-3)','No search results'],
+      'success:new':['utility:success','var(--slds-g-color-success-1)','Success'],
+      'access:request':['utility:lock','var(--slds-g-color-warning-1)','Access request'],
+      'maintenance:planned':['utility:settings','var(--slds-g-color-accent-1)','Planned maintenance'],
+    };
+    function Illustration({ name }) {
+      const [g,c]=ILLUS[name]||ILLUS['noresults:search'];
+      return <span className="di" style={{width:64,height:64,borderRadius:'50%',background:'var(--slds-g-color-surface-3)'}}><Icon iconName={g} size="large" style={{color:c}} /></span>;
+    }
+    function IllustrationDemo() {
+      return <VStack><VRow label="Illustration names (set:symbol) — icon only, text lives in adjacent UI">
+        {Object.keys(ILLUS).map(n=><span key={n} style={{display:'inline-flex',flexDirection:'column',alignItems:'center',gap:6,width:120}}><Illustration name={n} /><code style={{fontSize:11,color:'var(--slds-g-color-on-surface-3)'}}>{n}</code></span>)}
+      </VRow></VStack>;
+    }
+
+    /* lightning-map (beta) — map with markers + optional location list */
+    const MAP_LOC = [
+      { v:'sf', title:'Salesforce Tower', addr:'415 Mission St, San Francisco, CA', x:22, y:62, icon:'standard:account' },
+      { v:'ny', title:'Salesforce — New York', addr:'1095 Avenue of the Americas, NY', x:74, y:40, icon:'standard:account' },
+      { v:'ch', title:'Salesforce — Chicago', addr:'333 W Wacker Dr, Chicago, IL', x:55, y:46, icon:'standard:account' },
+    ];
+    function MapDemo() {
+      const [sel,setSel]=React.useState('sf');
+      return <VStack><VRow label="Markers + location list (select to activate a marker)" col>
+        <div style={{display:'flex',flexWrap:'wrap',border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+          <div style={{position:'relative',flex:'1 1 320px',minHeight:220,background:'linear-gradient(0deg,#e8efe6,#eef2f4)',backgroundImage:'linear-gradient(rgba(0,0,0,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.05) 1px,transparent 1px)',backgroundSize:'28px 28px'}}>
+            {MAP_LOC.map(m=>{const on=sel===m.v;return <button key={m.v} onClick={()=>setSel(m.v)} title={m.title} style={{position:'absolute',left:m.x+'%',top:m.y+'%',transform:'translate(-50%,-100%)',background:'transparent',border:0,cursor:'pointer',padding:0,zIndex:on?2:1}}><span className="material-symbols-rounded" style={{fontSize:on?40:30,color:on?'var(--slds-g-color-error-1)':'var(--slds-g-color-accent-1)',filter:'drop-shadow(0 1px 1px rgba(0,0,0,.3))',transition:'all var(--slds-g-duration-promptly) var(--slds-g-ease-out)'}}>location_on</span></button>;})}
+          </div>
+          <div style={{flex:'0 0 240px',borderLeft:'1px solid var(--slds-g-color-border-1)',display:'flex',flexDirection:'column'}}>
+            <div style={{padding:'0.625rem 0.875rem',borderBottom:'1px solid var(--slds-g-color-border-1)',fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-bold)',color:'var(--slds-g-color-on-surface-2)'}}>Offices ({MAP_LOC.length})</div>
+            <ul style={{listStyle:'none',margin:0,padding:0,flex:1}}>
+              {MAP_LOC.map(m=>{const on=sel===m.v;return <li key={m.v}><button onClick={()=>setSel(m.v)} style={{display:'flex',gap:8,width:'100%',textAlign:'left',padding:'0.625rem 0.875rem',border:0,borderLeft:'3px solid '+(on?'var(--slds-g-color-accent-1)':'transparent'),background:on?'var(--slds-g-color-surface-3)':'transparent',cursor:'pointer'}}><Icon iconName={m.icon} size="small" /><span><span style={{display:'block',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)'}}>{m.title}</span><span style={{display:'block',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>{m.addr}</span></span></button></li>;})}
+            </ul>
+            <a href="#" onClick={e=>e.preventDefault()} style={{padding:'0.625rem 0.875rem',borderTop:'1px solid var(--slds-g-color-border-1)',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>Open in Google Maps ↗</a>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* lightning-pill-container — a wrapping group of pills with a heading + overflow */
+    function PillContainer() {
+      const init=['California','Open','High Priority','This Quarter','Enterprise','Renewal'];
+      const [pills,setPills]=React.useState(init);
+      const remove=p=>setPills(s=>s.filter(x=>x!==p));
+      return <VStack>
+        <VRow label="Bordered container (removable filters)" col>
+          <div style={{display:'flex',flexWrap:'wrap',gap:6,padding:'0.5rem',border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-2)',background:'var(--slds-g-color-surface-container-1)'}}>
+            {pills.length?pills.map(p=><Pill key={p} label={p} onRemove={()=>remove(p)} />):<span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)',padding:'2px 4px'}}>No filters applied</span>}
+          </div>
+        </VRow>
+        <VRow label="Bare (with overflow)" col>
+          <div style={{display:'flex',flexWrap:'wrap',gap:6,alignItems:'center'}}>
+            <Pill label="Technology" iconName="utility:filter" />
+            <Pill label="Finance" iconName="utility:filter" />
+            <Pill label="Healthcare" iconName="utility:filter" />
+            <span style={{fontSize:'var(--slds-g-font-scale-neg-1)',color:'var(--slds-g-color-on-surface-2)',padding:'0 4px'}}>+4 more</span>
+          </div>
+        </VRow>
+      </VStack>;
+    }
+
+    /* lightning-input-rich-text — WYSIWYG editor with SLDS toolbar categories + variant (top/bottom toolbar) */
+    function RichText() {
+      const ref=React.useRef(null);
+      const [variant,setVariant]=React.useState('top');
+      const cmd=(c,v)=>{document.execCommand(c,false,v);ref.current&&ref.current.focus();};
+      const tbBtn={display:'inline-flex',alignItems:'center',justifyContent:'center',width:'1.75rem',height:'1.75rem',border:0,background:'transparent',borderRadius:'var(--slds-g-radius-border-2)',cursor:'pointer',color:'var(--slds-g-color-on-surface-2)'};
+      const sep=<span style={{width:1,height:18,background:'var(--slds-g-color-border-1)',margin:'0 2px'}}></span>;
+      const IcoBtn=({c,v,icon,title})=> <button title={title} style={tbBtn} onMouseDown={e=>{e.preventDefault();cmd(c,v);}} onMouseEnter={e=>e.currentTarget.style.background='var(--slds-g-color-surface-3)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'}><span className="material-symbols-rounded" style={{fontSize:18,color:'inherit'}}>{icon}</span></button>;
+      const sel={height:'1.75rem',border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-2)',background:'var(--slds-g-color-surface-container-1)',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-1)',padding:'0 4px',cursor:'pointer'};
+      const toolbar=<div style={{display:'flex',flexWrap:'wrap',alignItems:'center',gap:2,padding:'0.375rem 0.5rem',background:'var(--slds-g-color-surface-2)',borderBottom:variant==='top'?'1px solid var(--slds-g-color-border-1)':0,borderTop:variant==='bottom'?'1px solid var(--slds-g-color-border-1)':0}}>
+        <select style={sel} onMouseDown={e=>e.stopPropagation()} onChange={e=>cmd('fontName',e.target.value)} defaultValue=""><option value="" disabled>Font</option><option value="Arial">Arial</option><option value="Courier">Courier</option><option value="Garamond">Garamond</option><option value="Tahoma">Tahoma</option><option value="Times New Roman">Times New Roman</option><option value="Verdana">Verdana</option></select>
+        <select style={sel} onChange={e=>cmd('fontSize',e.target.value)} defaultValue="3"><option value="1">10</option><option value="2">13</option><option value="3">16</option><option value="4">18</option><option value="5">24</option><option value="6">36</option></select>
+        {sep}
+        <IcoBtn c="bold" icon="format_bold" title="Bold" /><IcoBtn c="italic" icon="format_italic" title="Italic" /><IcoBtn c="underline" icon="format_underlined" title="Underline" /><IcoBtn c="strikeThrough" icon="strikethrough_s" title="Strikethrough" />
+        {sep}
+        <IcoBtn c="insertUnorderedList" icon="format_list_bulleted" title="Bulleted list" /><IcoBtn c="insertOrderedList" icon="format_list_numbered" title="Numbered list" /><IcoBtn c="outdent" icon="format_indent_decrease" title="Outdent" /><IcoBtn c="indent" icon="format_indent_increase" title="Indent" />
+        {sep}
+        <IcoBtn c="justifyLeft" icon="format_align_left" title="Align left" /><IcoBtn c="justifyCenter" icon="format_align_center" title="Align center" /><IcoBtn c="justifyRight" icon="format_align_right" title="Align right" />
+        {sep}
+        <button title="Link" style={tbBtn} onMouseDown={e=>{e.preventDefault();const u=prompt('Link URL','https://');if(u)cmd('createLink',u);}} onMouseEnter={e=>e.currentTarget.style.background='var(--slds-g-color-surface-3)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'}><span className="material-symbols-rounded" style={{fontSize:18,color:'inherit'}}>link</span></button>
+        <IcoBtn c="" icon="image" title="Image (insert)" />
+        {sep}
+        <IcoBtn c="removeFormat" icon="format_clear" title="Remove formatting" />
+        {sep}
+        <span style={{display:'inline-flex',border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-2)',overflow:'hidden'}}>
+          <button title="Insert merge field (custom toolbar button)" style={{display:'inline-flex',alignItems:'center',gap:4,height:'1.75rem',padding:'0 0.5rem',border:0,borderRight:'1px solid var(--slds-g-color-border-2)',background:'var(--slds-g-color-surface-container-1)',cursor:'pointer',color:'var(--slds-g-color-accent-1)',fontSize:'var(--slds-g-text-body-small)'}} onMouseDown={e=>{e.preventDefault();cmd('insertText','{!Contact.FirstName}');}} onMouseEnter={e=>e.currentTarget.style.background='var(--slds-g-color-surface-3)'} onMouseLeave={e=>e.currentTarget.style.background='var(--slds-g-color-surface-container-1)'}><span className="material-symbols-rounded" style={{fontSize:16,color:'inherit'}}>data_object</span>Merge field</button>
+          <button title="Insert signature (custom toolbar button)" style={{display:'inline-flex',alignItems:'center',gap:4,height:'1.75rem',padding:'0 0.5rem',border:0,background:'var(--slds-g-color-surface-container-1)',cursor:'pointer',color:'var(--slds-g-color-accent-1)',fontSize:'var(--slds-g-text-body-small)'}} onMouseDown={e=>{e.preventDefault();cmd('insertHTML','<p>—<br/>Austin Guevara<br/>Sales, Acme</p>');}} onMouseEnter={e=>e.currentTarget.style.background='var(--slds-g-color-surface-3)'} onMouseLeave={e=>e.currentTarget.style.background='var(--slds-g-color-surface-container-1)'}><span className="material-symbols-rounded" style={{fontSize:16,color:'inherit'}}>draw</span>Signature</button>
+        </span>
+      </div>;
+      const editor=<div ref={ref} contentEditable suppressContentEditableWarning dangerouslySetInnerHTML={{__html:'<p>Edit me — select text and try <strong>bold</strong>, <em>italics</em>, lists, and alignment.</p>'}} style={{minHeight:90,padding:'0.75rem',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',outline:'none',lineHeight:1.5}}></div>;
+      return <VStack>
+        <VRow label="Variant" >
+          <ButtonGroup value={variant} onChange={setVariant} items={[{label:'Toolbar top',value:'top'},{label:'Toolbar bottom',value:'bottom'}]} />
+        </VRow>
+        <VRow label="WYSIWYG editor (live)" col>
+          <div style={{maxWidth:560,border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+            {variant==='top'?<React.Fragment>{toolbar}{editor}</React.Fragment>:<React.Fragment>{editor}{toolbar}</React.Fragment>}
+          </div>
+        </VRow>
+      </VStack>;
+    }
+
+    /* lightning-record-picker — autocomplete lookup combobox over Salesforce records */
+    const RP_DATA=[
+      {id:'1',name:'Acme Corporation',sub:'Technology · San Francisco',icon:'standard:account'},
+      {id:'2',name:'Acme Components',sub:'Manufacturing · Austin',icon:'standard:account'},
+      {id:'3',name:'Global Media',sub:'Media · New York',icon:'standard:account'},
+      {id:'4',name:'Northwind Trading',sub:'Retail · Boston',icon:'standard:account'},
+      {id:'5',name:'Salesforce',sub:'Technology · San Francisco',icon:'standard:account'},
+    ];
+    function RecordPicker({ mode='contains' }) {
+      const [q,setQ]=React.useState(''); const [open,setOpen]=React.useState(false); const [sel,setSel]=React.useState(null);
+      const matches=RP_DATA.filter(r=>{const n=r.name.toLowerCase(),t=q.toLowerCase();return mode==='startsWith'?n.startsWith(t):n.includes(t);});
+      if (sel) return <div style={{maxWidth:320}}><label style={{display:'block',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',marginBottom:4}}>Account</label>
+        <div style={{display:'flex',alignItems:'center',gap:8,height:'2.25rem',padding:'0 0.5rem',border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-2)',background:'var(--slds-g-color-surface-container-1)'}}>
+          <Icon iconName={sel.icon} size="small" /><span style={{flex:1,fontSize:'var(--slds-g-text-body-regular)'}}>{sel.name}</span>
+          <button onClick={()=>{setSel(null);setQ('');}} title="Clear" style={{display:'inline-flex',background:'transparent',border:0,cursor:'pointer',color:'var(--slds-g-color-on-surface-3)'}}><Icon iconName="utility:close" size="x-small" style={{color:'inherit'}} /></button>
+        </div></div>;
+      return <div style={{maxWidth:320,position:'relative'}}><label style={{display:'block',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',marginBottom:4}}>Account</label>
+        <div style={{display:'flex',alignItems:'center',gap:6,height:'2.25rem',padding:'0 0.5rem',border:'1px solid '+(open?'var(--slds-g-color-accent-1)':'var(--slds-g-color-border-2)'),borderRadius:'var(--slds-g-radius-border-2)',background:'var(--slds-g-color-surface-container-1)',boxShadow:open?'0 0 0 1px var(--slds-g-color-accent-1)':'none'}}>
+          <Icon iconName="utility:search" size="x-small" style={{color:'var(--slds-g-color-on-surface-3)'}} />
+          <input value={q} onChange={e=>{setQ(e.target.value);setOpen(true);}} onFocus={()=>setOpen(true)} onBlur={()=>setTimeout(()=>setOpen(false),150)} placeholder="Search Accounts…" style={{flex:1,border:0,outline:'none',background:'transparent',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)'}} />
+        </div>
+        {open && <ul style={{listStyle:'none',margin:'4px 0 0',padding:'4px 0',position:'absolute',left:0,right:0,zIndex:5,background:'var(--slds-g-color-surface-container-1)',border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-2)',boxShadow:'var(--slds-g-shadow-3)',maxHeight:200,overflow:'auto'}}>
+          {matches.length?matches.map(r=><li key={r.id}><button onMouseDown={()=>{setSel(r);setOpen(false);}} style={{display:'flex',alignItems:'center',gap:8,width:'100%',textAlign:'left',padding:'0.4rem 0.625rem',border:0,background:'transparent',cursor:'pointer'}} onMouseEnter={e=>e.currentTarget.style.background='var(--slds-g-color-surface-3)'} onMouseLeave={e=>e.currentTarget.style.background='transparent'}><Icon iconName={r.icon} size="small" /><span><span style={{display:'block',fontSize:'var(--slds-g-text-body-regular)'}}>{r.name}</span><span style={{display:'block',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>{r.sub}</span></span></button></li>):<li style={{padding:'0.5rem 0.625rem',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>No matches.</li>}
+        </ul>}
+      </div>;
+    }
+    function RecordPickerDemo() {
+      return <VStack>
+        <VRow label="Lookup (search · select · clear) — matching mode: contains" col><RecordPicker mode="contains" /></VRow>
+        <VRow label="Matching mode: startsWith" col><RecordPicker mode="startsWith" /></VRow>
+      </VStack>;
+    }
+
+    /* lightning-output-field / input-field / record-*-form — record data-binding (mocked over a sample Account) */
+    const ACCT={ Name:'Acme Corporation', Phone:'415 555 0132', Website:'https://acme.example.com', Industry:'Technology', Owner:'Austin Guevara', AnnualRevenue:1250000, Rating:'Hot' };
+    function fmtField(type,v){ if(type==='currency') return '$'+Number(v).toLocaleString('en-US'); return v; }
+    function OutputField({ label, value, type='text' }) {
+      const body = type==='url' ? <a href="#" onClick={e=>e.preventDefault()} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>{value}</a>
+        : type==='phone' ? <a href={'tel:'+String(value).replace(/ /g,'')} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>{value}</a>
+        : <span style={{color:'var(--slds-g-color-on-surface-1)'}}>{fmtField(type,value)}</span>;
+      return <div><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',marginBottom:2}}>{label}</div><div style={{fontSize:'var(--slds-g-text-body-regular)'}}>{body}</div></div>;
+    }
+    function InputField({ label, defaultValue, type='text', options }) {
+      if (options) return <Select label={label} options={options} />;
+      return <Input label={label} type={type==='currency'?'number':type} defaultValue={defaultValue} />;
+    }
+    const FIELD_GRID={display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.875rem 1.25rem'};
+    function RecordViewForm() {
+      return <Card title="Acme Corporation" iconName="standard:account">
+        <div style={FIELD_GRID}>
+          <OutputField label="Account Name" value={ACCT.Name} />
+          <OutputField label="Phone" value={ACCT.Phone} type="phone" />
+          <OutputField label="Website" value={ACCT.Website} type="url" />
+          <OutputField label="Industry" value={ACCT.Industry} />
+          <OutputField label="Account Owner" value={ACCT.Owner} />
+          <OutputField label="Annual Revenue" value={ACCT.AnnualRevenue} type="currency" />
+        </div>
+      </Card>;
+    }
+    function RecordEditForm({ onDone }) {
+      return <Card title="Edit Account" iconName="standard:account">
+        <div style={{...FIELD_GRID,marginBottom:'1rem'}}>
+          <InputField label="Account Name" defaultValue={ACCT.Name} />
+          <InputField label="Phone" defaultValue={ACCT.Phone} />
+          <InputField label="Website" defaultValue={ACCT.Website} />
+          <InputField label="Industry" options={['Technology','Finance','Healthcare','Retail']} />
+          <InputField label="Account Owner" defaultValue={ACCT.Owner} />
+          <InputField label="Annual Revenue" type="currency" defaultValue={ACCT.AnnualRevenue} />
+        </div>
+        <div style={{display:'flex',gap:8,justifyContent:'flex-end'}}><Button variant="neutral" label="Cancel" onClick={onDone} /><Button variant="brand" label="Save" onClick={onDone} /></div>
+      </Card>;
+    }
+    function RecordForm() {
+      const [mode,setMode]=React.useState('view');
+      if (mode==='edit') return <div style={{maxWidth:520}}><RecordEditForm onDone={()=>setMode('view')} /></div>;
+      return <div style={{maxWidth:520}}>
+        <Card title="Acme Corporation" iconName="standard:account" actions={<Button variant="neutral" size="small" label="Edit" iconName="utility:edit" onClick={()=>setMode('edit')} />}>
+          <div style={FIELD_GRID}>
+            <OutputField label="Account Name" value={ACCT.Name} />
+            <OutputField label="Phone" value={ACCT.Phone} type="phone" />
+            <OutputField label="Website" value={ACCT.Website} type="url" />
+            <OutputField label="Industry" value={ACCT.Industry} />
+            <OutputField label="Account Owner" value={ACCT.Owner} />
+            <OutputField label="Annual Revenue" value={ACCT.AnnualRevenue} type="currency" />
+          </div>
+        </Card>
+      </div>;
+    }
+    function OutputFieldDemo() {
+      return <VStack><VRow label="Bound formatted read-only fields (text · phone · url · currency)" col>
+        <div style={{...FIELD_GRID,maxWidth:440}}>
+          <OutputField label="Account Name" value={ACCT.Name} />
+          <OutputField label="Phone" value={ACCT.Phone} type="phone" />
+          <OutputField label="Website" value={ACCT.Website} type="url" />
+          <OutputField label="Annual Revenue" value={ACCT.AnnualRevenue} type="currency" />
+        </div>
+      </VRow></VStack>;
+    }
+    function InputFieldDemo() {
+      return <VStack><VRow label="Bound, type-aware edit fields" col>
+        <div style={{...FIELD_GRID,maxWidth:440}}>
+          <InputField label="Account Name" defaultValue={ACCT.Name} />
+          <InputField label="Phone" defaultValue={ACCT.Phone} />
+          <InputField label="Industry" options={['Technology','Finance','Healthcare']} />
+          <InputField label="Annual Revenue" type="currency" defaultValue={ACCT.AnnualRevenue} />
+        </div>
+      </VRow></VStack>;
+    }
+    function RecordEditFormDemo() {
+      return <div style={{maxWidth:520}}><RecordEditForm onDone={()=>{}} /></div>;
+    }
+
+    /* lightning-relative-date-time — "2 hours ago" style relative time */
+    function relTime(ms){ const d=(ms-Date.now())/1000; const abs=Math.abs(d); const f=(n,u)=>{const r=Math.round(n);return new Intl.RelativeTimeFormat('en',{numeric:'auto'}).format(d<0?-r:r,u);};
+      if(abs<60) return f(abs,'second'); if(abs<3600) return f(abs/60,'minute'); if(abs<86400) return f(abs/3600,'hour'); if(abs<2592000) return f(abs/86400,'day'); if(abs<31536000) return f(abs/2592000,'month'); return f(abs/31536000,'year'); }
+    function RelativeDateTime() {
+      const now=Date.now();
+      const rows=[['2 minutes ago',now-120000],['3 hours ago',now-3*3600000],['Yesterday',now-26*3600000],['Last week',now-8*86400000],['In 3 days',now+3*86400000],['Next month',now+40*86400000]];
+      return <VStack><VRow label="Relative time (auto-updates from now)" col>
+        <div style={{display:'flex',flexDirection:'column',gap:6}}>
+          {rows.map((r,i)=><div key={i} style={{display:'flex',gap:10,alignItems:'baseline'}}><span style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',minWidth:96}}>{relTime(r[1])}</span><span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>{new Date(r[1]).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</span></div>)}
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* lightning/confirm & lightning/alert — SLDS prompt blueprint (themed header + message + OK/Cancel) */
+    const PROMPT_THEME={
+      default:['var(--slds-g-color-surface-container-1)','var(--slds-g-color-on-surface-1)','var(--slds-g-color-border-1)'],
+      shade:['var(--slds-g-color-surface-3)','var(--slds-g-color-on-surface-1)','var(--slds-g-color-border-1)'],
+      inverse:['var(--slds-g-color-accent-1)','#fff',null],
+      'alt-inverse':['#032d60','#fff',null],
+      success:['var(--slds-g-color-success-1)','#fff',null],
+      info:['#5867e8','#fff',null],
+      warning:['var(--slds-g-color-warning-1)','#3a2a00',null],
+      error:['var(--slds-g-color-error-1)','#fff',null],
+      offline:['#181818','#fff',null],
+    };
+    function PromptModal({ kind, theme='default', variant='header', label, message, onClose }) {
+      const [bg,fg,bd]=PROMPT_THEME[theme]||PROMPT_THEME.default;
+      return <div onMouseDown={()=>onClose('cancel')} style={{position:'fixed',inset:0,background:'rgba(0,0,0,.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}}>
+        <div role={kind==='alert'?'alertdialog':'dialog'} onMouseDown={e=>e.stopPropagation()} style={{width:'min(90vw,420px)',background:'var(--slds-g-color-surface-container-1)',borderRadius:'var(--slds-g-radius-border-4)',boxShadow:'var(--slds-g-shadow-4)',overflow:'hidden'}}>
+          {variant==='header' && <div style={{background:bg,color:fg,padding:'0.75rem 1rem',fontWeight:'var(--slds-g-font-weight-bold)',fontSize:'var(--slds-g-text-heading-x-small,1rem)',borderBottom:bd?'1px solid '+bd:'none'}}>{label}</div>}
+          <div style={{padding:'1rem 1.25rem',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)'}}>{message}</div>
+          <div style={{display:'flex',gap:8,justifyContent:'flex-end',padding:'0.75rem 1rem',borderTop:'1px solid var(--slds-g-color-border-1)'}}>
+            {kind==='confirm' && <Button variant="neutral" label="Cancel" onClick={()=>onClose('cancel')} />}
+            <Button variant="brand" label="OK" onClick={()=>onClose('ok')} />
+          </div>
+        </div>
+      </div>;
+    }
+    function ConfirmDemo() {
+      const [dlg,setDlg]=React.useState(null);
+      const [result,setResult]=React.useState(null);
+      const openConfirm=(theme)=>setDlg({kind:'confirm',theme,variant:'header',label:'Delete record?',message:'This account and its related records will be permanently deleted. This can’t be undone.'});
+      return <VStack>
+        <VRow label="Confirm (OK / Cancel) — theme variants">
+          <Button variant="neutral" size="small" label="Info" onClick={()=>openConfirm('info')} />
+          <Button variant="neutral" size="small" label="Warning" onClick={()=>openConfirm('warning')} />
+          <Button variant="neutral" size="small" label="Error" onClick={()=>openConfirm('error')} />
+          <Button variant="neutral" size="small" label="Success" onClick={()=>openConfirm('success')} />
+        </VRow>
+        <VRow label="Alert (OK only) · headerless variant">
+          <Button variant="neutral" size="small" label="Alert" iconName="utility:error" onClick={()=>setDlg({kind:'alert',theme:'error',variant:'header',label:'Action failed',message:'Your session expired. Sign in again to continue.'})} />
+          <Button variant="neutral" size="small" label="Headerless" onClick={()=>setDlg({kind:'alert',theme:'default',variant:'headerless',label:'Notice',message:'Your changes were saved automatically.'})} />
+        </VRow>
+        {result!==null && <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>Returned: <code>{result}</code></div>}
+        {dlg && <PromptModal {...dlg} onClose={r=>{setDlg(null);if(dlg.kind==='confirm')setResult(r==='ok'?'true':'false');else setResult('(closed)');}} />}
+      </VStack>;
+    }
+
+    /* lightning/prompt — prompt blueprint modal requesting a single input value */
+    function PromptInputModal({ label, message, defaultValue, onClose }) {
+      const [val,setVal]=React.useState(defaultValue||'');
+      return <div onMouseDown={()=>onClose(null)} style={{position:'fixed',inset:0,background:'rgba(0,0,0,.4)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:9999}}>
+        <div role="dialog" onMouseDown={e=>e.stopPropagation()} style={{width:'min(90vw,420px)',background:'var(--slds-g-color-surface-container-1)',borderRadius:'var(--slds-g-radius-border-4)',boxShadow:'var(--slds-g-shadow-4)',overflow:'hidden'}}>
+          <div style={{padding:'0.75rem 1rem',fontWeight:'var(--slds-g-font-weight-bold)',fontSize:'var(--slds-g-text-heading-x-small,1rem)',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>{label}</div>
+          <div style={{padding:'1rem 1.25rem',display:'flex',flexDirection:'column',gap:10}}>
+            <span style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)'}}>{message}</span>
+            <Input label="" defaultValue={val} placeholder="Type a value…" />
+          </div>
+          <div style={{display:'flex',gap:8,justifyContent:'flex-end',padding:'0.75rem 1rem',borderTop:'1px solid var(--slds-g-color-border-1)'}}>
+            <Button variant="neutral" label="Cancel" onClick={()=>onClose(null)} /><Button variant="brand" label="OK" onClick={()=>onClose(val||'(empty)')} />
+          </div>
+        </div>
+      </div>;
+    }
+    function PromptDemo() {
+      const [open,setOpen]=React.useState(false); const [val,setVal]=React.useState(null);
+      return <VStack><VRow label="Single-input dialog (returns the entered value)" col>
+        <div><Button variant="neutral" size="small" label="Rename list view" iconName="utility:edit" onClick={()=>setOpen(true)} /></div>
+        {val!==null && <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>Returned: <code>{val===null?'null':JSON.stringify(val)}</code></div>}
+        {open && <PromptInputModal label="Rename" message="Enter a new name for this list view." defaultValue="My Open Opportunities" onClose={v=>{setOpen(false);setVal(v);}} />}
+      </VRow></VStack>;
+    }
+
+    /* lightning-toast-container — corner queue that stacks transient toasts */
+    function ToastContainerDemo() {
+      const [toasts,setToasts]=React.useState([]);
+      const idRef=React.useRef(0);
+      const push=(variant,title,message)=>{ const id=++idRef.current; setToasts(t=>[...t,{id,variant,title,message}]); setTimeout(()=>setToasts(t=>t.filter(x=>x.id!==id)),3200); };
+      return <VStack><VRow label="Fire toasts — they stack & auto-dismiss in a fixed corner" col>
+        <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+          <Button variant="neutral" size="small" label="Success" onClick={()=>push('success','Success!','Contact saved.')} />
+          <Button variant="neutral" size="small" label="Info" onClick={()=>push('info','Heads up','3 records were skipped.')} />
+          <Button variant="neutral" size="small" label="Error" onClick={()=>push('error','Error','Close date is invalid.')} />
+        </div>
+        {toasts.length>0 && <div style={{position:'fixed',top:16,right:16,display:'flex',flexDirection:'column',gap:8,zIndex:9999,width:'min(92vw,360px)'}}>
+          {toasts.map(t=><Toast key={t.id} variant={t.variant} title={t.title} message={t.message} onClose={()=>setToasts(s=>s.filter(x=>x.id!==t.id))} />)}
+        </div>}
+      </VRow></VStack>;
+    }
+
+    /* lightning-formatted-* — locale formatters (mocked with pre-formatted output) */
+    function FmtRow({ label, children }) { return <div style={{display:'flex',gap:10,alignItems:'baseline'}}><span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)',minWidth:90}}>{label}</span><span style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)'}}>{children}</span></div>; }
+    function FormattedAddress() {
+      return <VStack><VRow label="Locale-formatted postal address (+ map link)" col>
+        <address style={{fontStyle:'normal',fontSize:'var(--slds-g-text-body-regular)',lineHeight:1.5}}>415 Mission Street, Suite 300<br/>San Francisco, CA 94105<br/>United States</address>
+        <a href="#" onClick={e=>e.preventDefault()} style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>View on map ↗</a>
+      </VRow></VStack>;
+    }
+    function FormattedDateTime() {
+      const d=new Date('2026-03-09T14:24:00');
+      return <VStack><VRow label="Locale date / time with configurable parts" col>
+        <FmtRow label="Date">{d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</FmtRow>
+        <FmtRow label="Short">{d.toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'numeric'})}</FmtRow>
+        <FmtRow label="Time">{d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}</FmtRow>
+        <FmtRow label="Full">{d.toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'})}</FmtRow>
+      </VRow></VStack>;
+    }
+    function FormattedEmail() {
+      return <VStack><VRow label="mailto: link from an email value" col>
+        <a href="mailto:austin.guevara@acme.example.com" style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>austin.guevara@acme.example.com</a>
+        <a href="mailto:hello@globalmedia.example.com" style={{display:'inline-flex',alignItems:'center',gap:6,fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}><Icon iconName="utility:email" size="x-small" variant="brand" style={{color:'inherit'}} />hello@globalmedia.example.com</a>
+      </VRow></VStack>;
+    }
+    function FormattedLocation() {
+      return <VStack><VRow label="Latitude / longitude formatting" col>
+        <FmtRow label="Decimal">37.7929, -122.3971</FmtRow>
+        <FmtRow label="DMS">37°47′34″N, 122°23′50″W</FmtRow>
+      </VRow></VStack>;
+    }
+    function FormattedName() {
+      return <VStack><VRow label="Locale-aware person name ordering" col>
+        <FmtRow label="Long">Dr. Austin James Guevara III</FmtRow>
+        <FmtRow label="Medium">Austin Guevara</FmtRow>
+        <FmtRow label="Short">Austin G.</FmtRow>
+      </VRow></VStack>;
+    }
+
+    /* lightning-dynamic-list-container — virtualized list: only visible rows are in the DOM */
+    function DynamicListContainer() {
+      const ROW_H=44, BUFFER=4, VIEW_H=260;
+      const data=React.useMemo(()=>Array.from({length:1000},(_,i)=>({id:i, name:['Global Media','Acme','Pinnacle','Northwind','Salesforce','Cloud Kicks','Dickenson','Express Logistics','United Oil','Edge Comms'][i%10]+' — Opportunity #'+(i+1), amount:((i*7919)%900+50)*1000, stage:['Qualification','Proposal','Negotiation','Closed Won'][i%4]})),[]);
+      const [scrollTop,setScrollTop]=React.useState(0);
+      const start=Math.max(0,Math.floor(scrollTop/ROW_H)-BUFFER);
+      const end=Math.min(data.length,Math.ceil((scrollTop+VIEW_H)/ROW_H)+BUFFER);
+      const visible=data.slice(start,end);
+      const STAGE_BADGE={Qualification:'inverse',Proposal:'brand',Negotiation:'warning','Closed Won':'success'};
+      return <VStack>
+        <VRow label="Virtualized — scroll 1,000 rows, only visible ones render in the DOM" col>
+          <div style={{maxWidth:520,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+            <div role="list" onScroll={e=>setScrollTop(e.currentTarget.scrollTop)} style={{height:VIEW_H,overflowY:'auto',position:'relative'}}>
+              <div style={{height:data.length*ROW_H,position:'relative'}}>
+                {visible.map(r=>(
+                  <div key={r.id} role="listitem" style={{position:'absolute',top:r.id*ROW_H,left:0,right:0,height:ROW_H,display:'flex',alignItems:'center',gap:12,padding:'0 0.875rem',borderBottom:'1px solid var(--slds-g-color-border-1)',boxSizing:'border-box'}}>
+                    <span style={{fontSize:11,color:'var(--slds-g-color-on-surface-3)',fontFamily:'var(--slds-g-font-family-mono,monospace)',minWidth:38}}>#{r.id+1}</span>
+                    <span style={{flex:1,fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{r.name}</span>
+                    <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',minWidth:72,textAlign:'right'}}>${r.amount.toLocaleString()}</span>
+                    <Badge variant={STAGE_BADGE[r.stage]} label={r.stage} />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'0.5rem 0.875rem',borderTop:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>
+              <span>{data.length.toLocaleString()} items · intelligent virtualization</span>
+              <span style={{fontFamily:'var(--slds-g-font-family-mono,monospace)',color:'var(--slds-g-color-on-surface-1)'}}>{visible.length} rows in DOM</span>
+            </div>
+          </div>
+        </VRow>
+      </VStack>;
+    }
+
+    function FormattedNumber() {
+      return <VStack><VRow label="Number / currency / percent for the locale" col>
+        <FmtRow label="Decimal">{(1234567.891).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</FmtRow>
+        <FmtRow label="Currency">{(1250000).toLocaleString('en-US',{style:'currency',currency:'USD'})}</FmtRow>
+        <FmtRow label="EUR">{(89990).toLocaleString('en-US',{style:'currency',currency:'EUR'})}</FmtRow>
+        <FmtRow label="Percent">{(0.6825).toLocaleString('en-US',{style:'percent',minimumFractionDigits:1})}</FmtRow>
+        <FmtRow label="Compact">{(2400000).toLocaleString('en-US',{notation:'compact'})}</FmtRow>
+      </VRow></VStack>;
+    }
+    function FormattedPhone() {
+      return <VStack><VRow label="tel: link with formatted phone number" col>
+        <a href="tel:+14155550132" style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>(415) 555-0132</a>
+        <a href="tel:+442071838750" style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>+44 20 7183 8750</a>
+      </VRow></VStack>;
+    }
+    function FormattedRichText() {
+      return <VStack><VRow label="Renders sanitized rich-text HTML" col>
+        <div style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',lineHeight:1.5}} dangerouslySetInnerHTML={{__html:'<p>Follow-up: <strong>send proposal</strong> by <em>Friday</em>. Priorities:</p><ul style="margin:4px 0 0 1.1rem"><li>Confirm budget</li><li>Loop in <a href="#" style="color:var(--slds-g-color-accent-1);text-decoration:none">Lando Voss</a></li></ul>'}}></div>
+      </VRow></VStack>;
+    }
+    function FormattedText() {
+      const linkify=t=>{const parts=t.split(/(\bhttps?:\/\/[^\s]+|\b[\w.]+@[\w.]+\b)/g);return parts.map((p,i)=>/^https?:\/\//.test(p)?<a key={i} href={p} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>{p}</a>:/^[\w.]+@[\w.]+$/.test(p)?<a key={i} href={'mailto:'+p} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>{p}</a>:p);};
+      return <VStack><VRow label="Plain text with auto-linked URLs / emails" col>
+        <div style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',lineHeight:1.5,maxWidth:440}}>{linkify('Reach out at hello@acme.example.com or visit https://acme.example.com for details.')}</div>
+      </VRow></VStack>;
+    }
+    function FormattedTime() {
+      const d=new Date('2026-03-09T14:24:00');
+      return <VStack><VRow label="Locale time-of-day formatting" col>
+        <FmtRow label="Short">{d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}</FmtRow>
+        <FmtRow label="With seconds">{d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'})}</FmtRow>
+        <FmtRow label="24-hour">{d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}</FmtRow>
+      </VRow></VStack>;
+    }
+    function FormattedURL() {
+      return <VStack><VRow label="Anchor link from a URL value" col>
+        <a href="#" onClick={e=>e.preventDefault()} style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>https://acme.example.com</a>
+        <a href="#" onClick={e=>e.preventDefault()} style={{display:'inline-flex',alignItems:'center',gap:6,fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>Acme Corporation <Icon iconName="utility:new_window" size="xx-small" variant="brand" style={{color:'inherit'}} /></a>
+      </VRow></VStack>;
+    }
+
+    /* lightning-input-address — compound address field (street, city, province, postal code, country) */
+    function InputAddress() {
+      const COUNTRIES=[{label:'United States',value:'US'},{label:'United Kingdom',value:'UK'},{label:'Canada',value:'CA'},{label:'Australia',value:'AU'}];
+      const PROVINCES=[{label:'California',value:'CA'},{label:'New York',value:'NY'},{label:'Texas',value:'TX'},{label:'Washington',value:'WA'}];
+      return <VStack><VRow label="Compound address field" col>
+        <div style={{maxWidth:460,display:'flex',flexDirection:'column',gap:'0.75rem'}}>
+          <Input label="Street" defaultValue="415 Mission Street, Suite 300" />
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.75rem'}}>
+            <Input label="City" defaultValue="San Francisco" />
+            <Select label="Province" options={PROVINCES} defaultValue="CA" />
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.75rem'}}>
+            <Input label="Postal Code" defaultValue="94105" />
+            <Select label="Country" options={COUNTRIES} defaultValue="US" />
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* lightning-input type="checkbox-button" — a checkbox styled as a toggle button */
+    function CheckboxButton() {
+      const Btn=({icon,label,defaultOn})=>{ const [on,setOn]=React.useState(!!defaultOn); return <button onClick={()=>setOn(o=>!o)} aria-pressed={on} style={{display:'inline-flex',flexDirection:'column',alignItems:'center',gap:4,width:72,height:60,border:'1px solid '+(on?'var(--slds-g-color-accent-1)':'var(--slds-g-color-border-2)'),borderRadius:'var(--slds-g-radius-border-2)',background:on?'var(--slds-g-color-accent-container-1,#eaf2fb)':'var(--slds-g-color-surface-container-1)',color:on?'var(--slds-g-color-accent-1)':'var(--slds-g-color-on-surface-2)',cursor:'pointer',transition:'all var(--slds-g-duration-promptly) var(--slds-g-ease-out)'}}><span className="material-symbols-rounded" style={{fontSize:22,color:'inherit'}}>{icon}</span><span style={{fontSize:11}}>{label}</span></button>; };
+      return <VStack><VRow label="Checkbox styled as a toggle button (multi-select)">
+        <Btn icon="format_bold" label="Bold" defaultOn />
+        <Btn icon="format_italic" label="Italic" />
+        <Btn icon="format_underlined" label="Underline" />
+        <Btn icon="format_strikethrough" label="Strike" />
+      </VRow></VStack>;
+    }
+
+    /* lightning-input-location — compound geolocation field (latitude, longitude) */
+    function InputLocation() {
+      return <VStack><VRow label="Compound geolocation field" col>
+        <div style={{maxWidth:380,display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.75rem'}}>
+          <Input label="Latitude" type="number" defaultValue="37.7929" />
+          <Input label="Longitude" type="number" defaultValue="-122.3971" />
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* lightning-input-name — compound name field (salutation, first, middle, last, suffix) */
+    function InputName() {
+      const SALUTATIONS=[{label:'Mr.',value:'mr'},{label:'Ms.',value:'ms'},{label:'Mrs.',value:'mrs'},{label:'Dr.',value:'dr'},{label:'Prof.',value:'prof'}];
+      return <VStack><VRow label="Compound name field" col>
+        <div style={{maxWidth:480,display:'flex',flexDirection:'column',gap:'0.75rem'}}>
+          <div style={{display:'grid',gridTemplateColumns:'120px 1fr',gap:'0.75rem'}}>
+            <Select label="Salutation" options={SALUTATIONS} defaultValue="dr" />
+            <Input label="First Name" defaultValue="Austin" />
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 100px',gap:'0.75rem'}}>
+            <Input label="Middle Name" defaultValue="James" />
+            <Input label="Last Name" defaultValue="Guevara" />
+            <Input label="Suffix" defaultValue="III" />
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* omnistudio-flexcard — OmniStudio data card: header, field grid, status, actions */
+    function FlexCard() {
+      const fields=[['Account','Global Media'],['Stage','Negotiation'],['Amount','$240,000'],['Close Date','Apr 30, 2026'],['Owner','Austin Guevara'],['Probability','75%']];
+      return <VStack><VRow label="OmniStudio data card — header · fields · actions" col>
+        <div style={{maxWidth:420,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-4)',background:'var(--slds-g-color-surface-container-1)',boxShadow:'var(--slds-g-shadow-2)',overflow:'hidden'}}>
+          <div style={{display:'flex',alignItems:'center',gap:10,padding:'0.75rem 1rem',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>
+            <Icon iconName="standard:opportunity" size="small" />
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{fontSize:'var(--slds-g-text-body-regular)',fontWeight:'var(--slds-g-font-weight-bold)',color:'var(--slds-g-color-on-surface-1)'}}>Global Media — Renewal</div>
+              <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>Opportunity · #OPP-2041</div>
+            </div>
+            <Badge variant="warning" label="At Risk" />
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0.75rem 1.25rem',padding:'1rem'}}>
+            {fields.map((f,i)=><div key={i}><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)',marginBottom:2}}>{f[0]}</div><div style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)'}}>{f[1]}</div></div>)}
+          </div>
+          <div style={{display:'flex',gap:8,padding:'0.75rem 1rem',borderTop:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)'}}>
+            <Button variant="neutral" size="small" label="Call" iconName="utility:call" />
+            <Button variant="neutral" size="small" label="Email" iconName="utility:email" />
+            <Button variant="brand" size="small" label="Update Stage" />
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* omnistudio-omniscript — guided multi-step interaction (wizard) */
+    function OmniScript() {
+      const steps=['Account','Contact','Details','Review'];
+      const [step,setStep]=React.useState(0);
+      const body=[
+        <div key="0" style={{display:'flex',flexDirection:'column',gap:'0.75rem'}}><Input label="Account Name" defaultValue="Global Media" /><Select label="Industry" options={[{label:'Media',value:'m'},{label:'Technology',value:'t'}]} defaultValue="m" /></div>,
+        <div key="1" style={{display:'flex',flexDirection:'column',gap:'0.75rem'}}><Input label="Contact Name" defaultValue="Lando Voss" /><Input label="Email" type="email" defaultValue="lando@globalmedia.example.com" /></div>,
+        <div key="2" style={{display:'flex',flexDirection:'column',gap:'0.75rem'}}><Select label="Stage" options={[{label:'Proposal',value:'p'},{label:'Negotiation',value:'n'}]} defaultValue="n" /><Slider label="Probability" min={0} max={100} step={5} defaultValue={75} unit="%" /></div>,
+        <div key="3" style={{display:'flex',flexDirection:'column',gap:6,fontSize:'var(--slds-g-text-body-regular)'}}><div>✓ Account: <strong>Global Media</strong></div><div>✓ Contact: <strong>Lando Voss</strong></div><div>✓ Stage: <strong>Negotiation</strong> · 75%</div></div>,
+      ];
+      return <VStack><VRow label="Guided multi-step interaction (Previous / Next)" col>
+        <div style={{maxWidth:480,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-4)',background:'var(--slds-g-color-surface-container-1)',boxShadow:'var(--slds-g-shadow-2)',overflow:'hidden'}}>
+          <div style={{padding:'1rem 1.25rem',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>
+            <ProgressIndicator variant="path" current={step} steps={steps} />
+          </div>
+          <div style={{padding:'1.25rem'}}>
+            <div style={{fontSize:'var(--slds-g-text-heading-x-small,1rem)',fontWeight:'var(--slds-g-font-weight-bold)',marginBottom:'0.875rem'}}>Step {step+1}: {steps[step]}</div>
+            {body[step]}
+          </div>
+          <div style={{display:'flex',justifyContent:'space-between',padding:'0.75rem 1.25rem',borderTop:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)'}}>
+            <Button variant="neutral" label="Previous" disabled={step===0} onClick={()=>setStep(s=>Math.max(0,s-1))} />
+            {step<steps.length-1 ? <Button variant="brand" label="Next" onClick={()=>setStep(s=>Math.min(steps.length-1,s+1))} /> : <Button variant="success" label="Submit" onClick={()=>setStep(0)} />}
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* omnistudio-pubsub — publish/subscribe messaging between components (live demo) */
+    function PubSub() {
+      const [channel,setChannel]=React.useState('selectedAccount');
+      const [log,setLog]=React.useState([]);
+      const [subA,setSubA]=React.useState('—'); const [subB,setSubB]=React.useState('—');
+      const publish=(val)=>{ setSubA(val); setSubB(val); setLog(l=>[{t:new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'}),val},...l].slice(0,4)); };
+      const SubCard=({name,val,icon})=><div style={{flex:1,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',padding:'0.75rem',background:'var(--slds-g-color-surface-container-1)'}}><div style={{display:'flex',alignItems:'center',gap:6,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',marginBottom:6}}><Icon iconName={icon} size="x-small" /> {name} (subscriber)</div><div style={{fontSize:'var(--slds-g-text-body-regular)',fontWeight:'var(--slds-g-font-weight-bold)',color:val==='—'?'var(--slds-g-color-on-surface-3)':'var(--slds-g-color-accent-1)'}}>{val}</div></div>;
+      return <VStack><VRow label={`Publish on "${channel}" → subscribers react`} col>
+        <div style={{maxWidth:520,display:'flex',flexDirection:'column',gap:'0.875rem'}}>
+          <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'center'}}>
+            <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>Publisher:</span>
+            <Button variant="brand" size="small" label="Global Media" onClick={()=>publish('Global Media')} />
+            <Button variant="brand" size="small" label="Acme Corp" onClick={()=>publish('Acme Corp')} />
+            <Button variant="brand" size="small" label="Pinnacle" onClick={()=>publish('Pinnacle')} />
+          </div>
+          <div style={{display:'flex',gap:10}}><SubCard name="Detail Panel" val={subA} icon="standard:account" /><SubCard name="Map" val={subB} icon="utility:location" /></div>
+          <div style={{border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-2)',background:'var(--slds-g-color-surface-2)',padding:'0.5rem 0.75rem',minHeight:60}}>
+            <div style={{fontSize:11,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:'var(--slds-g-color-on-surface-3)',marginBottom:4}}>Event log</div>
+            {log.length?log.map((e,i)=><div key={i} style={{fontSize:'var(--slds-g-text-body-small)',fontFamily:'var(--slds-g-font-family-mono,monospace)',color:'var(--slds-g-color-on-surface-2)'}}><span style={{color:'var(--slds-g-color-on-surface-3)'}}>{e.t}</span> publish({channel}, "{e.val}")</div>):<div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Click a publisher button to emit an event.</div>}
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ---- live example components (only for built entries) ---- */
+    const Ex = {
+      PubSub,
+      OmniScript,
+      FlexCard,
+      InputName,
+      InputLocation,
+      InputAddress, CheckboxButton,
+      FormattedNumber, FormattedPhone, FormattedRichText, FormattedText, FormattedTime, FormattedURL,
+      DynamicListContainer,
+      Prompt: PromptDemo,
+      ToastContainer: ToastContainerDemo,
+      FormattedAddress, FormattedDateTime, FormattedEmail, FormattedLocation, FormattedName,
+      Confirm: ConfirmDemo,
+      RecordForm,
+      RecordEditForm: RecordEditFormDemo,
+      InputField: InputFieldDemo,
+      RecordViewForm,
+      OutputField: OutputFieldDemo,
+      RelativeDateTime,
+      InputRichText: RichText,
+      RecordPicker: RecordPickerDemo,
+      Illustration: IllustrationDemo,
+      Map: MapDemo,
+      PillContainer,
+      DynamicIcon,
+      QuickActionPanel,
+      TreeGrid,
+      ClickToDial: ClickToDialDemo,
+      Flow: FlowDemo,
+      ButtonIconStateful,
+      BarcodeScanner,
+      Button: () => <VStack><VRow label="Variants"><Button variant="brand" label="Brand" /><Button variant="neutral" label="Neutral" /><Button variant="outline-brand" label="Outline" /><Button variant="success" label="Success" /><Button variant="destructive" label="Destructive" /><Button variant="text" label="Text" /></VRow><VRow label="With icon"><Button variant="brand" label="New" iconName="utility:add" /><Button variant="neutral" label="Download" iconName="utility:download" iconPosition="right" /></VRow><VRow label="Sizes & states"><Button variant="brand" size="small" label="Small" /><Button variant="brand" size="medium" label="Medium" /><Button variant="brand" label="Disabled" disabled /></VRow><VRow label="Additional types (base · destructive-text · inverse)"><XBtn variant="base" label="Base" /><XBtn variant="destructive-text" label="Delete" /><Dark><XBtn variant="inverse" label="Inverse" /></Dark></VRow></VStack>,
+      ButtonIcon: () => <VStack><VRow label="Variants"><ButtonIcon iconName="utility:edit" variant="border" title="border" /><ButtonIcon iconName="utility:edit" variant="border-filled" title="border-filled" /><ButtonIcon iconName="utility:edit" variant="bare" title="bare" /><ButtonIcon iconName="utility:edit" variant="brand" title="brand" /><ButtonIcon iconName="utility:edit" variant="container" title="container" /></VRow><VRow label="Sizes"><ButtonIcon iconName="utility:settings" variant="border" size="x-small" title="x-small" /><ButtonIcon iconName="utility:settings" variant="border" size="small" title="small" /><ButtonIcon iconName="utility:settings" variant="border" size="medium" title="medium" /><ButtonIcon iconName="utility:settings" variant="border" size="large" title="large" /></VRow><VRow label="Inverse types (bare-inverse · border-inverse)"><Dark><XBtnIcon variant="bare-inverse" /><XBtnIcon variant="border-inverse" /></Dark></VRow></VStack>,
+      ButtonGroup: () => { const [v,setV]=React.useState('list'); return <VStack><VRow label="View switcher (single-select)"><ButtonGroup value={v} onChange={setV} items={[{label:'List',value:'list',iconName:'utility:list'},{label:'Kanban',value:'kanban',iconName:'utility:kanban'},{label:'Split',value:'split',iconName:'utility:table'}]} /></VRow><VRow label="Action group (plain buttons)"><ButtonGroup items={[{label:'Refresh'},{label:'Edit'},{label:'Save'}]} /></VRow><VRow label="Icon-only group (toolbar)"><ButtonGroup items={[{iconName:'utility:list',title:'List'},{iconName:'utility:filter',title:'Filter'},{iconName:'utility:sort',title:'Sort'}]} /></VRow><VRow label="With overflow menu"><span style={{display:'inline-flex',alignItems:'center'}}><ButtonGroup items={[{label:'Edit'},{label:'Delete'}]} style={{marginRight:-1}} /><ButtonMenu iconName="utility:down" items={[{label:'Clone',iconName:'utility:copy'},{label:'Share',iconName:'utility:share'},{divider:true},{label:'Delete',iconName:'utility:delete',destructive:true}]} /></span></VRow></VStack>; },
+      ButtonMenu: () => <VStack><VRow label="Border (default) · bare · icon-only"><ButtonMenu label="Actions" items={[{label:'Edit',iconName:'utility:edit'},{label:'Clone',iconName:'utility:copy'},{divider:true},{label:'Delete',iconName:'utility:delete',destructive:true}]} /><ButtonMenu label="More" variant="bare" items={[{label:'Rename'},{label:'Move'}]} /><ButtonMenu iconName="utility:settings" items={[{label:'Settings'},{label:'Help'}]} /></VRow><VRow label="With subheaders & checked items"><ButtonMenu label="Display" items={[{subheader:'Density'},{label:'Comfortable',checked:true},{label:'Compact'},{divider:true},{subheader:'Sort'},{label:'Recently Viewed',checked:true},{label:'Name'}]} /></VRow></VStack>,
+      ButtonStateful: () => <VStack><VRow label="Follow / Following"><ButtonStateful defaultSelected={false} /></VRow><VRow label="Custom labels"><ButtonStateful labelWhenOff="Subscribe" labelWhenOn="Subscribed" labelWhenHover="Unsubscribe" defaultSelected /></VRow></VStack>,
+      Input: () => <VStack><VRow label="Default · with icon · required" col><Input label="Account Name" defaultValue="Acme Corporation" /><Input label="Search" iconName="utility:search" placeholder="Search Salesforce" required /></VRow><VRow label="Error · read-only · disabled" col><Input label="Email" defaultValue="not-an-email" error="Enter a valid email address." /><Input label="Owner" defaultValue="Austin Guevara" readOnly /><Input label="Locked" defaultValue="Closed" disabled /></VRow><VRow label="Input types (number · date · time · datetime · color · password)" col><Input label="Number" type="number" defaultValue="42" /><Input label="Date" type="date" defaultValue="2026-03-01" /><Input label="Time" type="time" defaultValue="14:24" /><Input label="Date/Time" type="datetime-local" defaultValue="2026-03-01T14:24" /><Input label="Color" type="color" defaultValue="#0176d3" /><Input label="Password" type="password" defaultValue="secret123" /></VRow></VStack>,
+      Select: () => <VStack><VRow label="Default · required · error · disabled" col><Select label="Stage" options={[{label:'Qualification',value:'q'},{label:'Proposal',value:'p'},{label:'Closed Won',value:'w'}]} /><Select label="Owner" required options={['Austin Guevara','Lando Voss']} /><Select label="Type" error="Select a type." options={['New Business','Existing']} /><Select label="Locked" disabled options={['Read only']} /></VRow><VRow label="Multiple (size — list box, ⌘/Ctrl-click)" col><div style={{maxWidth:260}}><label style={{display:'block',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',marginBottom:4}}>Industries</label><select multiple size={5} defaultValue={['tech','media']} style={{width:'100%',border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-2)',background:'var(--slds-g-color-surface-container-1)',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',padding:'0.25rem'}}><option value="tech">Technology</option><option value="media">Media</option><option value="finance">Finance</option><option value="health">Healthcare</option><option value="retail">Retail</option></select></div></VRow></VStack>,
+      Textarea: () => <VStack><VRow label="Default · error · disabled" col><Textarea label="Description" rows={2} placeholder="Add details…" /><Textarea label="Notes" rows={2} defaultValue="Too short" error="Add at least 20 characters." /><Textarea label="Locked" rows={2} defaultValue="Read only" disabled /></VRow></VStack>,
+      Slider: () => <VStack><VRow label="Default (value label)" col><Slider label="Probability" min={0} max={100} step={5} defaultValue={75} unit="%" /></VRow><VRow label="Stepped (step 25) · custom range + unit" col><Slider label="Confidence" min={0} max={100} step={25} defaultValue={50} unit="%" /><Slider label="Discount" min={0} max={30} step={1} defaultValue={12} unit="%" /></VRow><VRow label="No value label · disabled" col><Slider label="Volume" defaultValue={40} showValue={false} /><Slider label="Locked" defaultValue={60} disabled /></VRow></VStack>,
+      Combobox: () => <VStack><VRow label="Default · placeholder (no selection) · disabled" col><Combobox label="Stage" defaultValue="neg" options={[{label:'Qualification',value:'qual'},{label:'Negotiation',value:'neg'},{label:'Closed Won',value:'won'}]} /><Combobox label="Industry" placeholder="Select an industry" options={[{label:'Technology',value:'tech'},{label:'Finance',value:'fin'},{label:'Healthcare',value:'health'}]} /><Combobox label="Locked" disabled options={[{label:'Read only',value:'r'}]} /></VRow></VStack>,
+      Checkbox: () => <VRow label="States" col><Checkbox label="Checked" defaultChecked /><Checkbox label="Unchecked" /><Checkbox label="Disabled" disabled /></VRow>,
+      CheckboxGroup: () => <VStack><VRow label="Default · disabled" col><CheckboxGroup label="Industries" defaultValue={['tech']} options={[{label:'Technology',value:'tech'},{label:'Finance',value:'fin'},{label:'Healthcare',value:'hc'}]} /><CheckboxGroup label="Locked" disabled defaultValue={['tech']} options={[{label:'Technology',value:'tech'}]} /></VRow></VStack>,
+      RadioGroup: () => <VStack><VRow label="Default · disabled" col><RadioGroup label="Priority" defaultValue="high" options={[{label:'High',value:'high'},{label:'Medium',value:'med'},{label:'Low',value:'low'}]} /><RadioGroup label="Locked" disabled defaultValue="high" options={[{label:'High',value:'high'},{label:'Low',value:'low'}]} /></VRow></VStack>,
+      Toggle: () => <VRow label="States" col><Toggle label="Notify my team" defaultChecked /><Toggle label="Email digest" /><Toggle label="Locked setting" defaultChecked disabled /></VRow>,
+      DualListbox: () => <DualListbox label="Permissions" defaultValue={['read']} options={[{label:'Read',value:'read'},{label:'Edit',value:'edit'},{label:'Delete',value:'delete'},{label:'Share',value:'share'}]} />,
+      FileUpload: () => <VStack><VRow label="Multiple (default)" col><FileUpload label="Attachments" /></VRow><VRow label="Single file · type filter" col><FileUpload label="Profile photo" multiple={false} accept="image/*" /></VRow></VStack>,
+      Card: () => <VStack><VRow label="With icon, footer & header action" col><Card title="Acme — Enterprise" iconName="standard:account" footer="Updated 2h ago" actions={<Button variant="neutral" size="small" label="Edit" />}><span style={{fontSize:'var(--slds-g-text-body-regular)'}}>$240,000 across 3 opportunities.</span></Card></VRow><VRow label="Plain (title only)" col><Card title="Recent Activity"><span style={{fontSize:'var(--slds-g-text-body-regular)'}}>No recent activity.</span></Card></VRow></VStack>,
+      Badge: () => <VRow label="Variants"><Badge label="Default" /><Badge variant="inverse" label="Inverse" /><Badge variant="brand" label="In Progress" /><Badge variant="success" label="Won" /><Badge variant="warning" label="At Risk" /><Badge variant="error" label="Overdue" /></VRow>,
+      Avatar: () => <VStack><VRow label="Sizes"><Avatar initials="AG" size="x-small" /><Avatar initials="AG" size="small" /><Avatar initials="AG" size="medium" /><Avatar initials="AG" size="large" /><Avatar initials="AG" size="x-large" /></VRow><VRow label="Types & shapes"><Avatar initials="LV" /><Avatar iconName="standard:account" /><Avatar iconName="standard:account" variant="square" /><Avatar initials="LV" variant="square" /></VRow></VStack>,
+      Pill: () => <VRow label="Types"><Pill label="Plain" /><Pill iconName="utility:filter" label="With icon" /><span style={{display:'inline-flex',alignItems:'center',gap:'0.375rem',height:'1.5rem',padding:'0 0.5rem 0 0.125rem',background:'var(--slds-g-color-surface-container-1)',border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-2)',fontSize:'var(--slds-g-font-scale-neg-1)'}}><Avatar initials="LV" size="x-small" /><span>With avatar</span></span><span style={{display:'inline-flex',alignItems:'center',height:'1.5rem',padding:'0 0.5rem',background:'var(--slds-g-color-surface-container-1)',border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-2)',fontSize:'var(--slds-g-font-scale-neg-1)'}}><a href="#" onClick={e=>e.preventDefault()} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>Link pill</a></span><Pill label="Removable" onRemove={()=>{}} /></VRow>,
+      Icon: () => <VStack><VRow label="Categories (utility · standard · action)"><Icon iconName="utility:search" size="medium" /><Icon iconName="standard:opportunity" size="medium" /><Icon iconName="action:call" size="medium" /></VRow><VRow label="Utility tints"><Icon iconName="utility:check" variant="success" /><Icon iconName="utility:warning" variant="warning" /><Icon iconName="utility:error" variant="error" /><Icon iconName="utility:info" variant="brand" /></VRow><VRow label="Sizes"><Icon iconName="utility:settings" size="xx-small" /><Icon iconName="utility:settings" size="x-small" /><Icon iconName="utility:settings" size="small" /><Icon iconName="utility:settings" size="medium" /><Icon iconName="utility:settings" size="large" /></VRow></VStack>,
+      EmptyState: () => <VStack><VRow label="No data (with CTA)" col><EmptyState size="small" iconName="standard:opportunity" title="No opportunities" message="Create one to start." action={<Button variant="brand" size="small" label="New" />} /></VRow><VRow label="No results · error" col><EmptyState size="small" iconName="utility:search" title="No results" message="No contacts match your search." /><EmptyState size="small" iconName="utility:error" title="Something went wrong" message="Couldn't load records. Try again." action={<Button variant="neutral" size="small" label="Retry" />} /></VRow></VStack>,
+      Helptext: () => <span style={{display:'inline-flex',alignItems:'center',gap:6,fontSize:'var(--slds-g-text-body-regular)'}}>Annual Revenue <Helptext content="Reported revenue for the last fiscal year." /></span>,
+      Accordion: () => <VStack><VRow label="Single-open (default — one at a time)" col><Accordion defaultActive={['a']} sections={[{id:'a',label:'Contact Information',content:<span>Phone, email, address.</span>},{id:'b',label:'Additional Details',content:<span>Lead source, department.</span>},{id:'c',label:'System Information',content:<span>Created and last-modified info.</span>}]} /></VRow><VRow label="Multiple-open (allowMultiple)" col><Accordion allowMultiple defaultActive={['a','b']} sections={[{id:'a',label:'Contact Information',content:<span>Phone, email, address.</span>},{id:'b',label:'Additional Details',content:<span>Lead source, department.</span>}]} /></VRow><VRow label="Styled content (SLDS border + well)" col><Accordion defaultActive={['a']} sections={[{id:'a',label:'Description',content:<div style={{border:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-3)',borderRadius:'var(--slds-g-radius-border-2)',padding:'0.75rem'}}>Content area with a border and gray background.</div>}]} /></VRow></VStack>,
+      Tile: () => <VStack><VRow label="With icon · meta · actions menu" col><div style={{maxWidth:340}}><Tile title="Global Media — Renewal" href="#" iconName="standard:opportunity" meta={[{label:'Amount',value:'$240,000'},{label:'Stage',value:'Negotiation'}]} actions={<ButtonMenu iconName="utility:down" items={[{label:'Edit'},{label:'Delete'}]} />} /></div></VRow><VRow label="With avatar (contact)" col><div style={{maxWidth:340}}><Tile title="Lando Voss" href="#" avatar={<Avatar initials="LV" size="small" />} meta={[{label:'Title',value:'VP, Operations'},{label:'Account',value:'Acme'}]} /></div></VRow><VRow label="Plain (title + meta)" col><div style={{maxWidth:340}}><Tile title="Q3 Territory Plan" iconName="doctype:pdf" meta={[{label:'Owner',value:'Austin Guevara'}]} /></div></VRow></VStack>,
+      Carousel: () => { const ImgSlide=({bg,icon,header,desc})=><div style={{display:'flex',flexDirection:'column',height:'100%'}}><div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',background:bg}}><span className="material-symbols-rounded" style={{fontSize:40,color:'#fff'}}>{icon}</span></div><div style={{padding:'0.5rem 0.75rem'}}><div style={{fontSize:'var(--slds-g-text-body-regular)',fontWeight:'var(--slds-g-font-weight-bold)',color:'var(--slds-g-color-on-surface-1)'}}>{header}</div><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>{desc}</div></div></div>; return <VStack><VRow label="With arrows (default)" col><Carousel height={120} slides={[{content:<Panel c="var(--slds-g-color-accent-container-1)" t="Welcome to Sales Cloud" />},{content:<Panel c="var(--slds-g-color-success-container-1)" t="Track your pipeline" />},{content:<Panel c="var(--slds-g-color-warning-container-1)" t="Close more deals" />}]} /></VRow><VRow label="Image slides (carousel-image: image + header + description)" col><Carousel height={170} slides={[{content:<ImgSlide bg="#5867e8" icon="campaign" header="Spring Release" desc="See what’s new this season." />},{content:<ImgSlide bg="#06a59a" icon="insights" header="Pipeline Insights" desc="AI-scored opportunities." />},{content:<ImgSlide bg="#fcb95b" icon="emoji_events" header="Top Performers" desc="Celebrate your wins." />}]} /></VRow><VRow label="Dots only (no arrows)" col><Carousel height={120} showArrows={false} slides={[{content:<Panel c="var(--slds-g-color-accent-container-1)" t="Swipe with dots" />},{content:<Panel c="var(--slds-g-color-success-container-1)" t="Second slide" />}]} /></VRow></VStack>; },
+      Layout: () => <Layout gutters><LayoutItem size={6}><Box>size 6</Box></LayoutItem><LayoutItem size={6}><Box>size 6</Box></LayoutItem><LayoutItem size={4}><Box>4</Box></LayoutItem><LayoutItem size={8}><Box>8</Box></LayoutItem></Layout>,
+      Tabs: () => { const [t,setT]=React.useState('details'); return <VStack><VRow label="Default (underlined)" col><Tabs value={t} onChange={setT} tabs={[{label:'Details',value:'details'},{label:'Related',value:'related'},{label:'News',value:'news'}]} /></VRow><VRow label="Scoped" col><ScopedTabs defaultValue="details" tabs={[{label:'Details',value:'details',panel:'Account details, phone, email, and address.'},{label:'Related',value:'related',panel:'Related opportunities and cases.'},{label:'News',value:'news',panel:'Latest account news and updates.'}]} /></VRow><VRow label="Vertical" col><VerticalTabs defaultValue="details" tabs={[{label:'Details',value:'details',panel:'Account details, phone, email, and address.'},{label:'Related',value:'related',panel:'Related opportunities and cases.'},{label:'Activity',value:'activity',panel:'Recent calls, tasks, and emails.'}]} /></VRow></VStack>; },
+      Alert: () => <div style={{display:'flex',flexDirection:'column',gap:8,width:'100%'}}><Alert variant="info" onClose={()=>{}}>Sync completed a few moments ago.</Alert><Alert variant="success" onClose={()=>{}}>Your changes were published.</Alert><Alert variant="warning" onClose={()=>{}}>Your trial ends in 3 days.</Alert><Alert variant="error">Couldn't reach the server.</Alert></div>,
+      Toast: () => <div style={{display:'flex',flexDirection:'column',gap:8}}><Toast variant="info" title="Heads up" message="3 records were skipped." onClose={()=>{}} /><Toast variant="success" title="Success!" message="Contact saved." onClose={()=>{}} /><Toast variant="warning" title="Warning" message="Close date is in the past." onClose={()=>{}} /><Toast variant="error" title="Error" message="Close date is invalid." onClose={()=>{}} /></div>,
+      Spinner: () => <VStack><VRow label="Sizes"><Spinner size="x-small" /><Spinner size="small" /><Spinner size="medium" /><Spinner size="large" /></VRow><VRow label="Inverse (on dark)"><div style={{display:'flex',gap:18,alignItems:'center',padding:'12px 18px',borderRadius:8,background:'var(--slds-g-color-on-surface-1)'}}><Spinner size="small" inverse /><Spinner size="medium" inverse /></div></VRow></VStack>,
+      Modal: () => { const [sz,setSz]=React.useState(null); return <React.Fragment><VRow label="Sizes"><Button variant="neutral" label="Small" onClick={()=>setSz('small')} /><Button variant="neutral" label="Medium" onClick={()=>setSz('medium')} /><Button variant="neutral" label="Large" onClick={()=>setSz('large')} /></VRow><Modal isOpen={!!sz} size={sz||'medium'} onClose={()=>setSz(null)} title="New Contact" tagline={(sz||'')+' modal'} footer={<React.Fragment><Button variant="neutral" label="Cancel" onClick={()=>setSz(null)} /><Button variant="brand" label="Save" onClick={()=>setSz(null)} /></React.Fragment>}><div style={{display:'flex',flexDirection:'column',gap:12}}><Input label="Name" placeholder="Jane Doe" /><Input label="Email" type="email" placeholder="jane@acme.com" /></div></Modal></React.Fragment>; },
+      Breadcrumbs: () => <Breadcrumbs items={[{label:'Sales',href:'#'},{label:'Contacts',href:'#'},{label:'Lando Voss'}]} />,
+      VerticalNavigation: () => { const [n,setN]=React.useState('recent'); const secs=[{label:'Reporting',items:[{id:'recent',label:'Recent',iconName:'utility:clock',badge:12},{id:'created',label:'Created by Me',iconName:'utility:user'},{id:'private',label:'Private',iconName:'utility:lock',badge:3}]}]; return <VStack><VRow label="Default" col><div style={{maxWidth:240}}><VerticalNavigation value={n} onSelect={setN} sections={secs} /></div></VRow><VRow label="Shaded" col><div style={{maxWidth:240}}><XVertNav variant="shaded" /></div></VRow><VRow label="Compact" col><div style={{maxWidth:240}}><XVertNav variant="compact" /></div></VRow></VStack>; },
+      ProgressIndicator: () => <VStack><VRow label="Path (sales / case)" col><ProgressIndicator variant="path" current={3} steps={['Qualification','Needs Analysis','Proposal','Negotiation','Closed Won']} /></VRow><VRow label="Base (guided stepper)" col><div style={{maxWidth:360}}><ProgressIndicator variant="base" current={1} steps={['Account','Details','Review','Confirm']} /></div></VRow></VStack>,
+      ProgressBar: () => <VStack><VRow label="Variants" col><ProgressBar value={68} variant="base" label="Base" showValue /><ProgressBar value={100} variant="success" label="Success" showValue /><ProgressBar value={45} variant="warning" label="Warning" showValue /></VRow><VRow label="Sizes" col><ProgressBar value={60} size="small" /><ProgressBar value={60} size="medium" /><ProgressBar value={60} size="large" /></VRow></VStack>,
+      ProgressRing: () => <VRow label="Variants"><ProgressRing value={75} size={44} variant="base" showValue /><ProgressRing value={100} size={44} variant="success" showValue /><ProgressRing value={45} size={44} variant="warning" showValue /><ProgressRing value={20} size={44} variant="error" showValue /></VRow>,
+      Datatable: () => { const [s,setS]=React.useState({by:'amount',dir:'desc'}); const rows=[{id:'1',name:'Global Media — Renewal',amount:240000,stage:'Negotiation'},{id:'2',name:'Acme — Expansion',amount:410000,stage:'Proposal'},{id:'3',name:'Pinnacle — Service',amount:88000,stage:'Qualification'}].sort((a,b)=>s.dir==='asc'?a[s.by]-b[s.by]:b[s.by]-a[s.by]); return <Datatable selectable sortBy={s.by} sortDir={s.dir} onSort={(by,dir)=>setS({by,dir})} columns={[{key:'name',label:'Opportunity',sortable:true},{key:'amount',label:'Amount',align:'right',sortable:true,render:(v)=>'$'+v.toLocaleString()},{key:'stage',label:'Stage',render:(v)=><Badge variant="brand" label={v} />}]} rows={rows} rowActions={()=> <ButtonIcon iconName="utility:threedots_vertical" variant="bare" size="small" title="Actions" />} />; },
+      Tree: () => <VStack><VRow label="Nested hierarchy with folder icons (expand / collapse)" col><Tree nodes={[{id:'w',label:'West',iconName:'utility:folder_open',children:[{id:'ca',label:'California',children:[{id:'sf',label:'San Francisco'},{id:'la',label:'Los Angeles'}]},{id:'or',label:'Oregon'}]},{id:'e',label:'East',iconName:'utility:folder_open',children:[{id:'ny',label:'New York'},{id:'ma',label:'Massachusetts'}]}]} /></VRow></VStack>,
+    };
+
+    function Panel({ c, t }) {
+      return <div style={{height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:c,fontWeight:600,color:'var(--slds-g-color-on-surface-1)'}}>{t}</div>;
+    }
+    function Box({ children }) {
+      return <div style={{padding:'0.5rem',textAlign:'center',background:'var(--slds-g-color-surface-3)',borderRadius:'var(--slds-g-radius-border-2)',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>{children}</div>;
+    }
+    function VStack({ children }) { return <div className="vstack">{children}</div>; }
+    function VRow({ label, col, children }) {
+      return <div className="vrow">{label && <span className="vlabel">{label}</span>}<div className={`vdemo ${col?'col':''}`}>{children}</div></div>;
+    }
+
+    /* ---- catalog data (full lightning base-component catalog) ---- */
+    const WIDE = new Set(['DualListbox','Carousel','Layout','ProgressIndicator','VerticalNavigation','Datatable','Tree','Modal','Alert','Button','ButtonIcon','Input','Avatar','Icon','Toast','ProgressBar','Spinner','Tabs','Accordion','Select','ButtonMenu','EmptyState','Card','Slider','FileUpload','Combobox','CheckboxGroup','RadioGroup','Textarea','BarcodeScanner','ButtonIconStateful','Flow','TreeGrid','QuickActionPanel','DynamicIcon','Illustration','Map','PillContainer','InputRichText','RecordPicker','RecordForm','RecordEditForm','RecordViewForm','Confirm','Prompt','ToastContainer','Tile','DynamicListContainer','InputAddress','OmniScript','PubSub']);
+    const CAT = [
+      { id:'actions', title:'Actions & Menus', desc:'Components that trigger an action when clicked.', items:[
+        ['Button','lightning-button','built','The primary clickable action. Variants: brand, neutral, outline-brand, destructive, success, text.','Button'],
+        ['Button Group','lightning-button-group','built','Joins related buttons into a segmented control / view switcher.','ButtonGroup'],
+        ['Button Icon','lightning-button-icon','built','Icon-only button. Variants: border, border-filled, bare, brand, container.','ButtonIcon'],
+        ['Button Icon Stateful','lightning-button-icon-stateful','built','A toggling icon-only button (like/dislike). Variants: border, border-filled, border-inverse; 4 sizes; selected state.','ButtonIconStateful'],
+        ['Button Menu','lightning-button-menu','built','A button opening a dropdown of items, dividers & subheaders (incl. Menu Item / Divider / Subheader).','ButtonMenu'],
+        ['Button Stateful','lightning-button-stateful','built','Toggle button with hover affordance (Follow / Following / Unfollow).','ButtonStateful'],
+        ['Click To Dial','lightning-click-to-dial','built','A formatted phone number rendered as a click-to-dial link (Open CTI / Voice) or plain text when disabled.','ClickToDial'],
+        ['Flow','lightning-flow','built','A screen flow interview runner with Back / Next / Pause / Finish navigation and status (started, paused, finished).','Flow'],
+      ]},
+      { id:'containers', title:'Containers', desc:'Components that group related content.', items:[
+        ['Accordion','lightning-accordion','built','Stacked expand/collapse sections (incl. Accordion Section).','Accordion'],
+        ['Card','lightning-card','built','A titled surface with optional icon, header actions, body & footer.','Card'],
+        ['Carousel','lightning-carousel','built','A sliding panel with indicator dots & arrows (incl. Carousel Image).','Carousel'],
+        ['Layout','lightning-layout','built','A responsive 12-column flex grid (Layout + Layout Item).','Layout'],
+        ['Modal','lightning-modal','built','A focused dialog over a dimmed backdrop (Modal Header / Body / Footer slots).','Modal'],
+        ['Quick Action Panel','lightning-quick-action-panel','built','A record quick-action modal (header + body + footer slot). Footer-slot form & record-form style.','QuickActionPanel'],
+        ['Tab Set','lightning-tabset','built','Underlined, scoped, and vertical tab types for switching views (Tab Set + Tab).','Tabs'],
+        ['Tile','lightning-tile','built','A compact record summary for related lists & side panels.','Tile'],
+      ]},
+      { id:'visuals', title:'Images & Visuals', desc:'Components that display images, icons, and visual elements.', items:[
+        ['Avatar','lightning-avatar','built','User/object avatar: photo, initials, or icon; circle or square.','Avatar'],
+        ['Badge','lightning-badge','built','A small status label. Variants: default, brand, success, warning, error.','Badge'],
+        ['Dynamic Icon','lightning-dynamic-icon','built','Animated state icons: ellie, eq, score, strength, trend & waffle (hover).','DynamicIcon'],
+        ['Empty State','lightning-empty-state','built','Centered icon + message + action for no-data / no-results states.','EmptyState'],
+        ['Helptext','lightning-helptext','built','A small info icon revealing a tooltip on hover/focus.','Helptext'],
+        ['Icon','lightning-icon','built','SLDS icon by name (utility / standard / action / doctype / custom).','Icon'],
+        ['Illustration','lightning-illustration','built','Empty-state SVG illustration (set:symbol), icon only — supporting text lives in adjacent UI.','Illustration'],
+        ['Map','lightning-map','built','A map with location markers and an optional selectable location list.','Map'],
+        ['Pill','lightning-pill','built','A removable token/chip with optional icon or avatar.','Pill'],
+        ['Pill Container','lightning-pill-container','built','A wrapping group of Pills with a heading & overflow (bordered or bare).','PillContainer'],
+      ]},
+      { id:'input', title:'Input', desc:'Components that let users enter and validate data.', items:[
+        ['Checkbox Group','lightning-checkbox-group','built','A labeled set of related checkboxes (multi-select).','CheckboxGroup'],
+        ['Combobox','lightning-combobox','built','A styled single-select dropdown with checkmark.','Combobox'],
+        ['Dual Listbox','lightning-dual-listbox','built','Move options between Available and Selected lists.','DualListbox'],
+        ['File Upload','lightning-file-upload','built','A dashed drop zone + browse link listing selected files.','FileUpload'],
+        ['Input','lightning-input','built','Text/email/number/etc input with icon, required & error states. Also Checkbox & Toggle below.','Input'],
+        ['Input Address','lightning-input-address','built','A compound address field — street, city, province, postal code & country.','InputAddress'],
+        ['Input Location','lightning-input-location','built','A compound geolocation field — latitude & longitude.','InputLocation'],
+        ['Input Name','lightning-input-name','built','A compound name field — salutation, first, middle, last & suffix.','InputName'],
+        ['Checkbox Button','lightning-input (checkbox-button)','built','A checkbox styled as a toggle button; multi-select toolbar.','CheckboxButton'],
+        ['Input Rich Text','lightning-input-rich-text','built','A WYSIWYG editor: font/size, bold/italic/underline/strike, lists, align, link & clean. Toolbar top or bottom.','InputRichText'],
+        ['Radio Group','lightning-radio-group','built','A labeled set of mutually-exclusive radio options.','RadioGroup'],
+        ['Record Picker','lightning-record-picker','built','An autocomplete lookup combobox over records — search, select & clear; contains / startsWith matching.','RecordPicker'],
+        ['Select','lightning-select','built','A native dropdown styled to match SLDS inputs.','Select'],
+        ['Slider','lightning-slider','built','A range input with brand-filled track and value label.','Slider'],
+        ['Text Area','lightning-textarea','built','A multi-line text input.','Textarea'],
+        ['Checkbox','lightning-input (checkbox)','built','A single checkbox toggle.','Checkbox'],
+        ['Toggle','lightning-input (toggle)','built','An on/off switch.','Toggle'],
+      ]},
+      { id:'forms', title:'Forms (Record data-binding)', desc:'Create / edit / view records bound to a Salesforce org — mocked here over a sample Account.', items:[
+        ['Record Form','lightning-record-form','built','Auto-renders a record’s fields with a view ↔ edit toggle.','RecordForm'],
+        ['Record Edit Form','lightning-record-edit-form','built','Editable record form built from Input Fields + Save / Cancel.','RecordEditForm'],
+        ['Input Field','lightning-input-field','built','A single bound, type-aware edit field (text, picklist, currency).','InputField'],
+        ['Record View Form','lightning-record-view-form','built','Read-only record form built from Output Fields.','RecordViewForm'],
+        ['Output Field','lightning-output-field','built','A single bound, formatted read-only field (text, phone, url, currency).','OutputField'],
+      ]},
+      { id:'navigation', title:'Navigation', desc:'Components that help users move between pages.', items:[
+        ['Breadcrumbs','lightning-breadcrumbs','built','A hierarchy trail above records & lists (Breadcrumbs + Breadcrumb).','Breadcrumbs'],
+        ['Vertical Navigation','lightning-vertical-navigation','built','Sidebar nav in default, shaded & compact types — sections, icons & count badges.','VerticalNavigation'],
+      ]},
+      { id:'notifications', title:'Notifications', desc:'Status & notification components that deliver information.', items:[
+        ['Alert','lightning-alert','built','A persistent, full-width notification bar. Variants: info, success, warning, error.','Alert'],
+        ['Confirm','lightning-confirm','built','A yes/no confirmation dialog (SLDS prompt blueprint). Also shows the alert prompt; theme & headerless variants.','Confirm'],
+        ['Prompt','lightning-prompt','built','A single-input dialog (SLDS prompt blueprint) that returns the entered value.','Prompt'],
+        ['Toast','lightning-toast','built','A transient confirmation/alert banner.','Toast'],
+        ['Toast Container','lightning-toast-container','built','The corner queue that stacks transient Toasts and auto-dismisses them.','ToastContainer'],
+        ['Platform Show Toast Event','lightning-platform-show-toast-event','doc','The Aura/LWC event that fires a Toast. Call your own toast trigger in a mock.',null],
+      ]},
+      { id:'output', title:'Output (Formatters)', desc:'Display values formatted for the user’s locale & language.', items:[
+        ['Formatted Address','lightning-formatted-address','built','Locale-formatted postal address with an optional map link.','FormattedAddress'],
+        ['Formatted Date Time','lightning-formatted-date-time','built','Locale date/time with configurable parts (date, short, time, full).','FormattedDateTime'],
+        ['Formatted Email','lightning-formatted-email','built','mailto: link from an email value.','FormattedEmail'],
+        ['Formatted Location','lightning-formatted-location','built','Latitude/longitude formatting (decimal & DMS).','FormattedLocation'],
+        ['Formatted Name','lightning-formatted-name','built','Locale-aware person name ordering (long, medium, short).','FormattedName'],
+        ['Formatted Number','lightning-formatted-number','built','Number / currency / percent / compact for the locale.','FormattedNumber'],
+        ['Formatted Phone','lightning-formatted-phone','built','tel: link with formatted phone number.','FormattedPhone'],
+        ['Formatted Rich Text','lightning-formatted-rich-text','built','Renders sanitized rich-text HTML.','FormattedRichText'],
+        ['Formatted Text','lightning-formatted-text','built','Plain text with auto-linked URLs/emails.','FormattedText'],
+        ['Formatted Time','lightning-formatted-time','built','Locale time-of-day formatting.','FormattedTime'],
+        ['Formatted URL','lightning-formatted-url','built','Anchor link from a URL value.','FormattedURL'],
+        ['Relative Date Time','lightning-relative-date-time','built','“2 hours ago” style relative time, computed live from now.','RelativeDateTime'],
+      ]},
+      { id:'progress', title:'Progress', desc:'Components that convey the progress of a process.', items:[
+        ['Progress Bar','lightning-progress-bar','built','A horizontal completion indicator (0–100).','ProgressBar'],
+        ['Progress Indicator','lightning-progress-indicator','built','Sales/case Path (chevrons) or guided-flow stepper (incl. Progress Step).','ProgressIndicator'],
+        ['Progress Ring','lightning-progress-ring','built','A compact circular completion indicator.','ProgressRing'],
+        ['Spinner','lightning-spinner','built','An animated loading indicator in four sizes.','Spinner'],
+      ]},
+      { id:'tables', title:'Tables & Trees', desc:'Display large amounts of record data; trees show expandable hierarchy.', items:[
+        ['Datatable','lightning-datatable','built','A record grid with selection, sortable columns, custom cells & row actions.','Datatable'],
+        ['Tree','lightning-tree','built','A nested, expand/collapse hierarchy.','Tree'],
+        ['Tree Grid','lightning-tree-grid','built','A datatable with expandable nested rows — chevron toggle, row selection, and typed cells (link, phone, currency).','TreeGrid'],
+        ['Dynamic List Container','lightning-dynamic-list-container','built','A virtualized list (dev preview) — renders only visible rows for huge datasets. Scroll 1,000 rows live.','DynamicListContainer'],
+        ['Dynamic List Item','lightning-dynamic-list-item','built','The row wrapper inside a Dynamic List Container — each item-id row, positioned by the container during virtualization.','DynamicListContainer'],
+      ]},
+      { id:'mobile', title:'Mobile', desc:'Components for use in the Salesforce Mobile App — access on-device hardware.', items:[
+        ['Barcode Scanner','lightning-barcode-scanner','built','Scans barcodes via the device camera. Single & continuous modes, icon sizes, enabled/disabled & custom icon.','BarcodeScanner'],
+      ]},
+      { id:'omnistudio', title:'OmniStudio', desc:'OmniStudio data-display & guided-interaction components.', items:[
+        ['FlexCard','omnistudio-flexcard','built','A data card — header, field grid, status badge & action buttons.','FlexCard'],
+        ['OmniScript','omnistudio-omniscript','built','A guided multi-step interaction (wizard) — path indicator, step forms & Previous/Next nav.','OmniScript'],
+        ['PubSub','omnistudio-pubsub','built','Publish/subscribe messaging between components — publishers emit, subscribers react.','PubSub'],
+      ]},
+    ];
+
+    const slug = s => 'c-'+String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+
+    function Entry({ row }) {
+      const [name, tag, status, desc, exKey] = row;
+      const wide = exKey && WIDE.has(exKey);
+      let demo;
+      if (status === 'built' && exKey && Ex[exKey]) {
+        const Comp = Ex[exKey];
+        demo = <div className="demo block"><Comp /></div>;
+      } else {
+        demo = <div className="demo empty">Documented — see description.</div>;
+      }
+      return (
+        <div className={`entry ${wide?'wide':''}`} id={slug(name)} style={{scrollMarginTop:'1rem'}}>
+          <header>
+            <div className="nm">
+              <span className={`dot ${status}`}></span>
+              <strong>{name}</strong>
+              <code>{tag}</code>
+              <span style={{flex:1}}></span>
+              <span className={`pill ${status}`}>{status === 'built' ? 'In this kit' : 'Documented'}</span>
+            </div>
+            <p className="desc">{desc}</p>
+          </header>
+          {demo}
+        </div>
+      );
+    }
+
+    function App() {
+      const builtAll = CAT.reduce((s,c)=>s+c.items.filter(i=>i[2]==='built').length,0);
+      const totalAll = CAT.reduce((s,c)=>s+c.items.length,0);
+      const allItems = React.useMemo(()=>CAT.flatMap(c=>c.items.map(i=>({name:i[0],tag:i[1],status:i[2]}))).sort((a,b)=>a.name.localeCompare(b.name)),[]);
+      const [q,setQ]=React.useState('');
+      const searchRef=React.useRef(null);
+      React.useEffect(()=>{const h=e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='j'){e.preventDefault();searchRef.current&&searchRef.current.focus();}};window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h);},[]);
+      const ql=q.trim().toLowerCase();
+      const matches=ql?allItems.filter(i=>i.name.toLowerCase().includes(ql)||i.tag.toLowerCase().includes(ql)):allItems;
+      return (
+        <>
+          <aside className="side">
+            <div className="side-head">
+              <div className="eyebrow"><span className="material-symbols-rounded" style={{fontSize:18}}>arrow_back</span><span className="material-symbols-rounded bolt">bolt</span><span>Platform</span></div>
+              <h1>Lightning Component Reference</h1>
+              <div className="search">
+                <span className="material-symbols-rounded" style={{fontSize:18,color:'var(--slds-g-color-on-surface-3)'}}>search</span>
+                <input ref={searchRef} value={q} onChange={e=>setQ(e.target.value)} placeholder="Search" aria-label="Search components" />
+                <span className="kbd">⌘J</span>
+              </div>
+            </div>
+            <nav className="navlist">
+              {matches.length ? matches.map(i => (
+                <a key={i.name} href={`#${slug(i.name)}`}>
+                  <span className={`sdot ${i.status}`}></span>
+                  <span>{i.name}</span>
+                </a>
+              )) : <div className="empty-nav">No components match “{q}”.</div>}
+            </nav>
+          </aside>
+          <main className="main">
+            <div className="lede">
+              <h2>LWC Component Reference</h2>
+              <p>Every Salesforce Lightning base component, organized by the official functional categories. Components built in this kit render live below; the rest are documented with how to compose them from the primitives.</p>
+              <div className="legend">
+                <span className="lg-item"><span className="dot built"></span> Built in this kit — live, token-driven SLDS 2 component ({builtAll}/{totalAll})</span>
+                <span className="lg-item"><span className="dot doc"></span> Documented — data-bound or locale formatter; compose / integrate</span>
+              </div>
+            </div>
+            {CAT.map(c => (
+              <section key={c.id} id={c.id} className="cat">
+                <h3>{c.title}</h3>
+                <p className="catdesc">{c.desc}</p>
+                <div className="grid">
+                  {c.items.map((row,i) => <Entry key={i} row={row} />)}
+                </div>
+              </section>
+            ))}
+          </main>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+  </script>
+</body>
+</html>

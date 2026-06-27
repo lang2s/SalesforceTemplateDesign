@@ -1,0 +1,105 @@
+/* ============================================================
+   SLDS 2 — Semantic Color Hooks (the "global styling hooks")
+   These are the tokens you reach for in real work. They map a
+   role (surface, on-surface, border, accent, feedback) to a
+   palette value, and flip automatically in dark mode via the
+   [data-slds-theme="dark"] scope.
+   ============================================================ */
+:root {
+  /* ---- Surfaces (page → container → raised) ---- */
+  --slds-g-color-surface-1: var(--slds-g-color-palette-neutral-95);   /* app canvas */
+  --slds-g-color-surface-2: var(--slds-g-color-palette-neutral-99);
+  --slds-g-color-surface-3: var(--slds-g-color-palette-neutral-90);
+  --slds-g-color-surface-container-1: var(--slds-g-color-palette-neutral-100); /* cards */
+  --slds-g-color-surface-container-2: var(--slds-g-color-palette-neutral-100);
+  --slds-g-color-surface-container-3: var(--slds-g-color-palette-neutral-95);
+  --slds-g-color-surface-inverse-1: var(--slds-g-color-palette-neutral-15);
+
+  /* ---- On-surface text ---- */
+  --slds-g-color-on-surface-1: var(--slds-g-color-palette-neutral-10);  /* primary text */
+  --slds-g-color-on-surface-2: var(--slds-g-color-palette-neutral-30);  /* secondary */
+  --slds-g-color-on-surface-3: var(--slds-g-color-palette-neutral-50);  /* weak / meta */
+  --slds-g-color-on-surface-inverse-1: var(--slds-g-color-palette-neutral-100);
+
+  /* ---- Borders & dividers ---- */
+  --slds-g-color-border-1: var(--slds-g-color-palette-neutral-90);
+  --slds-g-color-border-2: var(--slds-g-color-palette-neutral-80);
+  --slds-g-color-border-3: var(--slds-g-color-palette-neutral-70);
+
+  /* ---- Accent (brand) ---- */
+  --slds-g-color-accent-1: var(--slds-g-color-palette-blue-50);          /* brand */
+  --slds-g-color-accent-2: var(--slds-g-color-palette-blue-60);          /* hover */
+  --slds-g-color-accent-3: var(--slds-g-color-palette-blue-65);          /* active */
+  --slds-g-color-accent-container-1: var(--slds-g-color-palette-blue-10);
+  --slds-g-color-on-accent-1: var(--slds-g-color-palette-neutral-100);
+  --slds-g-color-accent-foreground-1: var(--slds-g-color-palette-blue-60);
+
+  /* ---- Feedback: success ---- */
+  --slds-g-color-success-1: var(--slds-g-color-palette-green-50);
+  --slds-g-color-success-container-1: var(--slds-g-color-palette-green-10);
+  --slds-g-color-on-success-1: var(--slds-g-color-palette-neutral-100);
+
+  /* ---- Feedback: warning ---- */
+  --slds-g-color-warning-1: var(--slds-g-color-palette-orange-40);
+  --slds-g-color-warning-container-1: var(--slds-g-color-palette-orange-10);
+  --slds-g-color-on-warning-1: var(--slds-g-color-palette-neutral-10);
+
+  /* ---- Feedback: error / destructive ---- */
+  --slds-g-color-error-1: var(--slds-g-color-palette-red-50);
+  --slds-g-color-error-2: var(--slds-g-color-palette-red-60);
+  --slds-g-color-error-container-1: var(--slds-g-color-palette-red-10);
+  --slds-g-color-on-error-1: var(--slds-g-color-palette-neutral-100);
+
+  /* ---- Disabled ---- */
+  --slds-g-color-disabled-1: var(--slds-g-color-palette-neutral-90);
+  --slds-g-color-disabled-2: var(--slds-g-color-palette-neutral-80);
+  --slds-g-color-on-disabled-1: var(--slds-g-color-palette-neutral-60);
+
+  /* ---- Convenience aliases (friendlier names) ---- */
+  --color-brand: var(--slds-g-color-accent-1);
+  --color-brand-hover: var(--slds-g-color-accent-2);
+  --surface-app: var(--slds-g-color-surface-1);
+  --surface-card: var(--slds-g-color-surface-container-1);
+  --text-default: var(--slds-g-color-on-surface-1);
+  --text-weak: var(--slds-g-color-on-surface-3);
+  --border-default: var(--slds-g-color-border-1);
+}
+
+/* ============================================================
+   Dark mode — Salesforce Cosmos dark theme.
+   Activate by setting data-slds-theme="dark" on <html> or any
+   container. Surfaces darken, text lightens, accent brightens
+   for contrast on dark backgrounds.
+   ============================================================ */
+[data-slds-theme="dark"] {
+  --slds-g-color-surface-1: var(--slds-g-color-palette-neutral-10);
+  --slds-g-color-surface-2: var(--slds-g-color-palette-neutral-15);
+  --slds-g-color-surface-3: var(--slds-g-color-palette-neutral-20);
+  --slds-g-color-surface-container-1: var(--slds-g-color-palette-neutral-15);
+  --slds-g-color-surface-container-2: var(--slds-g-color-palette-neutral-20);
+  --slds-g-color-surface-container-3: var(--slds-g-color-palette-neutral-30);
+  --slds-g-color-surface-inverse-1: var(--slds-g-color-palette-neutral-95);
+
+  --slds-g-color-on-surface-1: var(--slds-g-color-palette-neutral-100);
+  --slds-g-color-on-surface-2: var(--slds-g-color-palette-neutral-80);
+  --slds-g-color-on-surface-3: var(--slds-g-color-palette-neutral-70);
+  --slds-g-color-on-surface-inverse-1: var(--slds-g-color-palette-neutral-10);
+
+  --slds-g-color-border-1: var(--slds-g-color-palette-neutral-30);
+  --slds-g-color-border-2: var(--slds-g-color-palette-neutral-40);
+  --slds-g-color-border-3: var(--slds-g-color-palette-neutral-50);
+
+  --slds-g-color-accent-1: var(--slds-g-color-palette-blue-40);
+  --slds-g-color-accent-2: var(--slds-g-color-palette-blue-30);
+  --slds-g-color-accent-3: var(--slds-g-color-palette-blue-20);
+  --slds-g-color-accent-container-1: var(--slds-g-color-palette-blue-70);
+  --slds-g-color-accent-foreground-1: var(--slds-g-color-palette-blue-30);
+
+  --slds-g-color-success-1: var(--slds-g-color-palette-green-40);
+  --slds-g-color-success-container-1: var(--slds-g-color-palette-green-70);
+  --slds-g-color-warning-1: var(--slds-g-color-palette-orange-40);
+  --slds-g-color-warning-container-1: var(--slds-g-color-palette-orange-60);
+  --slds-g-color-error-1: var(--slds-g-color-palette-red-40);
+  --slds-g-color-error-2: var(--slds-g-color-palette-red-30);
+  --slds-g-color-error-container-1: var(--slds-g-color-palette-red-70);
+}

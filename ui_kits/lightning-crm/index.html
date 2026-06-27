@@ -1,0 +1,86 @@
+<!-- @dsCard group="Lightning CRM" viewport="1280x720" name="Lightning Experience CRM" subtitle="Interactive Sales Cloud recreation — home, list views, record home & pipeline board" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lightning Experience — Sales Cloud</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--slds-g-color-surface-1); }
+  #app { display: flex; flex-direction: column; height: 100vh; }
+  .crm-main { flex: 1; overflow-y: auto; background: var(--slds-g-color-surface-1); }
+  .crm-toast-wrap { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 50; }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script src="./data.js"></script>
+  <script type="text/babel" src="./shell.jsx"></script>
+  <script type="text/babel" src="./home.jsx"></script>
+  <script type="text/babel" src="./records.jsx"></script>
+
+  <script type="text/babel">
+    const DS = window.SalesforceSLDS2DesignSystem_2eee88;
+    const KEY = 'slds2-crm-view';
+
+    function Placeholder({ label }) {
+      const { Icon } = DS;
+      return (
+        <div style={{ maxWidth: 1180, margin: '0 auto', padding: '4rem 1.5rem', textAlign: 'center', color: 'var(--slds-g-color-on-surface-3)' }}>
+          <Icon iconName="standard:dashboard" size="large" />
+          <h1 style={{ fontSize: 'var(--slds-g-text-heading-large)', marginTop: '1rem', color: 'var(--slds-g-color-on-surface-2)' }}>{label}</h1>
+          <p style={{ marginTop: '.5rem' }}>This view isn't part of the kit demo — explore Home, Opportunities and Contacts.</p>
+        </div>
+      );
+    }
+
+    function App() {
+      const { Toast } = DS;
+      const [view, setView] = React.useState(() => localStorage.getItem(KEY) || 'home');
+      const [contactId, setContactId] = React.useState('1');
+      const [query, setQuery] = React.useState('');
+      const [toast, setToast] = React.useState(null);
+
+      React.useEffect(() => { localStorage.setItem(KEY, view); }, [view]);
+
+      const fireToast = (msg) => {
+        setToast(msg || { variant: 'success', title: 'Agentforce', message: 'Ask Agentforce is not wired up in this demo.' });
+        clearTimeout(window.__crmToast);
+        window.__crmToast = setTimeout(() => setToast(null), 3200);
+      };
+
+      const navigate = (v) => { setView(v); window.scrollTo && window.scrollTo(0, 0); };
+      const openContact = (id) => { setContactId(id); navigate('contactDetail'); };
+
+      let screen;
+      if (view === 'home') screen = <window.HomeDashboard onNavigate={navigate} />;
+      else if (view === 'opportunities') screen = <window.OpportunityBoard onToast={() => fireToast({ variant: 'success', title: 'Saved', message: 'New opportunity created.' })} />;
+      else if (view === 'contacts') screen = <window.ContactsList onOpen={openContact} query={query} />;
+      else if (view === 'contactDetail') screen = <window.ContactDetail id={contactId} onBack={() => navigate('contacts')} onToast={() => fireToast({ variant: 'success', title: 'Saved', message: 'Your changes were saved.' })} />;
+      else screen = <Placeholder label={view.charAt(0).toUpperCase() + view.slice(1)} />;
+
+      return (
+        <React.Fragment>
+          <window.GlobalHeader onSearch={(q) => { setQuery(q); if (q && view !== 'contacts') navigate('contacts'); }} onToast={() => fireToast()} />
+          <window.AppNav current={view} onNavigate={navigate} />
+          <div className="crm-main">{screen}</div>
+          {toast && (
+            <div className="crm-toast-wrap">
+              <Toast variant={toast.variant} title={toast.title} message={toast.message} onClose={() => setToast(null)} />
+            </div>
+          )}
+        </React.Fragment>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+  </script>
+</body>
+</html>

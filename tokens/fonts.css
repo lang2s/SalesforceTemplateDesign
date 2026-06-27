@@ -1,0 +1,41 @@
+/* ============================================================
+   SLDS 2 — Webfonts
+   PRIMARY TYPEFACE: Salesforce Sans (the real brand font) is
+   bundled in assets/fonts/ — full family Thin/Light/Regular/Bold
+   plus italics (© Salesforce, see the License .txt there).
+   **Public Sans** (Google Fonts) is kept only as a metric fallback.
+   Mono: Roboto Mono. Icons: real SLDS sprites in assets/icons/
+   (see Icon.jsx); Material Symbols Rounded loads only as the icon
+   fallback. All Google families are in ONE @import — chained
+   secondary @imports were being dropped by some renderers.
+   ============================================================ */
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto+Mono:wght@400;500&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=swap");
+
+/* Real brand typeface — Salesforce Sans (full family, © Salesforce;
+   see assets/fonts/License-for-SalesforceSans-font.txt).
+   Faces: Thin 100, Light 300, Regular 400, Bold 700 (+ italics).
+   500 (medium) resolves to 400, 600 (semibold) to 700 via nearest-weight. */
+@font-face { font-family: "Salesforce Sans"; font-style: normal; font-weight: 100; font-display: swap; src: url("../assets/fonts/SalesforceSans-Thin.ttf") format("truetype"); }
+@font-face { font-family: "Salesforce Sans"; font-style: italic; font-weight: 100; font-display: swap; src: url("../assets/fonts/SalesforceSans-ThinItalic.ttf") format("truetype"); }
+@font-face { font-family: "Salesforce Sans"; font-style: normal; font-weight: 300; font-display: swap; src: url("../assets/fonts/SalesforceSans-Light.ttf") format("truetype"); }
+@font-face { font-family: "Salesforce Sans"; font-style: italic; font-weight: 300; font-display: swap; src: url("../assets/fonts/SalesforceSans-LightItalic.ttf") format("truetype"); }
+@font-face { font-family: "Salesforce Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("../assets/fonts/SalesforceSans-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Salesforce Sans"; font-style: italic; font-weight: 400; font-display: swap; src: url("../assets/fonts/SalesforceSans-Italic.ttf") format("truetype"); }
+@font-face { font-family: "Salesforce Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url("../assets/fonts/SalesforceSans-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Salesforce Sans"; font-style: italic; font-weight: 700; font-display: swap; src: url("../assets/fonts/SalesforceSans-BoldItalic.ttf") format("truetype"); }
+
+.material-symbols-rounded {
+  font-family: "Material Symbols Rounded";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}

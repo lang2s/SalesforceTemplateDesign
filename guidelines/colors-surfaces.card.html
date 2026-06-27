@@ -1,0 +1,34 @@
+<!-- @dsCard group="Colors" viewport="700x210" name="Surfaces & Text" subtitle="Neutral canvas, containers, and on-surface text roles" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 20px; background: var(--slds-g-color-surface-container-1); }
+  .grp { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--slds-g-color-on-surface-3); margin: 0 0 12px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  .sw { width: 104px; }
+  .chip { height: 48px; border-radius: var(--slds-g-radius-border-3); border: 1px solid var(--slds-g-color-border-1); }
+  .name { font-size: 11px; font-weight: 600; color: var(--slds-g-color-on-surface-1); margin-top: 6px; }
+  .tok { font-family: var(--slds-g-font-family-mono); font-size: 9.5px; color: var(--slds-g-color-on-surface-3); }
+  .txt { display:flex; gap:18px; align-items:baseline; }
+  .txt span { font-size: 15px; font-weight: 600; }
+</style>
+</head>
+<body>
+  <p class="grp">Surfaces</p>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--slds-g-color-surface-1)"></div><div class="name">surface-1</div><div class="tok">app canvas</div></div>
+    <div class="sw"><div class="chip" style="background:var(--slds-g-color-surface-container-1)"></div><div class="name">container-1</div><div class="tok">cards</div></div>
+    <div class="sw"><div class="chip" style="background:var(--slds-g-color-surface-3)"></div><div class="name">surface-3</div><div class="tok">#f3f3f3</div></div>
+    <div class="sw"><div class="chip" style="background:var(--slds-g-color-surface-inverse-1)"></div><div class="name">inverse-1</div><div class="tok">dark wells</div></div>
+  </div>
+  <p class="grp">On-surface text</p>
+  <div class="txt">
+    <span style="color:var(--slds-g-color-on-surface-1)">on-surface-1 · primary</span>
+    <span style="color:var(--slds-g-color-on-surface-2)">on-surface-2 · secondary</span>
+    <span style="color:var(--slds-g-color-on-surface-3)">on-surface-3 · weak</span>
+  </div>
+</body>
+</html>

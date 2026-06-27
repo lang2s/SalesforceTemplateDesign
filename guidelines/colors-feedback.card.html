@@ -1,0 +1,38 @@
+<!-- @dsCard group="Colors" viewport="700x200" name="Feedback" subtitle="Success, warning, error & info — semantic state colors" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 18px 20px; background: var(--slds-g-color-surface-container-1); display:flex; gap: 14px; flex-wrap: wrap; }
+  .cell { width: 150px; }
+  .bar { height: 40px; border-radius: var(--slds-g-radius-border-3); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; }
+  .name { font-size: 11px; font-weight: 700; color: var(--slds-g-color-on-surface-1); margin-top: 8px; }
+  .tok { font-family: var(--slds-g-font-family-mono); font-size: 9.5px; color: var(--slds-g-color-on-surface-3); }
+  .lite { margin-top: 6px; height: 24px; border-radius: var(--slds-g-radius-border-2); display:flex; align-items:center; padding:0 10px; font-size:11px; font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="cell">
+    <div class="bar" style="background:var(--slds-g-color-success-1); color:var(--slds-g-color-on-success-1)">Success</div>
+    <div class="name">success-1</div><div class="tok">#2e844a</div>
+    <div class="lite" style="background:var(--slds-g-color-success-container-1); color:var(--slds-g-color-palette-green-60)">container</div>
+  </div>
+  <div class="cell">
+    <div class="bar" style="background:var(--slds-g-color-warning-1); color:var(--slds-g-color-on-warning-1)">Warning</div>
+    <div class="name">warning-1</div><div class="tok">#fe9339</div>
+    <div class="lite" style="background:var(--slds-g-color-warning-container-1); color:var(--slds-g-color-palette-orange-60)">container</div>
+  </div>
+  <div class="cell">
+    <div class="bar" style="background:var(--slds-g-color-error-1); color:var(--slds-g-color-on-error-1)">Error</div>
+    <div class="name">error-1</div><div class="tok">#ea001e</div>
+    <div class="lite" style="background:var(--slds-g-color-error-container-1); color:var(--slds-g-color-palette-red-60)">container</div>
+  </div>
+  <div class="cell">
+    <div class="bar" style="background:var(--slds-g-color-palette-cloud-blue-50); color:#fff">Info</div>
+    <div class="name">cloud-blue-50</div><div class="tok">#0d9dda</div>
+    <div class="lite" style="background:var(--slds-g-color-palette-cloud-blue-10); color:var(--slds-g-color-palette-cloud-blue-70)">container</div>
+  </div>
+</body>
+</html>

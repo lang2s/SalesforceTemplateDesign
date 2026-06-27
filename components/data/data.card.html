@@ -1,0 +1,59 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Data Tables & Trees" subtitle="Datatable with selection + sort, and a nested Tree" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px 22px; background: var(--slds-g-color-surface-1); }
+  .lbl { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--slds-g-color-on-surface-3); margin: 18px 0 10px; }
+  .lbl:first-child { margin-top: 0; }
+  .grid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 18px; align-items: start; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const { Datatable, Tree, Badge } = window.SalesforceSLDS2DesignSystem_2eee88;
+    function Demo() {
+      const [sort, setSort] = React.useState({ by: 'amount', dir: 'desc' });
+      const rows = [
+        { id: '1', name: 'Global Media — Renewal', amount: 240000, stage: 'Negotiation' },
+        { id: '2', name: 'Acme — Expansion', amount: 410000, stage: 'Proposal' },
+        { id: '3', name: 'Pinnacle — Service Cloud', amount: 88000, stage: 'Qualification' },
+      ].sort((a,b) => sort.dir==='asc' ? a[sort.by]-b[sort.by] : (typeof a[sort.by]==='number' ? b[sort.by]-a[sort.by] : 0));
+      return (
+        <div className="grid">
+          <div>
+            <p className="lbl">Datatable</p>
+            <Datatable selectable sortBy={sort.by} sortDir={sort.dir}
+              onSort={(by,dir)=>setSort({by,dir})}
+              columns={[
+                { key:'name', label:'Opportunity', sortable:true },
+                { key:'amount', label:'Amount', align:'right', sortable:true, render:(v)=>'$'+v.toLocaleString() },
+                { key:'stage', label:'Stage', render:(v)=><Badge variant="brand" label={v} /> },
+              ]}
+              rows={rows} />
+          </div>
+          <div>
+            <p className="lbl">Tree</p>
+            <Tree nodes={[
+              { id:'w', label:'West', iconName:'utility:open_folder', children:[
+                { id:'ca', label:'California' }, { id:'or', label:'Oregon' },
+              ]},
+              { id:'e', label:'East', iconName:'utility:open_folder', children:[
+                { id:'ny', label:'New York' },
+              ]},
+            ]} />
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+  </script>
+</body>
+</html>

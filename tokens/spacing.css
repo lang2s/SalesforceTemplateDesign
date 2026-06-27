@@ -1,0 +1,34 @@
+/* ============================================================
+   SLDS 2 — Spacing
+   Numeric scale (--slds-g-spacing-N) plus SLDS named aliases
+   (xxx-small … xx-large) kept for blueprint familiarity.
+   Base unit = 0.25rem (4px).
+   ============================================================ */
+:root {
+  --slds-g-spacing-0:  0;
+  --slds-g-spacing-1:  0.25rem;  /* 4px  — xxx-small */
+  --slds-g-spacing-2:  0.5rem;   /* 8px  — xx-small  */
+  --slds-g-spacing-3:  0.75rem;  /* 12px — x-small   */
+  --slds-g-spacing-4:  1rem;     /* 16px — small / medium */
+  --slds-g-spacing-5:  1.5rem;   /* 24px — large     */
+  --slds-g-spacing-6:  2rem;     /* 32px — x-large   */
+  --slds-g-spacing-7:  3rem;     /* 48px — xx-large  */
+  --slds-g-spacing-8:  4rem;     /* 64px */
+  --slds-g-spacing-9:  6rem;     /* 96px */
+
+  /* Named aliases (SLDS blueprint vocabulary) */
+  --slds-g-spacing-xxx-small: 0.125rem; /* 2px */
+  --slds-g-spacing-xx-small:  0.25rem;  /* 4px */
+  --slds-g-spacing-x-small:   0.5rem;   /* 8px */
+  --slds-g-spacing-small:     0.75rem;  /* 12px */
+  --slds-g-spacing-medium:    1rem;     /* 16px */
+  --slds-g-spacing-large:     1.5rem;   /* 24px */
+  --slds-g-spacing-x-large:   2rem;     /* 32px */
+  --slds-g-spacing-xx-large:  3rem;     /* 48px */
+
+  /* Sizing — common content widths (SLDS container scale) */
+  --slds-g-sizing-container-small:   30rem;  /* 480px */
+  --slds-g-sizing-container-medium:  48rem;  /* 768px */
+  --slds-g-sizing-container-large:   60rem;  /* 960px */
+  --slds-g-sizing-container-x-large: 75rem;  /* 1200px */
+}

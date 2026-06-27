@@ -1,0 +1,72 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Display" subtitle="Card, Badge, Avatar, Pill, Icon, Empty State & Helptext" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px 22px; background: var(--slds-g-color-surface-1); }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  .lbl { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--slds-g-color-on-surface-3); margin: 0 0 8px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const { Card, Badge, Avatar, Pill, Icon, Button, EmptyState, Helptext } = window.SalesforceSLDS2DesignSystem_2eee88;
+    function Demo() {
+      return (
+        <div className="grid">
+          <div>
+            <p className="lbl">Badges</p>
+            <div className="row">
+              <Badge label="Default" />
+              <Badge variant="brand" label="In Progress" />
+              <Badge variant="success" label="Closed Won" />
+              <Badge variant="warning" label="At Risk" />
+              <Badge variant="error" label="Overdue" />
+            </div>
+            <p className="lbl">Avatars</p>
+            <div className="row">
+              <Avatar initials="AG" size="large" />
+              <Avatar initials="AG" size="large" />
+              <Avatar iconName="standard:account" variant="square" size="large" />
+              <Avatar initials="LV" size="medium" />
+            </div>
+            <p className="lbl">Pills · Icons · Helptext</p>
+            <div className="row">
+              <Pill label="California" onRemove={() => {}} />
+              <Pill iconName="utility:filter" label="Open" />
+              <Icon iconName="utility:search" />
+              <Icon iconName="standard:opportunity" size="medium" />
+              <Icon iconName="utility:check" variant="success" />
+              <Helptext content="Reported revenue for the last fiscal year." />
+            </div>
+            <p className="lbl">Empty State</p>
+            <div style={{border:'1px solid var(--slds-g-color-border-1)', borderRadius:'var(--slds-g-radius-border-4)', background:'var(--slds-g-color-surface-container-1)'}}>
+              <EmptyState size="small" iconName="standard:opportunity" title="No open opportunities"
+                message="Create one to start tracking your pipeline."
+                action={<Button variant="brand" size="small" label="New" />} />
+            </div>
+          </div>
+          <Card title="Acme — Enterprise" iconName="standard:account"
+                actions={<Button variant="neutral" size="small" label="Edit" />}
+                footer="Updated 2 hours ago">
+            <p style={{margin:'0 0 8px', fontSize:'var(--slds-g-text-body-regular)'}}>Annual contract value <strong>$240,000</strong> across 3 active opportunities.</p>
+            <div className="row" style={{marginBottom:0}}>
+              <Badge variant="success" label="Active" />
+              <Badge variant="brand" label="Tier 1" />
+            </div>
+          </Card>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+  </script>
+</body>
+</html>

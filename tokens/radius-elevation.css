@@ -1,0 +1,36 @@
+/* ============================================================
+   SLDS 2 — Radius, Elevation & Motion
+   Cosmos uses softer corners than SLDS 1 and a restrained,
+   low-contrast shadow system (no harsh drop shadows).
+   ============================================================ */
+:root {
+  /* ---- Border radius ---- */
+  --slds-g-radius-border-1: 0.125rem; /* 2px  — subtle */
+  --slds-g-radius-border-2: 0.25rem;  /* 4px  — inputs, small chips */
+  --slds-g-radius-border-3: 0.5rem;   /* 8px  — buttons, controls */
+  --slds-g-radius-border-4: 0.75rem;  /* 12px — cards, panels */
+  --slds-g-radius-border-5: 1rem;     /* 16px — large surfaces, modals */
+  --slds-g-radius-border-pill:   62.5rem;
+  --slds-g-radius-border-circle: 50%;
+
+  /* ---- Border widths ---- */
+  --slds-g-sizing-border-1: 1px;
+  --slds-g-sizing-border-2: 2px;
+  --slds-g-sizing-border-3: 4px;
+
+  /* ---- Elevation (shadows) ---- */
+  --slds-g-shadow-1: 0 1px 2px 0 rgba(24, 24, 24, 0.08);   /* hairline / resting */
+  --slds-g-shadow-2: 0 2px 4px 0 rgba(24, 24, 24, 0.10);   /* cards */
+  --slds-g-shadow-3: 0 4px 12px 0 rgba(24, 24, 24, 0.12);  /* hover lift / dropdown */
+  --slds-g-shadow-4: 0 8px 24px 0 rgba(24, 24, 24, 0.16);  /* popover / modal */
+  --slds-g-shadow-inset: inset 0 1px 2px 0 rgba(24, 24, 24, 0.10);
+  --slds-g-shadow-focus: 0 0 0 3px rgba(1, 118, 211, 0.35); /* focus ring */
+
+  /* ---- Motion (Cosmos easing — calm, no bounce) ---- */
+  --slds-g-duration-immediately: 0s;   /* @kind other */
+  --slds-g-duration-quickly:     0.1s; /* @kind other */
+  --slds-g-duration-promptly:    0.2s; /* @kind other */
+  --slds-g-duration-slowly:      0.4s; /* @kind other */
+  --slds-g-ease-out:      cubic-bezier(0.25, 0.1, 0.25, 1); /* @kind other */
+  --slds-g-ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);     /* @kind other */
+}

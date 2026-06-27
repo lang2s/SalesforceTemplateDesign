@@ -1,0 +1,69 @@
+<!-- @dsCard group="Components" viewport="700x360" name="Buttons" subtitle="Button, ButtonIcon, Group, Menu & Stateful" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { margin: 0; padding: 20px 22px; background: var(--slds-g-color-surface-container-1); }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  .lbl { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--slds-g-color-on-surface-3); margin: 0 0 8px; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script type="text/babel">
+    const { Button, ButtonIcon, ButtonGroup, ButtonMenu, ButtonStateful } = window.SalesforceSLDS2DesignSystem_2eee88;
+    function Demo() {
+      return (
+        <div>
+          <p className="lbl">Variants</p>
+          <div className="row">
+            <Button variant="brand" label="Brand" />
+            <Button variant="neutral" label="Neutral" />
+            <Button variant="outline-brand" label="Outline" />
+            <Button variant="success" label="Success" />
+            <Button variant="destructive" label="Destructive" />
+            <Button variant="text" label="Text" />
+          </div>
+          <p className="lbl">With icon · sizes · disabled</p>
+          <div className="row">
+            <Button variant="brand" iconName="utility:add" label="New Contact" />
+            <Button variant="neutral" iconName="utility:download" iconPosition="right" label="Export" />
+            <Button variant="brand" size="small" label="Small" />
+            <Button variant="brand" label="Disabled" disabled />
+          </div>
+          <p className="lbl">Icon buttons</p>
+          <div className="row">
+            <ButtonIcon iconName="utility:edit" variant="border" title="Edit" />
+            <ButtonIcon iconName="utility:delete" variant="border-filled" title="Delete" />
+            <ButtonIcon iconName="utility:settings" variant="bare" title="Setup" />
+            <ButtonIcon iconName="utility:add" variant="brand" title="New" />
+            <ButtonIcon iconName="utility:refresh" variant="container" title="Refresh" />
+          </div>
+          <p className="lbl">Group · Menu · Stateful</p>
+          <div className="row">
+            <ButtonGroup value="list" items={[
+              {label:'List', value:'list', iconName:'utility:list'},
+              {label:'Kanban', value:'kanban', iconName:'utility:kanban'},
+              {label:'Split', value:'split', iconName:'utility:layout'},
+            ]} />
+            <ButtonMenu label="Actions" items={[
+              {label:'Edit', iconName:'utility:edit'},
+              {label:'Clone', iconName:'utility:copy'},
+              {divider:true},
+              {label:'Delete', iconName:'utility:delete', destructive:true},
+            ]} />
+            <ButtonStateful defaultSelected={false} />
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+  </script>
+</body>
+</html>

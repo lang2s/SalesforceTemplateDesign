@@ -1,0 +1,48 @@
+/* ============================================================
+   SLDS 2 — Typography scale & roles
+   Salesforce Sans (substituted with Public Sans — see fonts.css).
+   Token names follow the SLDS 2 semantic convention:
+   --slds-g-text-<role> for sizes, --slds-g-font-* for the rest.
+   ============================================================ */
+:root {
+  /* ---- Families ---- */
+  --slds-g-font-family:      "Salesforce Sans", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --slds-g-font-family-mono: "Roboto Mono", "Salesforce Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* ---- Weights ---- */
+  --slds-g-font-weight-light:    300;
+  --slds-g-font-weight-regular:  400;
+  --slds-g-font-weight-medium:   500;
+  --slds-g-font-weight-semibold: 600;
+  --slds-g-font-weight-bold:     700;
+
+  /* ---- Display (marketing / hero) ---- */
+  --slds-g-text-display-large:  3.25rem; /* 52px */
+  --slds-g-text-display-medium: 2rem;    /* 32px */
+
+  /* ---- Headings (in-product) ---- */
+  --slds-g-text-heading-x-large: 1.5rem;   /* 24px */
+  --slds-g-text-heading-large:   1.25rem;  /* 20px */
+  --slds-g-text-heading-medium:  1rem;     /* 16px */
+  --slds-g-text-heading-small:   0.875rem; /* 14px */
+
+  /* ---- Body ---- */
+  --slds-g-text-body-large:   1rem;      /* 16px */
+  --slds-g-text-body-regular: 0.875rem;  /* 14px — base reading size */
+  --slds-g-text-body-small:   0.75rem;   /* 12px — meta / captions */
+
+  /* ---- Raw scale steps (used by chips, fine print) ---- */
+  --slds-g-font-scale-neg-2: 0.625rem;  /* 10px */
+  --slds-g-font-scale-neg-1: 0.75rem;   /* 12px */
+  --slds-g-font-scale-1:     0.8125rem; /* 13px */
+  --slds-g-font-scale-2:     0.875rem;  /* 14px */
+  --slds-g-font-scale-3:     1rem;      /* 16px */
+
+  /* ---- Line heights ---- */
+  --slds-g-font-lineheight-heading: 1.25;
+  --slds-g-font-lineheight-body:    1.5;
+
+  /* ---- Letter spacing ---- */
+  --slds-g-font-letterspacing-display: -0.02em;
+  --slds-g-font-letterspacing-caps:     0.06em;
+}

@@ -1,0 +1,66 @@
+/* ============================================================
+   SLDS 2 — Base Palette (Salesforce Color System)
+   Raw color ramps exposed as --slds-g-color-palette-<hue>-<step>.
+   Step convention: for hues, LOWER step = lighter tint, HIGHER
+   step = deeper shade (e.g. blue-10 is the palest, blue-70 the
+   darkest). Neutrals run the opposite way (100 = white).
+   Never reference these directly in product UI — use the
+   semantic hooks in color.css (--slds-g-color-*).
+   ============================================================ */
+:root {
+  /* ---- Blue (Salesforce brand hue) ---- */
+  --slds-g-color-palette-blue-10: #eef4ff;
+  --slds-g-color-palette-blue-20: #aacbff;
+  --slds-g-color-palette-blue-30: #78b0fd;
+  --slds-g-color-palette-blue-40: #1b96ff;
+  --slds-g-color-palette-blue-50: #0176d3; /* primary brand */
+  --slds-g-color-palette-blue-60: #0b5cab;
+  --slds-g-color-palette-blue-65: #014486;
+  --slds-g-color-palette-blue-70: #032d60;
+
+  /* ---- Cloud Blue (logo cyan / info) ---- */
+  --slds-g-color-palette-cloud-blue-10: #def9ff;
+  --slds-g-color-palette-cloud-blue-50: #0d9dda;
+  --slds-g-color-palette-cloud-blue-70: #023248;
+
+  /* ---- Neutral / Gray (100 = white) ---- */
+  --slds-g-color-palette-neutral-10:  #181818;
+  --slds-g-color-palette-neutral-15:  #1b1b1b;
+  --slds-g-color-palette-neutral-20:  #2e2e2e;
+  --slds-g-color-palette-neutral-30:  #444444;
+  --slds-g-color-palette-neutral-40:  #5c5c5c;
+  --slds-g-color-palette-neutral-50:  #747474;
+  --slds-g-color-palette-neutral-60:  #939393;
+  --slds-g-color-palette-neutral-70:  #aeaeae;
+  --slds-g-color-palette-neutral-80:  #c9c9c9;
+  --slds-g-color-palette-neutral-90:  #e5e5e5;
+  --slds-g-color-palette-neutral-95:  #f3f3f3;
+  --slds-g-color-palette-neutral-99:  #fafafa;
+  --slds-g-color-palette-neutral-100: #ffffff;
+
+  /* ---- Green (success) ---- */
+  --slds-g-color-palette-green-10: #ebf7e6;
+  --slds-g-color-palette-green-40: #41b658;
+  --slds-g-color-palette-green-50: #2e844a;
+  --slds-g-color-palette-green-60: #194e31;
+  --slds-g-color-palette-green-70: #0a160c;
+
+  /* ---- Orange (warning) ---- */
+  --slds-g-color-palette-orange-10: #fef0e6;
+  --slds-g-color-palette-orange-40: #fe9339;
+  --slds-g-color-palette-orange-60: #a86403;
+
+  /* ---- Red (error / destructive) ---- */
+  --slds-g-color-palette-red-10: #feded8;
+  --slds-g-color-palette-red-30: #8e030f;
+  --slds-g-color-palette-red-40: #ba0517;
+  --slds-g-color-palette-red-50: #ea001e;
+  --slds-g-color-palette-red-60: #b60418;
+  --slds-g-color-palette-red-70: #2e0401;
+
+  /* ---- Accent hues (Cosmos: brandable accent options) ---- */
+  --slds-g-color-palette-indigo-50: #5867e8;
+  --slds-g-color-palette-violet-50: #9050e9;
+  --slds-g-color-palette-pink-50:   #e3066a;
+  --slds-g-color-palette-teal-50:   #06a59a;
+}
