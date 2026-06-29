@@ -75,6 +75,7 @@ The Cosmos look: **clean, bright, neutral-forward, with one confident blue.** In
 
 - **System:** Salesforce uses its own **SLDS icon set** — four categories: `utility:` (monochrome line/solid UI glyphs, ~16–24px, inherit text color), `standard:` (CRM objects on **colored rounded-square tiles**, white glyph), `action:` (round, colored), and `doctype:` (file types). Icons are referenced by colon name (`utility:download`, `standard:opportunity`).
 - **In this kit:** the `Icon` component (`components/display/Icon.jsx`) renders the **real SLDS sprites** from `assets/icons/*.svg`. It fetches them once, injects them into the document with category-namespaced symbol ids (`slds-<category>-<name>`, Safari-safe same-document `<use>`), and references them by SLDS name. `utility:*` render as monochrome glyphs that inherit color (variant tints: `brand`, `success`, `warning`, `error`, `inverse`); `standard:*`/`action:*`/`custom:*` render as a colored rounded tile + white glyph; `doctype:*` render full-color. Sizes: `xx-small`–`large`. If a name isn't in the sprite or the fetch fails, it falls back to a Material Symbols glyph.
+- **Browse them all:** `guidelines/iconography.card.html` (Design System tab → **Iconography → Icon Gallery**) is a searchable browser of **every** symbol in all five sprites (1,764 total). Switch categories with the tabs, type to filter by name, and click any icon to copy its `category:name` reference (e.g. `standard:opportunity`) to the clipboard. Use it to find the exact name to pass to the `Icon` component.
 - **Emoji / unicode:** never used as iconography. All icons come from the SLDS set.
 - **Sprites:** `assets/icons/utility.svg` (779), `standard.svg` (639), `action.svg` (187), `custom.svg` (113), `doctype.svg` (46). To update, replace these files with a newer SLDS icon release (same `<symbol id>` convention).
 
@@ -84,7 +85,7 @@ The Cosmos look: **clean, bright, neutral-forward, with one confident blue.** In
 
 **Root**
 - `styles.css` — the single entry point consumers link. `@import`s the token + base files below.
-- `readme.md` — this guide. · `SKILL.md` — Agent Skills wrapper.
+- `readme.md` — this guide. · `readme.kr.md` — Korean translation. · `SKILL.md` — Agent Skills wrapper.
 
 **`tokens/`** (all reachable from `styles.css`)
 - `palette.css` — raw color ramps (`--slds-g-color-palette-<hue>-<step>`).
@@ -119,13 +120,17 @@ The Cosmos look: **clean, bright, neutral-forward, with one confident blue.** In
 
 **`templates/`** — reusable **starting points** (shown in the Templates picker; copy a folder to seed a new design):
 - `templates/lightning-crm/` — the full Sales Cloud app (`LightningCrm.dc.html` mounts the self-contained `LightningCrmApp.jsx`).
-- `templates/lwc-reference/` — the searchable LWC component catalog (81 components, 80 live demos across 12 categories).
-- `templates/crm-builder/` — the drag-and-drop CRM Page Builder (see `crm-builder/` below).
+- `templates/lwc-reference/` — **canonical** searchable LWC component catalog (81 components, 80 live demos across 12 categories). The `reference/` card embeds this.
+- `templates/crm-builder/` — **canonical** drag-and-drop CRM Page Builder. The `crm-builder/` Tools card embeds this.
+- `templates/dashboard-builder/` — drag-and-drop **Dashboard Builder**: 21 widget types (bar/column/stacked, line/area/cumulative/combo, donut/pie/funnel, scatter/heat map, gauge, metric, table/lightning table/pivot, text/image/filter) on a resizable 12-column grid; dashboard settings + palette; exports Dashboard metadata XML, JSON, or a mockup outline. Same `index.html` + `catalog.js`/`render.jsx`/`export.js`/`app.jsx` structure as the CRM Page Builder.
+- `templates/email-builder/` — drag-and-drop **Email Template Builder**: 13 block types (header/footer, hero, heading, text, button, list, image, product card, two-column, divider, spacer, social) stacked on a single-column email canvas; merge-field syntax toggle (`{{Object.Field}}` ↔ `{!Object.Field}`) with personalization chips; 5 starter templates (Welcome, Newsletter, Receipt, Invite, Re-engagement); exports a table-based **inline-HTML email**, a **Lightning Email Template** body, or JSON. Same `index.html` + `catalog.js`/`render.jsx`/`export.js`/`app.jsx` structure.
+- `templates/approval-builder/` — drag-and-drop **전자결재 Form Builder** (Korean e-approval documents): 16 block types — 결재선(stamp grid), 문서 제목, 문서정보표, section header, notice, and form fields (text, number, date, currency, select, radio, checkbox, textarea, file), plus 품목 표 (line-items) and 서명/도장 영역; 4 starter 양식 (지출결의서, 휴가신청서, 구매요청서, 출장신청서); accent color + 서체 settings; exports a printable **inline-HTML form**, a **Lightning (LWC) scaffold** (`.html`/`.js`/`.js-meta.xml`, fields mapped to lightning base components + Approval-Process hooks), or JSON. Same builder structure.
+- `templates/detail-builder/` — drag-and-drop **LWC Detail Screen Builder**: design a Salesforce **record detail screen** by dropping leaf components — Forms (Input, Select, Combobox, Text Area, Checkbox + Group, Radio Group, Toggle, Slider, Dual Listbox, File Upload), Display (Badge, Avatar, Pill, Icon, Progress Bar, Text Block), and Actions (Button, Button Group) — into composable **Section / Card / Modal** containers, each with real editable variant schemas; editable record header, live **modal preview**, and per-component inspector; exports a **Lightning (LWC) bundle** & JSON. Same `index.html` + `catalog.js`/`render.jsx`/`export.js`/`app.jsx` structure.
 
-**`reference/`** — `LWC Reference.html`: a searchable catalog of the full Salesforce Lightning base-component set (81 components, 12 categories) with live SLDS 2 demos + how-to-compose notes for the data-bound ones. (Design System tab → "Reference".)
+**`reference/`** — `LWC Reference.html`: a thin **embed wrapper** (carries the `@dsCard group="Reference"` tag, iframes the canonical file in `templates/lwc-reference/`) so the catalog shows on the Design System tab without duplicating the 136 KB source.
 
-**`crm-builder/`** — the **CRM Page Builder**: a Lightning App Builder–style drag-and-drop prototyper (`index.html` + `catalog.js`, `render.jsx`, `export.js`, `app.jsx`). 25 page components, 6 region layouts, page settings, and per-component properties. Exports the layout as **FlexiPage XML** (native App Builder format), an **LWC parent-component scaffold** (`.html`/`.js`/`.js-meta.xml`), **JSON**, or a designer **mockup outline** — the configured properties flow into the generated code. (Design System tab → "Tools".)
+**`crm-builder/`** — `index.html`: a thin **embed wrapper** (carries the `@dsCard group="Tools"` tag, iframes the canonical builder in `templates/crm-builder/`) so the CRM Page Builder shows under Design System tab → "Tools" without duplicating the builder code. The real builder — a Lightning App Builder–style drag-and-drop prototyper (`catalog.js`, `render.jsx`, `export.js`, `app.jsx`; 25 page components, 6 region layouts, page settings, per-component properties; exports FlexiPage XML, an LWC scaffold, JSON, or a mockup outline) — lives in `templates/crm-builder/`.
 
-**`guidelines/`** — foundation specimen cards (Design System tab): Colors (Brand, Surfaces, Feedback, Dark), Type (Typeface, Headings, Body), Spacing (Scale, Radius, Elevation), Brand (Logo).
+**`guidelines/`** — foundation specimen cards (Design System tab): Colors (Brand, Surfaces, Feedback, Dark), Type (Typeface, Headings, Body), Spacing (Scale, Radius, Elevation), Brand (Logo), Iconography (Icon Gallery — searchable browser of all 1,764 SLDS icons).
 
 **`assets/`** — `salesforce-cloud.svg` (the cloud mark) + `icons/` (the five official SLDS icon sprites: utility, standard, action, doctype, custom). `public/favicon.ico` + `public/images/salesforce.svg` are the original starter-kit imports.

@@ -100,8 +100,13 @@
         return `        <lightning-formatted-rich-text value={richText}></lightning-formatted-rich-text>`;
       case "map":
         return `        <lightning-map map-markers={mapMarkers} zoom-level="${esc(p.zoom)}"></lightning-map>`;
-      case "customLwc":
-        return `        <${esc(p.tag)} ${esc(p.attrs || "")}></${esc(p.tag)}>`;
+      case "customLwc": {
+        const body = Array.isArray(p.body) ? p.body : [];
+        if (!body.length) return `        <${esc(p.tag)} ${esc(p.attrs || "")}></${esc(p.tag)}>`;
+        const tagFor = (c) => { const it = (window.CRMB.baseById && window.CRMB.baseById[c.key]) || (window.CRMB.baseByTag && window.CRMB.baseByTag[c.base]); return (it && it.base) || c.base || "lightning-card"; };
+        const kids = body.map((c) => `            <${esc(tagFor(c))}></${esc(tagFor(c))}>`).join("\n");
+        return `        <${esc(p.tag)}>\n${kids}\n        </${esc(p.tag)}>`;
+      }
       case "visualforce":
         return `        <iframe src="/apex/${esc(p.page)}" height="${esc(p.height)}" width="100%" frameborder="0"></iframe>`;
       default:

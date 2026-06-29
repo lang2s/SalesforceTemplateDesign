@@ -99,6 +99,27 @@
   .crmb-insp-actions > * { width: 100%; }
   .crmb-insp-foot { margin-top: auto; display: flex; gap: 0.5rem; padding: 0.875rem; border-top: 1px solid var(--slds-g-color-border-1); font-size: 11px; color: var(--slds-g-color-on-surface-3); line-height: 1.4; }
 
+  /* Custom LWC — component body */
+  .crmb-body-sec { margin: 0 0 1rem; padding: 0.75rem; background: var(--slds-g-color-surface-2); border: 1px solid var(--slds-g-color-border-1); border-radius: var(--slds-g-radius-border-3); }
+  .crmb-body-h { display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--slds-g-color-on-surface-2); margin-bottom: 0.375rem; }
+  .crmb-count { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--slds-g-color-accent-container-1); color: var(--slds-g-color-accent-2); font-size: 10px; font-weight: 700; }
+  .crmb-body-list { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.5rem; }
+  .crmb-body-item { display: flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.4rem; background: var(--slds-g-color-surface-container-1); border: 1px solid var(--slds-g-color-border-1); border-radius: var(--slds-g-radius-border-2); }
+  .crmb-body-item-l { flex: 1; min-width: 0; font-size: var(--slds-g-text-body-small); font-weight: var(--slds-g-font-weight-semibold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .crmb-body-item .crmb-ic { width: 18px; height: 18px; border: 0; background: var(--slds-g-color-surface-3); color: var(--slds-g-color-on-surface-2); border-radius: 4px; cursor: pointer; font-size: 8px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+  .crmb-body-item .crmb-ic:hover { background: var(--slds-g-color-border-2); }
+  .crmb-body-item .crmb-ic.del:hover { background: var(--slds-g-color-error-1); color: #fff; }
+
+  /* Add-component modal grid */
+  .crmb-addscroll { margin-top: 0.875rem; max-height: 56vh; overflow-y: auto; }
+  .crmb-addgroup { margin-bottom: 1rem; }
+  .crmb-addgroup-h { position: sticky; top: 0; background: var(--slds-g-color-surface-container-1); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--slds-g-color-on-surface-2); padding: 0.375rem 0; z-index: 1; }
+  .crmb-addgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .crmb-addcard { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.625rem; border: 1px solid var(--slds-g-color-border-2); border-radius: var(--slds-g-radius-border-3); background: var(--slds-g-color-surface-container-1); cursor: pointer; text-align: left; }
+  .crmb-addcard:hover { border-color: var(--slds-g-color-accent-1); background: var(--slds-g-color-accent-container-1); }
+  .crmb-addcard-l { font-size: var(--slds-g-text-body-regular); font-weight: var(--slds-g-font-weight-semibold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .crmb-addcard-c { font-family: var(--slds-g-font-family-mono); font-size: 10px; color: var(--slds-g-color-on-surface-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+
   /* Export modal */
   .crmb-export { display: grid; grid-template-columns: 200px 1fr; gap: 1rem; min-height: 380px; }
   .crmb-export-rail { display: flex; flex-direction: column; gap: 0.375rem; }

@@ -2,7 +2,7 @@
    per-component property editors, page settings, and multi-format export. */
 (function () {
   const DS = window.SalesforceSLDS2DesignSystem_2eee88;
-  const { pageTypes, layouts, regionLabels, catalog, byType, defaultProps, starter } = window.CRMB;
+  const { pageTypes, layouts, regionLabels, catalog, byType, defaultProps, starter, baseGroups, baseComponents, baseById, baseByTag } = window.CRMB;
   const { Icon, Button, ButtonGroup, ButtonMenu, Badge, Modal, Input, Select, Textarea, Toggle } = DS;
   const KEY = "crmb-state-v3";
 
@@ -43,6 +43,7 @@
     const [over, setOver] = React.useState(null);
     const [exp, setExp] = React.useState(false);
     const [settingsOpen, setSettingsOpen] = React.useState(false);
+    const [addBody, setAddBody] = React.useState(null);
 
     React.useEffect(() => { localStorage.setItem(KEY, JSON.stringify(state)); }, [state]);
 
@@ -83,6 +84,10 @@
     function removeBlock(id, region) { update((s) => { s.regions[region] = s.regions[region].filter((b) => b.id !== id); return s; }); setSel(null); }
     function nudge(id, region, dir) { update((s) => { const a = s.regions[region]; const i = a.findIndex((b) => b.id === id); const j = i + dir; if (i < 0 || j < 0 || j >= a.length) return s; [a[i], a[j]] = [a[j], a[i]]; return s; }); }
     function setProp(id, region, key, val) { update((s) => { s.regions[region] = s.regions[region].map((b) => b.id === id ? { ...b, props: { ...b.props, [key]: val } } : b); return s; }); }
+    function setBody(id, region, fn) { update((s) => { s.regions[region] = s.regions[region].map((b) => b.id === id ? { ...b, props: { ...b.props, body: fn(Array.isArray(b.props.body) ? b.props.body : []) } } : b); return s; }); }
+    function addBodyComp(id, region, key) { setBody(id, region, (arr) => [...arr, { id: uid(), key }]); }
+    function removeBodyComp(id, region, cid) { setBody(id, region, (arr) => arr.filter((x) => x.id !== cid)); }
+    function moveBodyComp(id, region, cid, dir) { setBody(id, region, (arr) => { const i = arr.findIndex((x) => x.id === cid); const j = i + dir; if (i < 0 || j < 0 || j >= arr.length) return arr; const n = arr.slice(); [n[i], n[j]] = [n[j], n[i]]; return n; }); }
 
     function onDropRegion(region, index, e) {
       e.preventDefault(); e.stopPropagation(); setOver(null);
@@ -173,6 +178,27 @@
                     </div>
                   )}
 
+                  {selBlock.type === "customLwc" && (
+                    <div className="crmb-body-sec">
+                      <div className="crmb-body-h"><span>Component body</span><span className="crmb-count">{(selBlock.props.body || []).length}</span></div>
+                      <p className="crmb-hint" style={{ margin: "0 0 0.5rem" }}>Add base components from the LWC reference to define what this component renders.</p>
+                      <Button variant="brand" iconName="utility:add" label="Add component" onClick={() => setAddBody({ id: selBlock.id, region: selBlock.region })} style={{ width: "100%" }} />
+                      {(selBlock.props.body || []).length > 0 && (
+                        <div className="crmb-body-list">
+                          {(selBlock.props.body || []).map((c) => { const item = baseById[c.key] || baseByTag[c.base] || {}; return (
+                            <div key={c.id} className="crmb-body-item">
+                              <Icon iconName={item.icon || "utility:apex"} size="x-small" />
+                              <span className="crmb-body-item-l">{item.label || c.key || c.base}</span>
+                              <button className="crmb-ic" title="Up" onClick={() => moveBodyComp(selBlock.id, selBlock.region, c.id, -1)}>▲</button>
+                              <button className="crmb-ic" title="Down" onClick={() => moveBodyComp(selBlock.id, selBlock.region, c.id, 1)}>▼</button>
+                              <button className="crmb-ic del" title="Remove" onClick={() => removeBodyComp(selBlock.id, selBlock.region, c.id)}>✕</button>
+                            </div>
+                          ); })}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   <dl className="crmb-meta">
                     <dt>Region</dt><dd>{regionLabels[selBlock.region] || selBlock.region}</dd>
                     <dt>App Builder</dt><dd><code>{byType[selBlock.type].flexipage}</code></dd>
@@ -207,6 +233,7 @@
 
         {exp && <ExportModal state={state} onClose={() => setExp(false)} />}
         {settingsOpen && <SettingsModal state={state} setState={setState} onClose={() => setSettingsOpen(false)} />}
+        {addBody && <AddComponentModal onClose={() => setAddBody(null)} onAdd={(key) => addBodyComp(addBody.id, addBody.region, key)} />}
       </div>
     );
 
@@ -258,9 +285,44 @@
 
   function groupOrder() { const seen = []; catalog.forEach((c) => { if (!seen.includes(c.group)) seen.push(c.group); }); return seen; }
 
+  function AddComponentModal({ onClose, onAdd }) {
+    const [q, setQ] = React.useState("");
+    const ql = q.trim().toLowerCase();
+    const groups = baseGroups
+      .map((g) => ({ title: g.title, items: baseComponents.filter((b) => b.group === g.title && (!ql || b.label.toLowerCase().includes(ql) || b.base.includes(ql))) }))
+      .filter((g) => g.items.length);
+    const total = groups.reduce((n, g) => n + g.items.length, 0);
+    return (
+      <Modal isOpen onClose={onClose} size="large" title="Add base component"
+        tagline="From the LWC reference — pick any base component to add to the body."
+        footer={<Button variant="brand" label="Done" onClick={onClose} />}>
+        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={`Search ${baseComponents.length} components…`} iconName="utility:search" />
+        <div className="crmb-addscroll">
+          {groups.map((g) => (
+            <div key={g.title} className="crmb-addgroup">
+              <div className="crmb-addgroup-h">{g.title}</div>
+              <div className="crmb-addgrid">
+                {g.items.map((b) => (
+                  <button key={b.id} className="crmb-addcard" onClick={() => onAdd(b.id)}>
+                    <Icon iconName={b.icon} size="small" />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div className="crmb-addcard-l">{b.label}</div>
+                      <code className="crmb-addcard-c">{b.base}</code>
+                    </div>
+                    <Icon iconName="utility:add" size="xx-small" variant="brand" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+          {total === 0 && <div className="crmb-hint" style={{ textAlign: "center", padding: "1.5rem 0" }}>No components match “{q}”.</div>}
+        </div>
+      </Modal>
+    );
+  }
+
   function SettingsModal({ state, setState, onClose }) {
     const [s, setS] = React.useState(state.settings);
-    const save = () => { setState((st) => ({ ...st, settings: s })); onClose(); };
     return (
       <Modal isOpen onClose={onClose} size="small" title="Page settings"
         tagline="These map to the FlexiPage masterLabel, API name & object."

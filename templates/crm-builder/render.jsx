@@ -60,6 +60,101 @@
     <div style={{ background: "var(--slds-g-color-surface-container-1)", border: "1px solid var(--slds-g-color-border-1)", borderRadius: "var(--slds-g-radius-border-4)", boxShadow: "var(--slds-g-shadow-1)", padding: "1rem 1.125rem" }}>{children}</div>
   );
 
+  // lightweight previews for base components nested inside a Custom LWC body
+  function basePreview(item) {
+    const base = item ? item.base : "";
+    const label = item ? item.label : base;
+    const kind = item ? item.preview : "";
+    switch (kind) {
+      case "button":
+        return <Button variant="brand" label={label} />;
+      case "buttongroup":
+        return <div style={{ display: "inline-flex" }}><Button variant="neutral" label="List" /><Button variant="neutral" label="Table" /></div>;
+      case "buttonicon":
+        return <div style={{ display: "flex", gap: "0.375rem" }}><ButtonIcon iconName="utility:edit" variant="border" title="Edit" /><ButtonIcon iconName="utility:favorite" variant="border" title="Like" /></div>;
+      case "input":
+        return <Input label={label} placeholder="Enter value…" />;
+      case "textarea":
+        return <Input label={label} placeholder="Multi-line text…" />;
+      case "combobox":
+      case "select":
+        return <div><div style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-3)", marginBottom: 2 }}>{label}</div><div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", border: "1px solid var(--slds-g-color-border-2)", borderRadius: "var(--slds-g-radius-border-2)", padding: "0.375rem 0.625rem", fontSize: "var(--slds-g-text-body-regular)", color: "var(--slds-g-color-on-surface-2)" }}>Select an option<Icon iconName="utility:chevrondown" size="xx-small" /></div></div>;
+      case "toggle":
+        return <Toggle label={label} />;
+      case "checkbox":
+        return <div><div style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-3)", marginBottom: 4 }}>{label}</div><div style={{ display: "flex", flexDirection: "column", gap: 4 }}>{["Technology", "Finance"].map((o, i) => <label key={i} style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "var(--slds-g-text-body-regular)" }}><input type="checkbox" defaultChecked={i === 0} readOnly />{o}</label>)}</div></div>;
+      case "radio":
+        return <div><div style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-3)", marginBottom: 4 }}>{label}</div><div style={{ display: "flex", gap: 14 }}>{["High", "Low"].map((o, i) => <label key={i} style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "var(--slds-g-text-body-regular)" }}><input type="radio" name={label} defaultChecked={i === 0} readOnly />{o}</label>)}</div></div>;
+      case "slider":
+        return <div><div style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-3)", marginBottom: 4 }}>{label}</div><div style={{ position: "relative", height: 4, borderRadius: 2, background: "var(--slds-g-color-surface-3)" }}><div style={{ width: "55%", height: "100%", borderRadius: 2, background: "var(--slds-g-color-accent-1)" }} /><div style={{ position: "absolute", left: "55%", top: "50%", transform: "translate(-50%,-50%)", width: 14, height: 14, borderRadius: "50%", background: "var(--slds-g-color-accent-1)" }} /></div></div>;
+      case "duallist":
+        return <div style={{ display: "flex", gap: 8 }}>{["Available", "Selected"].map((t, i) => <div key={i} style={{ flex: 1 }}><div style={{ fontSize: 11, color: "var(--slds-g-color-on-surface-3)", marginBottom: 4 }}>{t}</div><div style={{ border: "1px solid var(--slds-g-color-border-2)", borderRadius: "var(--slds-g-radius-border-2)", height: 64, padding: 6, fontSize: 12, color: "var(--slds-g-color-on-surface-2)" }}>{i ? "Read" : "Edit · Delete · Share"}</div></div>)}</div>;
+      case "fileupload":
+        return <div style={{ border: "1.5px dashed var(--slds-g-color-border-2)", borderRadius: "var(--slds-g-radius-border-3)", padding: "1rem", textAlign: "center", color: "var(--slds-g-color-on-surface-3)", fontSize: "var(--slds-g-text-body-small)" }}><Icon iconName="utility:upload" size="small" /><div style={{ marginTop: 4 }}>Upload or drop files</div></div>;
+      case "richtext":
+        return <div style={{ fontSize: "var(--slds-g-text-body-regular)", color: "var(--slds-g-color-on-surface-1)", lineHeight: 1.5 }}><strong>Rich text.</strong> Bold, links &amp; lists render here.</div>;
+      case "text":
+        return <div style={{ fontSize: "var(--slds-g-text-body-regular)", color: "var(--slds-g-color-on-surface-1)" }}>{label} value</div>;
+      case "formatted":
+        return <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}><span style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-3)" }}>{label}</span><span style={{ fontSize: "var(--slds-g-text-body-regular)", fontWeight: "var(--slds-g-font-weight-semibold)" }}>{fmtSample(label)}</span></div>;
+      case "badge":
+        return <div style={{ display: "flex", gap: "0.375rem" }}><Badge variant="brand" label="Active" /><Badge label="New" /></div>;
+      case "pill":
+        return <div style={{ display: "flex", gap: "0.375rem", flexWrap: "wrap" }}><Pill label="California" /><Pill iconName="utility:filter" label="Open" /></div>;
+      case "icon":
+        return <Icon iconName="standard:contact" size="medium" />;
+      case "avatar":
+        return <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}><Avatar initials="LV" size="medium" /><span style={{ fontSize: "var(--slds-g-text-body-regular)" }}>Lando Voss</span></div>;
+      case "empty":
+        return <div style={{ textAlign: "center", padding: "0.75rem", color: "var(--slds-g-color-on-surface-3)" }}><Icon iconName="standard:opportunity" size="medium" /><div style={{ fontSize: "var(--slds-g-text-body-small)", marginTop: 4 }}>No records yet</div></div>;
+      case "datatable":
+        return <Datatable columns={oppCols(OPP_COLS)} rows={OPP_ROWS.slice(0, 2)} />;
+      case "tree":
+        return <Accordion allowMultiple defaultActive={[0]} sections={[{ id: 0, label: "West", content: <div style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-2)" }}>California · Oregon</div> }, { id: 1, label: "East", content: <div style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-2)" }}>New York</div> }]} />;
+      case "accordion":
+        return <Accordion allowMultiple defaultActive={[0]} sections={[{ id: 0, label: "Section One", content: fieldGrid(FIELDS.slice(0, 2), 1) }, { id: 1, label: "Section Two", content: fieldGrid(FIELDS.slice(2, 4), 1) }]} />;
+      case "recordform":
+        return fieldGrid(FIELDS.slice(0, 4), 2);
+      case "tabset":
+        return <TabBlock tabs={["Details", "Related"]} kind="record" />;
+      case "breadcrumbs":
+        return <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-2)" }}>Sales<Icon iconName="utility:chevronright" size="xx-small" />Contacts<Icon iconName="utility:chevronright" size="xx-small" /><strong style={{ color: "var(--slds-g-color-on-surface-1)" }}>Lando Voss</strong></div>;
+      case "alert":
+        return <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "0.625rem 0.875rem", borderRadius: "var(--slds-g-radius-border-3)", background: "var(--slds-g-color-accent-container-1)", color: "var(--slds-g-color-on-surface-1)", fontSize: "var(--slds-g-text-body-regular)" }}><Icon iconName="utility:info" size="x-small" variant="brand" />{label} message</div>;
+      case "progress":
+        return <div><div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-3)", marginBottom: 4 }}><span>Progress</span><span>68%</span></div><div style={{ height: 8, borderRadius: 4, background: "var(--slds-g-color-surface-3)", overflow: "hidden" }}><div style={{ width: "68%", height: "100%", background: "var(--slds-g-color-accent-1)" }} /></div></div>;
+      case "ring":
+        return <div style={{ width: 48, height: 48, borderRadius: "50%", background: "conic-gradient(var(--slds-g-color-accent-1) 75%, var(--slds-g-color-surface-3) 0)", display: "grid", placeItems: "center" }}><div style={{ width: 34, height: 34, borderRadius: "50%", background: "var(--slds-g-color-surface-container-1)", display: "grid", placeItems: "center", fontSize: 11, fontWeight: 700 }}>75%</div></div>;
+      case "spinner":
+        return <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--slds-g-color-on-surface-3)" }}><Icon iconName="utility:spinner" size="small" /><span style={{ fontSize: "var(--slds-g-text-body-small)" }}>Loading…</span></div>;
+      case "path":
+        return <ProgressIndicator variant="path" steps={["Qualify", "Discovery", "Proposal", "Closed"].map((l, i) => ({ label: l, value: i }))} current={2} />;
+      case "map":
+        return <div style={{ position: "relative", height: 110, borderRadius: "var(--slds-g-radius-border-3)", background: "linear-gradient(135deg, #dbe7f3, #c3d6ea)", overflow: "hidden" }}><div style={{ position: "absolute", left: "50%", top: "48%", transform: "translate(-50%,-50%)" }}><Icon iconName="utility:location" size="medium" variant="error" /></div></div>;
+      case "heading":
+        return <h3 style={{ margin: 0, fontSize: "var(--slds-g-text-heading-medium)", fontWeight: "var(--slds-g-font-weight-bold)", color: "var(--slds-g-color-on-surface-1)" }}>Section heading</h3>;
+      case "textblock":
+        return <p style={{ margin: 0, fontSize: "var(--slds-g-text-body-regular)", color: "var(--slds-g-color-on-surface-2)", lineHeight: 1.5 }}>A block of body text describing this section.</p>;
+      case "divider":
+        return <div style={{ borderTop: "1px solid var(--slds-g-color-border-2)" }} />;
+      case "spacer":
+        return <div style={{ height: 24, border: "1px dashed var(--slds-g-color-border-1)", borderRadius: 4, display: "grid", placeItems: "center", color: "var(--slds-g-color-on-surface-3)", fontSize: 10 }}>spacer</div>;
+      case "card":
+      default:
+        return shell(label, "standard:record", <p style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-2)" }}>{label} — base component content.</p>);
+    }
+  }
+  function fmtSample(label) {
+    if (/Number/.test(label)) return "$1,250,000";
+    if (/Phone/.test(label)) return "(415) 555-0132";
+    if (/Email/.test(label)) return "lvoss@globalmedia.com";
+    if (/URL/.test(label)) return "acme.example.com";
+    if (/Date|Time/.test(label)) return "Jun 20, 2026";
+    if (/Address|Location/.test(label)) return "415 Mission St, SF";
+    if (/Name/.test(label)) return "Lando Voss";
+    return "Formatted value";
+  }
+
   const R = {
     highlights: (p) => (
       <div style={{ background: "var(--slds-g-color-surface-container-1)", border: "1px solid var(--slds-g-color-border-1)", borderRadius: "var(--slds-g-radius-border-4)", boxShadow: "var(--slds-g-shadow-1)", padding: "1rem 1.125rem" }}>
@@ -115,7 +210,7 @@
     topics: (p) => shell("Topics", "standard:topic", <div style={{ display: "flex", flexWrap: "wrap", gap: "0.375rem" }}>{splitList(p.topics).map((t, i) => <Pill key={i} label={t} />)}</div>),
 
     listView: (p) => <ListView p={p} />,
-    dataTable: (p) => shell("Data Table", "standard:datatable", <Datatable selectable={!!p.selectable} columns={oppCols(OPP_COLS)} rows={OPP_ROWS.slice(0, Number(p.rows) || 3)} />),
+    dataTable: (p) => shell("Data Table", "utility:table", <Datatable selectable={!!p.selectable} columns={oppCols(OPP_COLS)} rows={OPP_ROWS.slice(0, Number(p.rows) || 3)} />),
     recentItems: (p) => shell(p.title, "standard:recent", (
       <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
         {CONTACT_ROWS.slice(0, Number(p.rows) || 4).map((c) => (
@@ -146,13 +241,30 @@
         <div style={{ marginTop: "0.5rem", fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-2)" }}>{p.address}</div>
       </div>
     )),
-    customLwc: (p) => (
-      <div style={{ border: "1px dashed var(--slds-g-color-accent-1)", borderRadius: "var(--slds-g-radius-border-4)", background: "var(--slds-g-color-accent-container-1)", padding: "1.25rem", textAlign: "center" }}>
-        <Icon iconName="utility:apex" size="small" variant="brand" />
-        <div style={{ marginTop: "0.5rem", fontFamily: "var(--slds-g-font-family-mono)", fontSize: "var(--slds-g-text-body-regular)", color: "var(--slds-g-color-accent-2)" }}>&lt;{p.tag}&gt;</div>
-        <div style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-3)" }}>{p.label} — custom Lightning Web Component</div>
-      </div>
-    ),
+    customLwc: (p) => {
+      const body = Array.isArray(p.body) ? p.body : [];
+      const cols = Number(p.bodyColumns) || 1;
+      return (
+        <div style={{ border: "1px solid var(--slds-g-color-border-2)", borderRadius: "var(--slds-g-radius-border-4)", background: "var(--slds-g-color-surface-container-1)", overflow: "hidden", boxShadow: "var(--slds-g-shadow-1)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.75rem 1rem", borderBottom: "1px solid var(--slds-g-color-border-1)" }}>
+            <Icon iconName="utility:apex" size="small" variant="brand" />
+            <strong style={{ flex: 1, fontSize: "var(--slds-g-text-body-regular)" }}>{p.label}</strong>
+            <code style={{ fontFamily: "var(--slds-g-font-family-mono)", fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-accent-2)" }}>&lt;{p.tag}&gt;</code>
+          </div>
+          {body.length === 0 ? (
+            <div style={{ margin: "1rem", border: "1.5px dashed var(--slds-g-color-accent-1)", borderRadius: "var(--slds-g-radius-border-4)", background: "var(--slds-g-color-accent-container-1)", padding: "1.75rem 1rem", textAlign: "center" }}>
+              <Icon iconName="utility:add" size="medium" variant="brand" />
+              <div style={{ marginTop: "0.5rem", fontWeight: "var(--slds-g-font-weight-bold)", fontSize: "var(--slds-g-text-body-regular)", color: "var(--slds-g-color-on-surface-1)" }}>Empty component</div>
+              <div style={{ fontSize: "var(--slds-g-text-body-small)", color: "var(--slds-g-color-on-surface-3)" }}>Select this block, then add base components from the LWC reference.</div>
+            </div>
+          ) : (
+            <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, gap: "0.75rem", padding: "1rem" }}>
+              {body.map((c) => { const item = window.CRMB.baseById[c.key] || window.CRMB.baseByTag[c.base]; return <div key={c.id}>{basePreview(item)}</div>; })}
+            </div>
+          )}
+        </div>
+      );
+    },
     visualforce: (p) => shell(p.page, "utility:page", <div style={{ height: Math.min(Number(p.height) || 320, 200), display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid var(--slds-g-color-border-2)", borderRadius: "var(--slds-g-radius-border-2)", background: "var(--slds-g-color-surface-2)", color: "var(--slds-g-color-on-surface-3)", fontSize: "var(--slds-g-text-body-small)" }}>Visualforce: {p.page} ({p.height}px)</div>),
   };
 

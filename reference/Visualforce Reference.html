@@ -1,0 +1,1200 @@
+<!-- @dsCard group="Reference" viewport="1200x780" name="Visualforce Component Reference" subtitle="The apex: standard-component catalog — page blocks, forms, actions, charts & Chatter, styled in SLDS 2" -->
+<!DOCTYPE html>
+<html lang="en" data-slds-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SLDS 2 — Visualforce Component Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto+Mono:wght@400;500&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=swap">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--slds-g-color-surface-1); color: var(--slds-g-color-on-surface-1); }
+  #app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+
+  .side {
+    position: sticky; top: 0; align-self: start; height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column;
+    border-right: 1px solid var(--slds-g-color-border-1);
+    background: var(--slds-g-color-surface-container-1);
+  }
+  .side-head { padding: 1rem 1rem 0.75rem; border-bottom: 1px solid var(--slds-g-color-border-1); }
+  .eyebrow { display: flex; align-items: center; gap: 0.4rem; font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-2); margin-bottom: 0.625rem; }
+  .eyebrow .bolt { color: #5867e8; font-size: 18px; }
+  .side-head h1 { font-size: var(--slds-g-text-heading-small); font-weight: var(--slds-g-font-weight-bold); margin: 0 0 0.75rem; line-height: 1.2; color: var(--slds-g-color-on-surface-1); }
+  .search { display: flex; align-items: center; gap: 0.45rem; height: 2.25rem; padding: 0 0.5rem; border: 1px solid var(--slds-g-color-border-2); border-radius: var(--slds-g-radius-border-2); background: var(--slds-g-color-surface-container-1); }
+  .search:focus-within { border-color: var(--slds-g-color-accent-1); box-shadow: 0 0 0 1px var(--slds-g-color-accent-1); }
+  .search input { flex: 1; border: 0; outline: none; background: transparent; font-size: var(--slds-g-text-body-regular); color: var(--slds-g-color-on-surface-1); }
+  .search .kbd { font-size: 11px; color: var(--slds-g-color-on-surface-3); border: 1px solid var(--slds-g-color-border-2); border-radius: 4px; padding: 1px 5px; }
+  .navlist { flex: 1; overflow-y: auto; padding: 0.5rem; }
+  .navlist a {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 0.5rem; border-radius: var(--slds-g-radius-border-2);
+    font-size: var(--slds-g-text-body-regular); color: var(--slds-g-color-accent-1);
+    text-decoration: none;
+  }
+  .navlist a:hover { background: var(--slds-g-color-surface-3); }
+  .navlist a .sdot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+  .navlist a .sdot.built { background: var(--slds-g-color-success-1); }
+  .navlist a .sdot.doc { background: var(--slds-g-color-on-surface-3); }
+  .navlist .empty-nav { padding: 0.75rem 0.5rem; font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-3); }
+
+  .main { padding: 2rem 2.25rem 5rem; max-width: 1600px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+  .lede { margin: 0 0 2rem; }
+  .lede h2 { font-size: var(--slds-g-text-display-medium); margin: 0 0 0.5rem; letter-spacing: var(--slds-g-font-letterspacing-display); }
+  .lede p { font-size: var(--slds-g-text-body-large); color: var(--slds-g-color-on-surface-2); max-width: 70ch; line-height: 1.5; }
+  .lede .note { margin-top: 0.875rem; font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-3); max-width: 70ch; }
+  .legend { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+
+  section.cat { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+  section.cat > h3 {
+    font-size: var(--slds-g-text-heading-large); margin: 0 0 0.25rem;
+    padding-bottom: 0.5rem; border-bottom: 2px solid var(--slds-g-color-border-1);
+  }
+  section.cat > .catdesc { font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-3); margin: 0.5rem 0 1.25rem; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+  .entry {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--slds-g-color-border-1); border-radius: var(--slds-g-radius-border-4);
+    background: var(--slds-g-color-surface-container-1); overflow: hidden;
+  }
+  .entry.wide { grid-column: 1 / -1; }
+  .entry header { padding: 0.75rem 0.875rem 0.625rem; border-bottom: 1px solid var(--slds-g-color-border-1); }
+  .entry .nm { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .entry .nm strong { font-size: var(--slds-g-text-heading-small); }
+  .entry .nm code { font-size: 11px; color: var(--slds-g-color-on-surface-3); background: var(--slds-g-color-surface-3); padding: 1px 5px; border-radius: 4px; font-family: var(--slds-g-font-family-mono); }
+  .entry .desc { font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-2); margin: 0.375rem 0 0; line-height: 1.45; }
+  .entry .demo { padding: 1rem 0.875rem; flex: 1; display: flex; align-items: center; }
+  .entry .demo.block { display: block; }
+  .entry .demo.empty { color: var(--slds-g-color-on-surface-3); font-size: var(--slds-g-text-body-small); }
+
+  .pill { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 10.5px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: 2px 7px; border-radius: var(--slds-g-radius-border-pill); }
+  .pill.built { color: var(--slds-g-color-success-1); background: var(--slds-g-color-success-container-1); }
+  .pill.doc { color: var(--slds-g-color-on-surface-2); background: var(--slds-g-color-surface-3); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.built { background: var(--slds-g-color-success-1); }
+  .dot.doc { background: var(--slds-g-color-border-3); }
+  .lg-item { display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--slds-g-text-body-small); color: var(--slds-g-color-on-surface-2); }
+
+  /* variant showcase inside each demo */
+  .vstack { display: flex; flex-direction: column; gap: 0.875rem; width: 100%; }
+  .vrow { display: flex; flex-direction: column; gap: 0.4rem; }
+  .vlabel { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--slds-g-color-on-surface-3); }
+  .vdemo { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .vdemo.col { flex-direction: column; align-items: stretch; }
+  .entry.wide .vstack { flex-direction: row; flex-wrap: wrap; gap: 1.25rem 2.5rem; align-items: flex-start; }
+  .entry.wide .vrow { min-width: 220px; }
+
+  /* classic Visualforce page-block scaffolding, restyled in SLDS 2 */
+  .vf-block { width: 100%; border: 1px solid var(--slds-g-color-border-1); border-radius: var(--slds-g-radius-border-4); background: var(--slds-g-color-surface-container-1); box-shadow: var(--slds-g-shadow-2); overflow: hidden; }
+  .vf-section-label { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--slds-g-color-on-surface-3); padding-bottom: 0.5rem; margin-bottom: 0.25rem; border-bottom: 1px solid var(--slds-g-color-border-1); }
+  .vf-field { display: grid; grid-template-columns: 130px 1fr; gap: 0.75rem; padding: 0.45rem 0; border-bottom: 1px solid var(--slds-g-color-border-1); align-items: baseline; }
+  .vf-field .lbl { font-size: var(--slds-g-text-body-small); font-weight: var(--slds-g-font-weight-semibold); color: var(--slds-g-color-on-surface-2); text-align: right; }
+  .vf-field .val { font-size: var(--slds-g-text-body-regular); color: var(--slds-g-color-on-surface-1); }
+  .vf-field .val.link { color: var(--slds-g-color-accent-1); }
+  .vf-foot { display: flex; gap: 8px; justify-content: center; padding: 0.625rem 1rem; border-top: 1px solid var(--slds-g-color-border-1); background: var(--slds-g-color-surface-2); }
+
+  @keyframes vf-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ * { animation-duration: 0.001ms !important; } }
+</style>
+</head>
+<body>
+  <template id="__bundler_thumbnail">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="16" fill="#0176d3"/>
+      <rect x="20" y="22" width="60" height="12" rx="3" fill="#fff"/>
+      <rect x="20" y="40" width="60" height="38" rx="4" fill="#cfe6fb"/>
+      <rect x="26" y="46" width="22" height="6" rx="2" fill="#0176d3"/>
+      <rect x="26" y="58" width="48" height="5" rx="2" fill="#fff"/>
+      <rect x="26" y="68" width="38" height="5" rx="2" fill="#fff"/>
+    </svg>
+  </template>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../_ds_bundle.js"></script>
+
+  <script type="text/babel">
+    const C = window.SalesforceSLDS2DesignSystem_2eee88;
+    const {
+      Button, ButtonIcon, ButtonGroup, ButtonStateful,
+      Input, Select, Textarea, Slider, Combobox, Checkbox, CheckboxGroup, RadioGroup, FileUpload,
+      Card, Badge, Avatar, Pill, Icon, EmptyState,
+      Accordion, Tabs, Alert, Spinner,
+      Breadcrumbs, ProgressBar, Datatable,
+    } = C;
+
+    /* ---------- shared layout helpers ---------- */
+    function VStack({ children }) { return <div className="vstack">{children}</div>; }
+    function VRow({ label, col, children }) {
+      return <div className="vrow">{label && <span className="vlabel">{label}</span>}<div className={`vdemo ${col?'col':''}`}>{children}</div></div>;
+    }
+    function Field({ label, value, link }) {
+      return <div className="vf-field"><span className="lbl">{label}</span><span className={`val ${link?'link':''}`}>{value}</span></div>;
+    }
+
+    /* ===================== PAGE STRUCTURE ===================== */
+    /* apex:composition / apex:insert / apex:define — template + content page */
+    function Composition() {
+      return <VStack><VRow label="apex:composition over a template with apex:insert / apex:define overrides" col>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'1rem',width:'100%',maxWidth:560}}>
+          <div style={{border:'1px dashed var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden'}}>
+            <div style={{fontSize:10,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:'var(--slds-g-color-on-surface-3)',padding:'0.4rem 0.625rem',borderBottom:'1px dashed var(--slds-g-color-border-2)'}}>Template (apex:insert)</div>
+            <div style={{padding:'0.625rem',display:'flex',flexDirection:'column',gap:6}}>
+              <div style={{padding:'0.4rem 0.625rem',borderRadius:6,background:'var(--slds-g-color-surface-3)',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>insert name="header"</div>
+              <div style={{padding:'0.4rem 0.625rem',borderRadius:6,background:'var(--slds-g-color-surface-3)',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>insert name="body"</div>
+            </div>
+          </div>
+          <div style={{border:'1px solid var(--slds-g-color-accent-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden'}}>
+            <div style={{fontSize:10,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:'var(--slds-g-color-accent-1)',padding:'0.4rem 0.625rem',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>Rendered (apex:define)</div>
+            <div style={{padding:'0.625rem',display:'flex',flexDirection:'column',gap:6}}>
+              <div style={{fontWeight:'var(--slds-g-font-weight-bold)',fontSize:'var(--slds-g-text-body-regular)'}}>Account Workspace</div>
+              <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>Body content supplied by the composing page.</div>
+            </div>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    /* apex:image */
+    function ImageVF() {
+      return <VStack><VRow label="apex:image — a static-resource or URL image" col>
+        <div style={{width:200,height:120,borderRadius:'var(--slds-g-radius-border-3)',border:'1px solid var(--slds-g-color-border-1)',background:'repeating-linear-gradient(135deg, var(--slds-g-color-surface-2) 0 10px, var(--slds-g-color-surface-3) 10px 20px)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+          <span style={{fontFamily:'var(--slds-g-font-family-mono,monospace)',fontSize:11,color:'var(--slds-g-color-on-surface-3)'}}>logo.png</span>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== PAGE BLOCKS ===================== */
+    /* apex:pageBlock — the signature Visualforce detail layout */
+    function PageBlock() {
+      return <VStack><VRow label="Detail page block — title bar, section, two-column field grid & footer buttons" col>
+        <div className="vf-block" style={{maxWidth:640}}>
+          <div style={{display:'flex',alignItems:'center',gap:10,padding:'0.75rem 1rem',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>
+            <Icon iconName="standard:account" size="small" />
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Account</div>
+              <div style={{fontSize:'var(--slds-g-text-heading-small)',fontWeight:'var(--slds-g-font-weight-bold)'}}>Acme Corporation</div>
+            </div>
+            <Button variant="neutral" size="small" label="Edit" />
+            <Button variant="neutral" size="small" label="Delete" />
+          </div>
+          <div style={{padding:'0.875rem 1rem 0.25rem'}}>
+            <div className="vf-section-label">Account Information</div>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0 2rem'}}>
+              <Field label="Account Name" value="Acme Corporation" link />
+              <Field label="Owner" value="Austin Guevara" link />
+              <Field label="Phone" value="(415) 555-0132" />
+              <Field label="Type" value="Customer — Direct" />
+              <Field label="Industry" value="Technology" />
+              <Field label="Annual Revenue" value="$48,000,000" />
+            </div>
+          </div>
+          <div className="vf-foot">
+            <Button variant="brand" size="small" label="Save" />
+            <Button variant="neutral" size="small" label="Save & New" />
+            <Button variant="neutral" size="small" label="Cancel" />
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    /* apex:pageBlockSection — collapsible sections with column count */
+    function PageBlockSection() {
+      const [open,setOpen]=React.useState({a:true,b:true});
+      const Sec=({id,title,children})=> <div style={{border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden'}}>
+        <button onClick={()=>setOpen(o=>({...o,[id]:!o[id]}))} style={{display:'flex',alignItems:'center',gap:6,width:'100%',textAlign:'left',padding:'0.5rem 0.75rem',background:'var(--slds-g-color-surface-2)',border:0,borderBottom:open[id]?'1px solid var(--slds-g-color-border-1)':'0',cursor:'pointer',font:'inherit',fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-bold)',color:'var(--slds-g-color-on-surface-1)'}}>
+          <Icon iconName={open[id]?'utility:chevrondown':'utility:chevronright'} size="xx-small" style={{color:'var(--slds-g-color-on-surface-2)'}} />{title}
+        </button>
+        {open[id] && <div style={{padding:'0.625rem 0.75rem'}}>{children}</div>}
+      </div>;
+      return <VStack><VRow label="Collapsible sections (columns=2) inside a page block" col>
+        <div style={{maxWidth:560,display:'flex',flexDirection:'column',gap:10}}>
+          <Sec id="a" title="Address Information">
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0 2rem'}}>
+              <Field label="Billing City" value="San Francisco" />
+              <Field label="Billing State" value="CA" />
+              <Field label="Country" value="United States" />
+              <Field label="Postal Code" value="94105" />
+            </div>
+          </Sec>
+          <Sec id="b" title="System Information">
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'0 2rem'}}>
+              <Field label="Created By" value="Austin Guevara" link />
+              <Field label="Last Modified" value="2 hours ago" />
+            </div>
+          </Sec>
+        </div>
+      </VRow></VStack>;
+    }
+    /* apex:sectionHeader */
+    function SectionHeader() {
+      return <VStack><VRow label="Page title + subtitle bar above the content" col>
+        <div style={{maxWidth:520,display:'flex',alignItems:'center',gap:12,padding:'0.625rem 0.875rem',borderRadius:'var(--slds-g-radius-border-3)',background:'var(--slds-g-color-surface-2)',border:'1px solid var(--slds-g-color-border-1)'}}>
+          <Icon iconName="standard:contact" size="small" />
+          <div>
+            <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Contact</div>
+            <div style={{fontSize:'var(--slds-g-text-heading-small)',fontWeight:'var(--slds-g-font-weight-bold)'}}>Lando Voss</div>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    /* apex:detail — standard record detail (highlights + related actions) */
+    function Detail() {
+      return <VStack><VRow label="Standard record detail — highlights panel with key fields & actions" col>
+        <div className="vf-block" style={{maxWidth:640}}>
+          <div style={{display:'flex',alignItems:'center',gap:12,padding:'0.875rem 1rem',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>
+            <Icon iconName="standard:opportunity" size="medium" />
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Opportunity</div>
+              <div style={{fontSize:'var(--slds-g-text-heading-medium)',fontWeight:'var(--slds-g-font-weight-bold)'}}>Global Media — Renewal</div>
+            </div>
+            <Button variant="neutral" size="small" label="Edit" />
+            <Button variant="brand" size="small" label="Follow" />
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'0.75rem 1.25rem',padding:'0.875rem 1rem'}}>
+            {[['Amount','$240,000'],['Close Date','Apr 30, 2026'],['Stage','Negotiation'],['Owner','Austin Guevara']].map(([l,v])=>
+              <div key={l}><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)',marginBottom:2}}>{l}</div><div style={{fontSize:'var(--slds-g-text-body-regular)',fontWeight:'var(--slds-g-font-weight-semibold)'}}>{v}</div></div>
+            )}
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== INPUT ===================== */
+    function InputGeneric() {
+      return <VStack><VRow label="apex:input — HTML5 type-aware input, usable without an SObject binding" col>
+        <div style={{maxWidth:420,display:'flex',flexDirection:'column',gap:'0.75rem'}}>
+          <Input label="Email (type=email)" type="email" defaultValue="lando@globalmedia.example" />
+          <Input label="Close Date (type=date)" type="date" defaultValue="2026-04-30" />
+          <Input label="Quantity (type=number)" type="number" defaultValue="12" />
+        </div>
+      </VRow></VStack>;
+    }
+    function InlineEdit() {
+      const [editing,setEditing]=React.useState(false);
+      const [val,setVal]=React.useState('Acme Corporation');
+      const [draft,setDraft]=React.useState(val);
+      return <VStack><VRow label="apex:inlineEditSupport — click a read-only field to edit it in place" col>
+        <div style={{maxWidth:360}}>
+          {!editing ? (
+            <div onClick={()=>{setDraft(val);setEditing(true);}} style={{display:'flex',alignItems:'center',gap:8,padding:'0.4rem 0.5rem',borderRadius:'var(--slds-g-radius-border-2)',cursor:'pointer',border:'1px solid var(--slds-g-color-border-2)'}}>
+              <span style={{flex:1,fontSize:'var(--slds-g-text-body-regular)'}}>{val}</span>
+              <ButtonIcon iconName="utility:edit" variant="bare" size="small" title="Edit" />
+            </div>
+          ) : (
+            <div style={{display:'flex',alignItems:'center',gap:6}}>
+              <div style={{flex:1}}><Input value={draft} onChange={e=>setDraft(e.target.value)} autoFocus /></div>
+              <ButtonIcon iconName="utility:check" variant="brand" size="small" title="Save" onClick={()=>{setVal(draft);setEditing(false);}} />
+              <ButtonIcon iconName="utility:close" variant="border" size="small" title="Cancel" onClick={()=>setEditing(false)} />
+            </div>
+          )}
+        </div>
+      </VRow></VStack>;
+    }
+    function InputField() {
+      return <VStack><VRow label="Bound, type-aware edit fields rendered from the SObject schema" col>
+        <div style={{maxWidth:420,display:'flex',flexDirection:'column',gap:'0.75rem'}}>
+          <Input label="Account Name" defaultValue="Acme Corporation" required />
+          <Select label="Industry" defaultValue="tech" options={[{label:'Technology',value:'tech'},{label:'Finance',value:'fin'},{label:'Healthcare',value:'hc'}]} />
+          <Input label="Annual Revenue" type="number" defaultValue="48000000" />
+        </div>
+      </VRow></VStack>;
+    }
+    function InputText() {
+      return <VStack><VRow label="apex:inputText · required · disabled" col>
+        <div style={{maxWidth:360,display:'flex',flexDirection:'column',gap:'0.75rem'}}>
+          <Input label="Subject" defaultValue="Follow-up call" />
+          <Input label="Reference" placeholder="Enter a value" required />
+          <Input label="Locked" defaultValue="Read only" disabled />
+        </div>
+      </VRow></VStack>;
+    }
+    function InputTextarea() {
+      return <VStack><VRow label="apex:inputTextarea — multi-line, with rich-text off" col>
+        <div style={{maxWidth:420}}><Textarea label="Description" rows={3} defaultValue="Renewal opportunity; decision expected end of quarter." /></div>
+      </VRow></VStack>;
+    }
+    function InputCheckbox() {
+      return <VRow label="apex:inputCheckbox" col><Checkbox label="Send email confirmation" defaultChecked /><Checkbox label="Add to campaign" /></VRow>;
+    }
+    function InputSecret() {
+      return <VStack><VRow label="apex:inputSecret — masked input" col>
+        <div style={{maxWidth:320}}><Input label="API Token" type="password" defaultValue="s3cr3t-token" /></div>
+      </VRow></VStack>;
+    }
+    function InputFile() {
+      return <VStack><VRow label="apex:inputFile — upload an attachment / document" col>
+        <FileUpload label="Attachment" multiple={false} />
+      </VRow></VStack>;
+    }
+    function SelectList() {
+      return <VStack><VRow label="apex:selectList (size=1 dropdown) with apex:selectOptions" col>
+        <div style={{maxWidth:300}}><Combobox label="Stage" defaultValue="neg" options={[{label:'Qualification',value:'qual'},{label:'Proposal',value:'prop'},{label:'Negotiation',value:'neg'},{label:'Closed Won',value:'won'}]} /></div>
+      </VRow>
+      <VRow label="apex:selectList (size>1 multi-select)" col>
+        <div style={{maxWidth:260}}><label style={{display:'block',fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',marginBottom:4}}>Regions</label>
+          <select multiple size={4} defaultValue={['west','east']} style={{width:'100%',border:'1px solid var(--slds-g-color-border-2)',borderRadius:'var(--slds-g-radius-border-2)',background:'var(--slds-g-color-surface-container-1)',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',padding:'0.25rem'}}>
+            <option value="west">West</option><option value="east">East</option><option value="central">Central</option><option value="intl">International</option>
+          </select>
+        </div>
+      </VRow></VStack>;
+    }
+    function SelectCheckboxes() {
+      return <VStack><VRow label="apex:selectCheckboxes — multi-select checkbox group" col>
+        <CheckboxGroup label="Lead Sources" defaultValue={['web','event']} options={[{label:'Web',value:'web'},{label:'Event',value:'event'},{label:'Referral',value:'ref'},{label:'Partner',value:'partner'}]} />
+      </VRow></VStack>;
+    }
+    function SelectRadio() {
+      return <VStack><VRow label="apex:selectRadio — mutually-exclusive options" col>
+        <RadioGroup label="Rating" defaultValue="hot" options={[{label:'Hot',value:'hot'},{label:'Warm',value:'warm'},{label:'Cold',value:'cold'}]} />
+      </VRow></VStack>;
+    }
+    function SliderVF() {
+      return <VStack><VRow label="apex:slider — numeric range" col>
+        <Slider label="Probability" min={0} max={100} step={5} defaultValue={75} unit="%" />
+      </VRow></VStack>;
+    }
+
+    /* ===================== OUTPUT ===================== */
+    function OutputField() {
+      return <VStack><VRow label="apex:outputField — formatted, read-only bound field" col>
+        <div style={{maxWidth:420}}>
+          <Field label="Account Name" value="Acme Corporation" link />
+          <Field label="Annual Revenue" value="$48,000,000" />
+          <Field label="Website" value="acme.example.com" link />
+          <Field label="Created Date" value="Mar 1, 2026" />
+        </div>
+      </VRow></VStack>;
+    }
+    function OutputText() {
+      return <VRow label="apex:outputText (escaped) · with {0} merge value" col>
+        <span style={{fontSize:'var(--slds-g-text-body-regular)'}}>Closed-won this quarter: <strong>$420,000</strong></span>
+        <span style={{fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-2)'}}>Welcome back, Austin.</span>
+      </VRow>;
+    }
+    function OutputLabel() {
+      return <VRow label="apex:outputLabel bound to an input (for=)" col>
+        <label style={{display:'flex',flexDirection:'column',gap:4,maxWidth:300}}>
+          <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>Close Date</span>
+          <Input type="date" defaultValue="2026-04-30" />
+        </label>
+      </VRow>;
+    }
+    function OutputLink() {
+      return <VRow label="apex:outputLink — navigational hyperlink"><a href="#" onClick={e=>e.preventDefault()} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none',fontSize:'var(--slds-g-text-body-regular)'}}>View Account →</a><a href="#" onClick={e=>e.preventDefault()} style={{display:'inline-flex',alignItems:'center',gap:4,color:'var(--slds-g-color-accent-1)',textDecoration:'none',fontSize:'var(--slds-g-text-body-regular)'}}><Icon iconName="utility:new_window" size="xx-small" style={{color:'inherit'}} />Open in Setup</a></VRow>;
+    }
+
+    /* ===================== BUTTONS & ACTIONS ===================== */
+    function CommandButton() {
+      return <VStack><VRow label="apex:commandButton — submits the form & invokes an action"><Button variant="brand" label="Save" /><Button variant="neutral" label="Save & New" /><Button variant="neutral" label="Cancel" /></VRow>
+        <VRow label="Disabled · rerender-only (immediate)"><Button variant="brand" label="Submit" disabled /><Button variant="neutral" label="Recalculate" iconName="utility:refresh" /></VRow></VStack>;
+    }
+    function CommandLink() {
+      return <VRow label="apex:commandLink — an action rendered as a link"><a href="#" onClick={e=>e.preventDefault()} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none',fontSize:'var(--slds-g-text-body-regular)'}}>Recalculate totals</a><a href="#" onClick={e=>e.preventDefault()} style={{color:'var(--slds-g-color-error-1)',textDecoration:'none',fontSize:'var(--slds-g-text-body-regular)'}}>Delete row</a></VRow>;
+    }
+    function ActionStatus() {
+      const [loading,setLoading]=React.useState(false);
+      const run=()=>{ setLoading(true); setTimeout(()=>setLoading(false),1600); };
+      return <VStack><VRow label="apex:actionStatus — shows a spinner facet while an AJAX action runs" col>
+        <div style={{display:'flex',alignItems:'center',gap:12}}>
+          <Button variant="brand" label="Recalculate" onClick={run} disabled={loading} />
+          {loading
+            ? <span style={{display:'inline-flex',alignItems:'center',gap:8,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}><Spinner size="x-small" /> Processing…</span>
+            : <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Idle</span>}
+        </div>
+      </VRow></VStack>;
+    }
+    function ActionPoller() {
+      const [n,setN]=React.useState(42);
+      const [t,setT]=React.useState(0);
+      React.useEffect(()=>{ const id=setInterval(()=>{ setN(v=>v+Math.floor(Math.random()*4)); setT(x=>x+1); },2000); return ()=>clearInterval(id); },[]);
+      return <VStack><VRow label="apex:actionPoller — reruns an action on an interval (every 2s)" col>
+        <div style={{display:'inline-flex',alignItems:'center',gap:12,padding:'0.625rem 0.875rem',borderRadius:'var(--slds-g-radius-border-3)',border:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-container-1)',maxWidth:280}}>
+          <span style={{position:'relative',display:'inline-flex',width:8,height:8}}><span style={{width:8,height:8,borderRadius:'50%',background:'var(--slds-g-color-success-1)'}}></span></span>
+          <div><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Open Cases (live)</div><div style={{fontSize:'var(--slds-g-text-heading-small)',fontWeight:'var(--slds-g-font-weight-bold)'}}>{n}</div></div>
+          <span style={{marginLeft:'auto',fontSize:11,fontFamily:'var(--slds-g-font-family-mono,monospace)',color:'var(--slds-g-color-on-surface-3)'}}>poll #{t}</span>
+        </div>
+      </VRow></VStack>;
+    }
+    function ActionFunction() {
+      const [val,setVal]=React.useState('—');
+      const [calls,setCalls]=React.useState(0);
+      const callFromJS=()=>{ setVal(new Date().toLocaleTimeString()); setCalls(c=>c+1); };
+      return <VStack><VRow label="apex:actionFunction — a JS-callable name that invokes a controller action & rerenders a target" col>
+        <div style={{display:'flex',alignItems:'center',gap:12,flexWrap:'wrap'}}>
+          <code style={{fontFamily:'var(--slds-g-font-family-mono)',fontSize:11,padding:'2px 6px',borderRadius:4,background:'var(--slds-g-color-surface-3)',color:'var(--slds-g-color-on-surface-2)'}}>refreshTime();</code>
+          <Button variant="neutral" size="small" label="Run from JavaScript" onClick={callFromJS} />
+          <span style={{fontSize:'var(--slds-g-text-body-regular)'}}>Rerendered value: <strong>{val}</strong></span>
+          <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>({calls} calls)</span>
+        </div>
+      </VRow></VStack>;
+    }
+    function ActionSupport() {
+      const [stage,setStage]=React.useState('neg');
+      const prob={qual:20,prop:50,neg:75,won:100};
+      return <VStack><VRow label="apex:actionSupport — fires an AJAX action on a DOM event (onchange), updating a target only" col>
+        <div style={{display:'flex',alignItems:'flex-end',gap:16,flexWrap:'wrap',maxWidth:420}}>
+          <div style={{minWidth:180}}><Combobox label="Stage (onchange)" value={stage} onChange={setStage} options={[{label:'Qualification',value:'qual'},{label:'Proposal',value:'prop'},{label:'Negotiation',value:'neg'},{label:'Closed Won',value:'won'}]} /></div>
+          <div style={{padding:'0.5rem 0.875rem',borderRadius:'var(--slds-g-radius-border-3)',border:'1px solid var(--slds-g-color-accent-1)',background:'var(--slds-g-color-accent-container-1)'}}>
+            <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Rerendered probability</div>
+            <div style={{fontSize:'var(--slds-g-text-heading-small)',fontWeight:'var(--slds-g-font-weight-bold)'}}>{prob[stage]}%</div>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    function ActionRegion() {
+      const [a,setA]=React.useState('In region');
+      const [b,setB]=React.useState('Outside region');
+      const [seen,setSeen]=React.useState('');
+      return <VStack><VRow label="apex:actionRegion — only fields inside the region are processed & submitted by its action" col>
+        <div style={{display:'flex',gap:14,flexWrap:'wrap',alignItems:'flex-start'}}>
+          <div style={{border:'1.5px dashed var(--slds-g-color-accent-1)',borderRadius:'var(--slds-g-radius-border-3)',padding:'0.625rem 0.75rem',background:'var(--slds-g-color-accent-container-1)'}}>
+            <div style={{fontSize:10,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:'var(--slds-g-color-accent-1)',marginBottom:6}}>actionRegion</div>
+            <div style={{maxWidth:200}}><Input label="In region" value={a} onChange={e=>setA(e.target.value)} /></div>
+            <div style={{marginTop:8}}><Button variant="brand" size="small" label="Submit region" onClick={()=>setSeen(a)} /></div>
+          </div>
+          <div style={{maxWidth:200}}><Input label="Outside region" value={b} onChange={e=>setB(e.target.value)} /></div>
+          <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',alignSelf:'center'}}>Controller received: <strong>{seen||'—'}</strong><br/><span style={{color:'var(--slds-g-color-on-surface-3)'}}>(the outside field is ignored)</span></div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== DATA & ITERATION ===================== */
+    const OPP_ROWS = [
+      {id:'1',name:'Global Media — Renewal',amount:240000,stage:'Negotiation'},
+      {id:'2',name:'Acme — Expansion',amount:410000,stage:'Proposal'},
+      {id:'3',name:'Pinnacle — Service',amount:88000,stage:'Qualification'},
+    ];
+    function PageBlockTable() {
+      return <VStack><VRow label="apex:pageBlockTable — styled, value-bound related-list grid" col>
+        <Datatable columns={[
+          {key:'name',label:'Opportunity'},
+          {key:'amount',label:'Amount',align:'right',render:v=>'$'+v.toLocaleString()},
+          {key:'stage',label:'Stage',render:v=><Badge variant="brand" label={v} />},
+        ]} rows={OPP_ROWS} rowActions={()=> <ButtonIcon iconName="utility:threedots_vertical" variant="bare" size="small" title="Actions" />} />
+      </VRow></VStack>;
+    }
+    function DataTableVF() {
+      return <VStack><VRow label="apex:dataTable — generic HTML table over a collection" col>
+        <Datatable columns={[
+          {key:'name',label:'Account'},
+          {key:'owner',label:'Owner'},
+          {key:'rev',label:'Revenue',align:'right'},
+        ]} rows={[
+          {id:'1',name:'Acme Corporation',owner:'A. Guevara',rev:'$48M'},
+          {id:'2',name:'Global Media',owner:'L. Voss',rev:'$31M'},
+          {id:'3',name:'Pinnacle Foods',owner:'M. Ortiz',rev:'$12M'},
+        ]} />
+      </VRow></VStack>;
+    }
+    function Repeat() {
+      const items=['Qualification','Needs Analysis','Proposal','Negotiation','Closed Won'];
+      return <VStack><VRow label="apex:repeat — iterate a collection, emitting custom markup per item" col>
+        <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
+          {items.map((s,i)=><Pill key={i} label={s} />)}
+        </div>
+      </VRow></VStack>;
+    }
+    function DataList() {
+      const items=['Sent renewal quote','Scheduled QBR for May','Logged pricing call','Updated close date'];
+      return <VStack><VRow label="apex:dataList — renders a collection as an HTML list (ul / ol)" col>
+        <div style={{display:'flex',gap:32,flexWrap:'wrap'}}>
+          <div><div style={{fontSize:10,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:'var(--slds-g-color-on-surface-3)',marginBottom:4}}>Unordered</div>
+            <ul style={{margin:0,paddingLeft:20,fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',lineHeight:1.7}}>{items.map((t,i)=><li key={i}>{t}</li>)}</ul></div>
+          <div><div style={{fontSize:10,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:'var(--slds-g-color-on-surface-3)',marginBottom:4}}>Ordered</div>
+            <ol style={{margin:0,paddingLeft:20,fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',lineHeight:1.7}}>{items.map((t,i)=><li key={i}>{t}</li>)}</ol></div>
+        </div>
+      </VRow></VStack>;
+    }
+    function RelatedList() {
+      return <VStack><VRow label="apex:relatedList — a standard child related list with header & New" col>
+        <div className="vf-block" style={{maxWidth:640}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,padding:'0.625rem 0.875rem',borderBottom:'1px solid var(--slds-g-color-border-1)'}}>
+            <Icon iconName="standard:contact" size="x-small" />
+            <strong style={{fontSize:'var(--slds-g-text-body-regular)'}}>Contacts (3)</strong>
+            <span style={{flex:1}}></span>
+            <Button variant="neutral" size="small" label="New" />
+          </div>
+          <Datatable columns={[
+            {key:'name',label:'Name',render:v=><a href="#" onClick={e=>e.preventDefault()} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none'}}>{v}</a>},
+            {key:'title',label:'Title'},
+            {key:'email',label:'Email'},
+          ]} rows={[
+            {id:'1',name:'Lando Voss',title:'VP Operations',email:'lando@globalmedia.example'},
+            {id:'2',name:'Mara Ortiz',title:'Buyer',email:'mara@pinnacle.example'},
+            {id:'3',name:'Devon Park',title:'CFO',email:'devon@acme.example'},
+          ]} />
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== MESSAGES ===================== */
+    function PageMessages() {
+      return <div style={{display:'flex',flexDirection:'column',gap:8,width:'100%'}}>
+        <Alert variant="error">Error: Insert failed. First exception on row 0; REQUIRED_FIELD_MISSING.</Alert>
+        <Alert variant="warning">Close date is in the past.</Alert>
+        <Alert variant="success">Record saved.</Alert>
+        <Alert variant="info">Showing the first 50 of 214 records.</Alert>
+      </div>;
+    }
+    function PageMessage() {
+      return <Alert variant="warning">This opportunity is missing a primary contact.</Alert>;
+    }
+    function FieldMessage() {
+      return <VStack><VRow label="apex:message — a single field-level validation error" col>
+        <div style={{maxWidth:360}}><Input label="Email" defaultValue="not-an-email" error="Enter a valid email address." /></div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== PANELS & TABS ===================== */
+    function TabPanel() {
+      const [t,setT]=React.useState('details');
+      return <VStack><VRow label="apex:tabPanel with apex:tab children" col>
+        <Tabs value={t} onChange={setT} tabs={[{label:'Details',value:'details'},{label:'Related',value:'related'},{label:'Activity',value:'activity'}]} />
+        <div style={{padding:'0.75rem 0.25rem',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-2)'}}>
+          {t==='details'&&'Account details, phone, email, and address.'}
+          {t==='related'&&'Related contacts, opportunities, and cases.'}
+          {t==='activity'&&'Recent calls, tasks, and logged emails.'}
+        </div>
+      </VRow></VStack>;
+    }
+    function PanelBar() {
+      return <VStack><VRow label="apex:panelBar / apex:panelBarItem — accordion-style sections" col>
+        <Accordion defaultActive={['a']} sections={[
+          {id:'a',label:'Account Information',content:<span style={{fontSize:'var(--slds-g-text-body-regular)'}}>Name, phone, industry, and owner.</span>},
+          {id:'b',label:'Address Information',content:<span style={{fontSize:'var(--slds-g-text-body-regular)'}}>Billing and shipping addresses.</span>},
+          {id:'c',label:'System Information',content:<span style={{fontSize:'var(--slds-g-text-body-regular)'}}>Created and last-modified details.</span>},
+        ]} />
+      </VRow></VStack>;
+    }
+    function PanelGrid() {
+      const cells=[['Stage','Negotiation'],['Amount','$240,000'],['Close Date','Apr 30'],['Probability','75%'],['Owner','A. Guevara'],['Type','Renewal']];
+      return <VStack><VRow label="apex:panelGrid — an HTML table laid out in N columns (columns=3)" col>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:1,background:'var(--slds-g-color-border-1)',border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-2)',overflow:'hidden',maxWidth:480}}>
+          {cells.map(([l,v],i)=><div key={i} style={{background:'var(--slds-g-color-surface-container-1)',padding:'0.5rem 0.75rem'}}><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>{l}</div><div style={{fontSize:'var(--slds-g-text-body-regular)',fontWeight:'var(--slds-g-font-weight-semibold)'}}>{v}</div></div>)}
+        </div>
+      </VRow></VStack>;
+    }
+    function Toolbar() {
+      return <VStack><VRow label="apex:toolbar with apex:toolbarGroup — left & right-aligned actions" col>
+        <div style={{display:'flex',alignItems:'center',gap:8,padding:'0.5rem 0.75rem',borderRadius:'var(--slds-g-radius-border-3)',border:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)',maxWidth:560}}>
+          <Button variant="neutral" size="small" label="New" iconName="utility:add" />
+          <Button variant="neutral" size="small" label="Import" iconName="utility:upload" />
+          <span style={{flex:1}}></span>
+          <ButtonIcon iconName="utility:refresh" variant="border" size="small" title="Refresh" />
+          <ButtonIcon iconName="utility:settings" variant="border" size="small" title="Settings" />
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== CHARTING ===================== */
+    const CHART_BLUE='var(--slds-g-color-accent-1)';
+    function ChartBar() {
+      const data=[['Q1',120],['Q2',185],['Q3',150],['Q4',240]];
+      const max=260;
+      return <VStack><VRow label="apex:chart + apex:barSeries — column chart" col>
+        <div style={{maxWidth:400}}>
+          <div style={{display:'flex',alignItems:'flex-end',gap:20,height:150,padding:'0 0.5rem 0 0.25rem',borderLeft:'1px solid var(--slds-g-color-border-2)',borderBottom:'1px solid var(--slds-g-color-border-2)'}}>
+            {data.map(([l,v])=>
+              <div key={l} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'flex-end',gap:5,height:'100%'}}>
+                <span style={{fontSize:10,color:'var(--slds-g-color-on-surface-3)'}}>${v}k</span>
+                <div style={{width:'100%',maxWidth:40,height:Math.round(v/max*120),background:CHART_BLUE,borderRadius:'3px 3px 0 0'}}></div>
+              </div>
+            )}
+          </div>
+          <div style={{display:'flex',gap:20,padding:'0.35rem 0.5rem 0 0.25rem'}}>{data.map(([l])=><span key={l} style={{flex:1,textAlign:'center',fontSize:11,color:'var(--slds-g-color-on-surface-2)'}}>{l}</span>)}</div>
+        </div>
+      </VRow></VStack>;
+    }
+    function ChartLine() {
+      const pts=[20,55,40,80,68,95];
+      const W=320,H=120,max=100;
+      const coords=pts.map((p,i)=>[ (i/(pts.length-1))*W, H-(p/max)*H ]);
+      const line=coords.map(c=>c.join(',')).join(' ');
+      const area=`0,${H} ${line} ${W},${H}`;
+      return <VStack><VRow label="apex:chart + apex:lineSeries — trend line with filled area" col>
+        <div style={{maxWidth:360}}>
+          <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={H} style={{display:'block',borderLeft:'1px solid var(--slds-g-color-border-2)',borderBottom:'1px solid var(--slds-g-color-border-2)'}}>
+            <polygon points={area} fill="var(--slds-g-color-accent-container-1)" />
+            <polyline points={line} fill="none" stroke={CHART_BLUE} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+            {coords.map((c,i)=><circle key={i} cx={c[0]} cy={c[1]} r="3.5" fill="#fff" stroke={CHART_BLUE} strokeWidth="2" />)}
+          </svg>
+          <div style={{display:'flex',justifyContent:'space-between',padding:'0.35rem 0 0',fontSize:11,color:'var(--slds-g-color-on-surface-2)'}}><span>Jan</span><span>Mar</span><span>May</span></div>
+        </div>
+      </VRow></VStack>;
+    }
+    function ChartPie() {
+      const segs=[['Closed Won',45,'var(--slds-g-color-accent-1)'],['Pipeline',30,'#06a59a'],['Lost',25,'#fcb95b']];
+      let acc=0; const stops=segs.map(([l,v,c])=>{ const start=acc; acc+=v; return `${c} ${start}% ${acc}%`; }).join(', ');
+      return <VStack><VRow label="apex:chart + apex:pieSeries — donut with legend"><div style={{display:'flex',alignItems:'center',gap:18}}>
+        <div style={{width:104,height:104,borderRadius:'50%',background:`conic-gradient(${stops})`,position:'relative'}}>
+          <div style={{position:'absolute',inset:'26%',borderRadius:'50%',background:'var(--slds-g-color-surface-container-1)'}}></div>
+        </div>
+        <div style={{display:'flex',flexDirection:'column',gap:6}}>
+          {segs.map(([l,v,c])=><div key={l} style={{display:'flex',alignItems:'center',gap:8,fontSize:'var(--slds-g-text-body-small)'}}><span style={{width:10,height:10,borderRadius:2,background:c}}></span><span style={{color:'var(--slds-g-color-on-surface-2)'}}>{l}</span><strong style={{marginLeft:'auto'}}>{v}%</strong></div>)}
+        </div>
+      </div></VRow></VStack>;
+    }
+
+    function ChartGauge() {
+      const val=68, W=200, H=110, cx=100, cy=100, r=80;
+      const polar=(deg)=>{ const a=(180-deg)*Math.PI/180; return [cx+r*Math.cos(a), cy-r*Math.sin(a)]; };
+      const arc=(from,to,color,w)=>{ const [x1,y1]=polar(from),[x2,y2]=polar(to); const large=(to-from)>180?1:0; return <path d={`M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}`} fill="none" stroke={color} strokeWidth={w} strokeLinecap="round" />; };
+      return <VStack><VRow label="apex:chart + apex:gaugeSeries — single-value gauge" col>
+        <div style={{maxWidth:240,textAlign:'center'}}>
+          <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{display:'block'}}>
+            {arc(0,180,'var(--slds-g-color-surface-3)',12)}
+            {arc(0,val/100*180,'var(--slds-g-color-accent-1)',12)}
+          </svg>
+          <div style={{marginTop:-26,fontSize:'var(--slds-g-text-heading-large)',fontWeight:'var(--slds-g-font-weight-bold)'}}>{val}%</div>
+          <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Quota attainment</div>
+        </div>
+      </VRow></VStack>;
+    }
+    function AxisChart() {
+      const data=[['Q1',120],['Q2',185],['Q3',150],['Q4',240]];
+      const W=320,H=150,max=250,ticks=[0,50,100,150,200,250];
+      return <VStack><VRow label="apex:axis — configures a chart axis (gridlines, ticks, titles)" col>
+        <div style={{maxWidth:380,display:'flex',gap:6}}>
+          <div style={{display:'flex',flexDirection:'column',justifyContent:'space-between',alignItems:'flex-end',height:H,fontSize:10,color:'var(--slds-g-color-on-surface-3)',paddingBottom:2}}>
+            {[...ticks].reverse().map(t=><span key={t}>${t}k</span>)}
+          </div>
+          <div style={{flex:1}}>
+            <div style={{position:'relative',height:H,borderLeft:'1px solid var(--slds-g-color-border-2)',borderBottom:'1px solid var(--slds-g-color-border-2)'}}>
+              {ticks.slice(1).map(t=><div key={t} style={{position:'absolute',left:0,right:0,bottom:(t/max*100)+'%',borderTop:'1px dashed var(--slds-g-color-border-1)'}}></div>)}
+              <div style={{position:'absolute',inset:0,display:'flex',alignItems:'flex-end',gap:18,padding:'0 12px'}}>
+                {data.map(([l,v])=><div key={l} style={{flex:1,maxWidth:34,height:(v/max*100)+'%',background:'var(--slds-g-color-accent-1)',borderRadius:'3px 3px 0 0'}}></div>)}
+              </div>
+            </div>
+            <div style={{display:'flex',gap:18,padding:'0.35rem 12px 0'}}>{data.map(([l])=><span key={l} style={{flex:1,maxWidth:34,textAlign:'center',fontSize:11,color:'var(--slds-g-color-on-surface-2)'}}>{l}</span>)}</div>
+            <div style={{textAlign:'center',fontSize:10,fontWeight:700,letterSpacing:'.05em',textTransform:'uppercase',color:'var(--slds-g-color-on-surface-3)',marginTop:4}}>Quarter</div>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    function CanvasApp() {
+      return <VStack><VRow label="apex:canvasApp — embeds a third-party Canvas app via signed request" col>
+        <div style={{maxWidth:420,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,padding:'0.45rem 0.75rem',borderBottom:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)'}}>
+            <Icon iconName="utility:apps" size="xx-small" />
+            <span style={{fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-semibold)'}}>BillingPortal</span>
+            <span style={{fontSize:10,padding:'1px 6px',borderRadius:'var(--slds-g-radius-border-pill)',background:'var(--slds-g-color-surface-3)',color:'var(--slds-g-color-on-surface-3)'}}>Canvas · external</span>
+          </div>
+          <div style={{padding:'1.25rem 1rem',display:'flex',flexDirection:'column',alignItems:'center',gap:6,background:'repeating-linear-gradient(45deg, var(--slds-g-color-surface-1) 0 12px, var(--slds-g-color-surface-2) 12px 24px)'}}>
+            <span className="material-symbols-rounded" style={{fontSize:28,color:'var(--slds-g-color-on-surface-3)'}}>iframe</span>
+            <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>Third-party app rendered in an iframe</span>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    function ChartArea() {
+      const series=[18,42,30,58,50,72];
+      const W=300,H=120,max=80;
+      const coords=series.map((p,i)=>[(i/(series.length-1))*W, H-(p/max)*H]);
+      const line=coords.map(c=>c.join(',')).join(' ');
+      const area=`0,${H} ${line} ${W},${H}`;
+      return <VStack><VRow label="apex:chart + apex:areaSeries — filled area for a numeric series" col>
+        <div style={{maxWidth:340}}>
+          <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={H} style={{display:'block',borderLeft:'1px solid var(--slds-g-color-border-2)',borderBottom:'1px solid var(--slds-g-color-border-2)'}}>
+            <polygon points={area} fill="var(--slds-g-color-accent-container-1)" />
+            <polyline points={line} fill="none" stroke="var(--slds-g-color-accent-1)" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+          </svg>
+          <div style={{display:'flex',justifyContent:'space-between',padding:'0.35rem 0 0',fontSize:11,color:'var(--slds-g-color-on-surface-2)'}}><span>Week 1</span><span>Week 6</span></div>
+        </div>
+      </VRow></VStack>;
+    }
+    function ChartScatter() {
+      const pts=[[15,30],[35,55],[50,40],[62,72],[78,60],[88,90],[40,25],[70,48]];
+      const W=300,H=120;
+      return <VStack><VRow label="apex:chart + apex:scatterSeries — points on two axes" col>
+        <svg viewBox={`0 0 ${W} ${H}`} width="100%" height={H} style={{maxWidth:320,display:'block',borderLeft:'1px solid var(--slds-g-color-border-2)',borderBottom:'1px solid var(--slds-g-color-border-2)'}}>
+          {pts.map((p,i)=><circle key={i} cx={p[0]/100*W} cy={H-p[1]/100*H} r="4" fill="var(--slds-g-color-accent-1)" fillOpacity="0.7" />)}
+        </svg>
+      </VRow></VStack>;
+    }
+
+    /* ===================== EMAIL TEMPLATES ===================== */
+    function EmailTemplate() {
+      return <VStack><VRow label="messaging:emailTemplate — an HTML Visualforce email template" col>
+        <div style={{maxWidth:520,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+          <div style={{display:'flex',flexDirection:'column',gap:2,padding:'0.625rem 0.875rem',borderBottom:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)',fontSize:'var(--slds-g-text-body-small)'}}>
+            <div><span style={{color:'var(--slds-g-color-on-surface-3)'}}>To:&nbsp;</span>lando@globalmedia.example</div>
+            <div><span style={{color:'var(--slds-g-color-on-surface-3)'}}>Subject:&nbsp;</span><strong>Your renewal is confirmed</strong></div>
+          </div>
+          <div style={{padding:'0.875rem',fontSize:'var(--slds-g-text-body-regular)',lineHeight:1.5,color:'var(--slds-g-color-on-surface-1)'}}>
+            <p style={{margin:'0 0 0.625rem'}}>Hi Lando,</p>
+            <p style={{margin:'0 0 0.625rem'}}>Your renewal for <strong>Global Media</strong> totaling <strong>$240,000</strong> is confirmed and active through Apr 30, 2026.</p>
+            <p style={{margin:0,color:'var(--slds-g-color-on-surface-3)'}}>— The Acme Team</p>
+          </div>
+          <div style={{padding:'0.5rem 0.875rem',borderTop:'1px solid var(--slds-g-color-border-1)',fontSize:11,color:'var(--slds-g-color-on-surface-3)'}}>messaging:attachment · contract.pdf</div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== SERVICE & KNOWLEDGE ===================== */
+    function CaseFeed() {
+      return <VStack><VRow label="support:caseFeed — the agent case feed & publishers" col>
+        <div style={{maxWidth:560,display:'flex',flexDirection:'column',gap:8}}>
+          <div style={{display:'flex',gap:6}}>
+            {['Email','Log a Call','Portal','Internal'].map((t,i)=><span key={t} style={{padding:'0.35rem 0.7rem',borderRadius:'var(--slds-g-radius-border-pill)',fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-semibold)',background:i===0?'var(--slds-g-color-accent-1)':'var(--slds-g-color-surface-3)',color:i===0?'#fff':'var(--slds-g-color-on-surface-2)'}}>{t}</span>)}
+          </div>
+          <Textarea rows={2} placeholder="Write an email to the contact…" />
+          <div style={{display:'flex',gap:10,padding:'0.625rem 0.75rem',border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',background:'var(--slds-g-color-surface-container-1)'}}>
+            <Icon iconName="standard:case" size="x-small" />
+            <div style={{flex:1,minWidth:0}}><div style={{fontSize:'var(--slds-g-text-body-small)'}}><strong>Status changed</strong> to Escalated</div><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>by Austin Guevara · 1h ago</div></div>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    function LogCallPublisher() {
+      return <VStack><VRow label="apex:logCallPublisher — the case-feed log-a-call composer" col>
+        <div style={{maxWidth:480,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,padding:'0.45rem 0.75rem',borderBottom:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)'}}>
+            <Icon iconName="utility:call" size="xx-small" /><strong style={{fontSize:'var(--slds-g-text-body-small)'}}>Log a Call</strong>
+          </div>
+          <div style={{padding:'0.625rem 0.75rem',display:'flex',flexDirection:'column',gap:8}}>
+            <Input label="Subject" defaultValue="Outbound — renewal terms" />
+            <Textarea rows={2} placeholder="Call notes…" defaultValue="Confirmed pricing; sending contract." />
+            <div style={{display:'flex',justifyContent:'flex-end'}}><Button variant="brand" size="small" label="Save" /></div>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    function ClickToDial() {
+      return <VRow label="support:clickToDial — a CTI-enabled phone number"><a href="#" onClick={e=>e.preventDefault()} style={{display:'inline-flex',alignItems:'center',gap:6,color:'var(--slds-g-color-accent-1)',textDecoration:'none',fontSize:'var(--slds-g-text-body-regular)'}}><Icon iconName="utility:call" size="xx-small" style={{color:'inherit'}} />(415) 555-0132</a></VRow>;
+    }
+    function EmailPublisher() {
+      return <VStack><VRow label="apex:emailPublisher — the case feed email composer" col>
+        <div style={{maxWidth:520,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',overflow:'hidden',background:'var(--slds-g-color-surface-container-1)'}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,padding:'0.45rem 0.75rem',borderBottom:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)'}}>
+            <Icon iconName="utility:email" size="xx-small" /><strong style={{fontSize:'var(--slds-g-text-body-small)'}}>Email</strong>
+          </div>
+          <div style={{padding:'0.625rem 0.75rem',display:'flex',flexDirection:'column',gap:6}}>
+            <div style={{display:'flex',gap:8,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)',borderBottom:'1px solid var(--slds-g-color-border-1)',paddingBottom:4}}><span style={{width:36}}>To</span><span style={{color:'var(--slds-g-color-on-surface-1)'}}>lando@globalmedia.example</span></div>
+            <div style={{display:'flex',gap:8,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)',borderBottom:'1px solid var(--slds-g-color-border-1)',paddingBottom:4}}><span style={{width:36}}>Subj</span><span style={{color:'var(--slds-g-color-on-surface-1)'}}>Re: Case #00481299</span></div>
+            <Textarea rows={2} placeholder="Type your reply…" />
+            <div style={{display:'flex',justifyContent:'flex-end',gap:8}}><Button variant="neutral" size="small" label="Attach" iconName="utility:attach" /><Button variant="brand" size="small" label="Send" /></div>
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    function KnowledgeList() {
+      const arts=[['How to reset an integration user','Setup',342],['Renewal billing FAQ','Billing',128],['SSO troubleshooting','Identity',96]];
+      return <VStack><VRow label="knowledge:articleList — knowledge articles for a topic" col>
+        <div style={{maxWidth:480,display:'flex',flexDirection:'column',gap:6}}>
+          {arts.map(([t,cat,views],i)=>
+            <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'0.5rem 0.75rem',border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',background:'var(--slds-g-color-surface-container-1)'}}>
+              <Icon iconName="standard:knowledge" size="x-small" />
+              <div style={{flex:1,minWidth:0}}><a href="#" onClick={e=>e.preventDefault()} style={{color:'var(--slds-g-color-accent-1)',textDecoration:'none',fontSize:'var(--slds-g-text-body-regular)'}}>{t}</a><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>{cat}</div></div>
+              <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>{views} views</span>
+            </div>
+          )}
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== ANALYTICS ===================== */
+    function ReportChart() {
+      const data=[['Negotiation',240],['Proposal',410],['Qualification',88],['Closed Won',420]];
+      const max=460;
+      return <VStack><VRow label="analytics:reportChart — embeds the chart from a saved report" col>
+        <div style={{maxWidth:440,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',background:'var(--slds-g-color-surface-container-1)',overflow:'hidden'}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,padding:'0.5rem 0.75rem',borderBottom:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)'}}>
+            <Icon iconName="standard:report" size="x-small" />
+            <strong style={{fontSize:'var(--slds-g-text-body-regular)'}}>Pipeline by Stage</strong>
+            <span style={{flex:1}}></span>
+            <span style={{fontSize:11,color:'var(--slds-g-color-on-surface-3)'}}>Report · cached</span>
+          </div>
+          <div style={{padding:'0.875rem 1rem',display:'flex',flexDirection:'column',gap:8}}>
+            {data.map(([l,v])=>
+              <div key={l} style={{display:'flex',alignItems:'center',gap:10}}>
+                <span style={{width:96,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)',textAlign:'right'}}>{l}</span>
+                <div style={{flex:1,height:14,borderRadius:3,background:'var(--slds-g-color-surface-3)',overflow:'hidden'}}><div style={{width:(v/max*100)+'%',height:'100%',background:'var(--slds-g-color-accent-1)'}}></div></div>
+                <span style={{width:48,fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-semibold)'}}>${v}k</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    function WaveDashboard() {
+      return <VStack><VRow label="wave:dashboard — embeds a CRM Analytics (Wave) dashboard" col>
+        <div style={{maxWidth:440,border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',background:'var(--slds-g-color-surface-container-1)',overflow:'hidden'}}>
+          <div style={{display:'flex',alignItems:'center',gap:8,padding:'0.5rem 0.75rem',borderBottom:'1px solid var(--slds-g-color-border-1)',background:'var(--slds-g-color-surface-2)'}}>
+            <Icon iconName="standard:dashboard" size="x-small" /><strong style={{fontSize:'var(--slds-g-text-body-regular)'}}>Sales Performance</strong>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:1,background:'var(--slds-g-color-border-1)'}}>
+            {[['Bookings','$1.16M','+12%'],['Win Rate','41%','+3pts'],['Avg Deal','$84k','−1%'],['Open Pipe','$2.4M','+8%']].map(([l,v,d])=>
+              <div key={l} style={{background:'var(--slds-g-color-surface-container-1)',padding:'0.625rem 0.75rem'}}>
+                <div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>{l}</div>
+                <div style={{fontSize:'var(--slds-g-text-heading-small)',fontWeight:'var(--slds-g-font-weight-bold)'}}>{v}</div>
+                <div style={{fontSize:11,color:d.startsWith('−')?'var(--slds-g-color-error-1)':'var(--slds-g-color-success-1)'}}>{d}</div>
+              </div>
+            )}
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== COMPONENTS & UTILITIES ===================== */
+    function MilestoneTracker() {
+      const [pct,setPct]=React.useState(64);
+      React.useEffect(()=>{ const id=setInterval(()=>setPct(p=>p>=96?64:p+2),1500); return ()=>clearInterval(id); },[]);
+      const remaining=Math.round((100-pct)/100*120);
+      const warn=pct>85;
+      const col=warn?'var(--slds-g-color-error-1)':'var(--slds-g-color-success-1)';
+      return <VStack><VRow label="apex:milestoneTracker — entitlement milestone progress & time remaining" col>
+        <div style={{maxWidth:380,padding:'0.75rem 0.875rem',border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',background:'var(--slds-g-color-surface-container-1)'}}>
+          <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:8}}>
+            <strong style={{fontSize:'var(--slds-g-text-body-regular)'}}>First Response</strong>
+            <span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>SLA milestone</span>
+            <span style={{marginLeft:'auto',fontSize:'var(--slds-g-text-body-small)',fontWeight:'var(--slds-g-font-weight-bold)',color:col}}>{remaining} min left</span>
+          </div>
+          <div style={{height:10,borderRadius:5,background:'var(--slds-g-color-surface-3)',overflow:'hidden'}}>
+            <div style={{width:pct+'%',height:'100%',background:col,transition:'width .8s ease'}}></div>
+          </div>
+          <div style={{display:'flex',justifyContent:'space-between',marginTop:5,fontSize:11,color:'var(--slds-g-color-on-surface-3)'}}><span>Target 2:00 PM</span><span>{warn?'At risk':'On track'}</span></div>
+        </div>
+      </VRow></VStack>;
+    }
+    function MapVF() {
+      const markers=[['Acme HQ','San Francisco',38,42],['West Office','Oakland',58,52],['Data Center','San Jose',70,74]];
+      return <VStack><VRow label="apex:map + apex:mapMarker — an interactive map with location markers" col>
+        <div style={{display:'flex',gap:14,flexWrap:'wrap',alignItems:'flex-start'}}>
+          <div style={{position:'relative',width:260,height:170,borderRadius:'var(--slds-g-radius-border-3)',border:'1px solid var(--slds-g-color-border-1)',overflow:'hidden',background:'linear-gradient(160deg,#e6efe6,#dce8f2)'}}>
+            <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(var(--slds-g-color-border-1) 1px,transparent 1px),linear-gradient(90deg,var(--slds-g-color-border-1) 1px,transparent 1px)',backgroundSize:'26px 26px',opacity:.5}}></div>
+            <div style={{position:'absolute',left:'8%',top:'58%',width:'84%',height:6,background:'#c9b894',borderRadius:3,transform:'rotate(-8deg)',opacity:.7}}></div>
+            {markers.map(([n,c,x,y],i)=>
+              <div key={i} style={{position:'absolute',left:x+'%',top:y+'%',transform:'translate(-50%,-100%)',display:'flex',flexDirection:'column',alignItems:'center'}}>
+                <span className="material-symbols-rounded" style={{fontSize:24,color:'var(--slds-g-color-accent-1)',filter:'drop-shadow(0 1px 1px rgba(0,0,0,.3))'}}>location_on</span>
+              </div>
+            )}
+          </div>
+          <div style={{display:'flex',flexDirection:'column',gap:6}}>
+            {markers.map(([n,c],i)=>
+              <div key={i} style={{display:'flex',alignItems:'center',gap:8}}>
+                <span className="material-symbols-rounded" style={{fontSize:16,color:'var(--slds-g-color-accent-1)'}}>location_on</span>
+                <div><div style={{fontSize:'var(--slds-g-text-body-regular)',fontWeight:'var(--slds-g-font-weight-semibold)'}}>{n}</div><div style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>{c}</div></div>
+              </div>
+            )}
+          </div>
+        </div>
+      </VRow></VStack>;
+    }
+    function Vote() {
+      const [v,setV]=React.useState(0);
+      const [count,setCount]=React.useState(18);
+      const set=(dir)=>{ setCount(c=>c - (v||0) + dir); setV(dir); };
+      return <VStack><VRow label="apex:vote — up/down voting on a knowledge article" col>
+        <div style={{display:'inline-flex',alignItems:'center',gap:10,padding:'0.5rem 0.75rem',borderRadius:'var(--slds-g-radius-border-pill)',border:'1px solid var(--slds-g-color-border-2)',background:'var(--slds-g-color-surface-container-1)'}}>
+          <ButtonIcon iconName="utility:like" variant={v===1?'brand':'border'} size="small" title="Helpful" onClick={()=>set(v===1?0:1)} />
+          <span style={{fontSize:'var(--slds-g-text-body-regular)',fontWeight:'var(--slds-g-font-weight-bold)',minWidth:20,textAlign:'center'}}>{count}</span>
+          <ButtonIcon iconName="utility:dislike" variant={v===-1?'brand':'border'} size="small" title="Not helpful" onClick={()=>set(v===-1?0:-1)} />
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ===================== CHATTER & SOCIAL ===================== */
+    function ChatterFeed() {
+      const posts=[
+        {who:'Austin Guevara',init:'AG',when:'2h',text:'Closed the Global Media renewal — $240K. Great teamwork on the pricing.',likes:6,comments:2},
+        {who:'Lando Voss',init:'LV',when:'5h',text:'Uploaded the Q3 territory plan to the account.',likes:3,comments:0},
+      ];
+      return <VStack><VRow label="chatter:feed — record feed with posts, likes & comments" col>
+        <div style={{maxWidth:560,display:'flex',flexDirection:'column',gap:10}}>
+          <div style={{display:'flex',gap:10,alignItems:'flex-start'}}>
+            <Avatar initials="AG" size="small" />
+            <Textarea rows={2} placeholder="Share an update…" />
+          </div>
+          {posts.map((p,i)=>
+            <div key={i} style={{display:'flex',gap:10,padding:'0.75rem',border:'1px solid var(--slds-g-color-border-1)',borderRadius:'var(--slds-g-radius-border-3)',background:'var(--slds-g-color-surface-container-1)'}}>
+              <Avatar initials={p.init} size="small" />
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{display:'flex',alignItems:'baseline',gap:6}}><strong style={{fontSize:'var(--slds-g-text-body-regular)'}}>{p.who}</strong><span style={{fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-3)'}}>· {p.when}</span></div>
+                <p style={{margin:'0.25rem 0 0.5rem',fontSize:'var(--slds-g-text-body-regular)',color:'var(--slds-g-color-on-surface-1)',lineHeight:1.45}}>{p.text}</p>
+                <div style={{display:'flex',gap:16,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>
+                  <span style={{display:'inline-flex',alignItems:'center',gap:4}}><Icon iconName="utility:like" size="xx-small" /> {p.likes}</span>
+                  <span style={{display:'inline-flex',alignItems:'center',gap:4}}><Icon iconName="utility:comments" size="xx-small" /> {p.comments}</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </VRow></VStack>;
+    }
+    function ChatterFollow() {
+      return <VRow label="chatter:follow — follow / unfollow a record"><ButtonStateful labelWhenOff="Follow" labelWhenOn="Following" labelWhenHover="Unfollow" /></VRow>;
+    }
+    function ChatterFollowers() {
+      const f=['AG','LV','MO','DP','RS'];
+      return <VStack><VRow label="chatter:followers — who follows this record" col>
+        <div style={{display:'flex',alignItems:'center'}}>
+          {f.map((x,i)=><span key={i} style={{marginLeft:i?-8:0,borderRadius:'50%',boxShadow:'0 0 0 2px var(--slds-g-color-surface-container-1)'}}><Avatar initials={x} size="small" /></span>)}
+          <span style={{marginLeft:10,fontSize:'var(--slds-g-text-body-small)',color:'var(--slds-g-color-on-surface-2)'}}>5 followers</span>
+        </div>
+      </VRow></VStack>;
+    }
+    function ChatterNewStatus() {
+      return <VStack><VRow label="chatter:newStatus — post a new update" col>
+        <div style={{maxWidth:480,display:'flex',flexDirection:'column',gap:8}}>
+          <Textarea rows={2} placeholder="What are you working on?" />
+          <div style={{display:'flex',justifyContent:'flex-end'}}><Button variant="brand" size="small" label="Share" /></div>
+        </div>
+      </VRow></VStack>;
+    }
+
+    /* ---- live example registry ---- */
+    const Ex = {
+      Composition, ImageVF,
+      PageBlock, PageBlockSection, SectionHeader, Detail,
+      InputGeneric, InlineEdit, InputField, InputText, InputTextarea, InputCheckbox, InputSecret, InputFile,
+      SelectList, SelectCheckboxes, SelectRadio, SliderVF,
+      OutputField, OutputText, OutputLabel, OutputLink,
+      CommandButton, CommandLink, ActionStatus, ActionPoller,
+      PageBlockTable, DataTableVF, Repeat, DataList, RelatedList,
+      PageMessages, PageMessage, FieldMessage,
+      TabPanel, PanelBar, PanelGrid, Toolbar,
+      ChartBar, ChartLine, ChartPie, ChartGauge, ChartScatter, ChartArea, AxisChart,
+      ActionFunction, ActionSupport, ActionRegion, CanvasApp,
+      EmailTemplate,
+      CaseFeed, ClickToDial, LogCallPublisher, KnowledgeList, EmailPublisher,
+      ReportChart, WaveDashboard,
+      MapVF, MilestoneTracker,
+      Vote,
+      ChatterFeed, ChatterFollow, ChatterFollowers, ChatterNewStatus,
+    };
+
+    /* ---- catalog data (Visualforce apex: standard component reference) ---- */
+    const WIDE = new Set(['Composition','PageBlock','PageBlockSection','Detail','SelectList','PageBlockTable','DataTableVF','RelatedList','PageMessages','TabPanel','PanelBar','PanelGrid','Toolbar','ChartBar','ChartLine','ActionStatus','ActionPoller','ChatterFeed','OutputField','InputField','CommandButton','SelectCheckboxes','Repeat','EmailTemplate','CaseFeed','KnowledgeList','ChartScatter','ReportChart','WaveDashboard','ActionSupport','ActionRegion','AxisChart','DataList','EmailPublisher','InlineEdit','MapVF','LogCallPublisher','MilestoneTracker']);
+    const CAT = [
+      { id:'structure', title:'Page Structure', desc:'Components that define a page and assemble it from templates and resources.', items:[
+        ['Page','apex:page','doc','The root container. Binds a standardController/extensions, and toggles sidebar, header, and SLDS styling.',null],
+        ['Composition','apex:composition','built','References a template page; apex:define fills the named apex:insert holes the template declares.','Composition'],
+        ['Define','apex:define','doc','Inside a composition, supplies content for a named insert in the referenced template.',null],
+        ['Insert','apex:insert','doc','A named placeholder in a template that composing pages override with apex:define.',null],
+        ['Include','apex:include','doc','Inlines the rendered content of another Visualforce page at this location.',null],
+        ['Image','apex:image','built','Renders an image from a static resource, document, or URL.','ImageVF'],
+        ['IFrame','apex:iframe','doc','Embeds an external URL or page in an inline frame.',null],
+        ['Stylesheet','apex:stylesheet','doc','Adds a CSS stylesheet (often a static resource) to the page head.',null],
+        ['Include Script','apex:includeScript','doc','Adds a JavaScript file (often a static resource) to the page.',null],
+        ['Flash','apex:flash','doc','Embeds an Adobe Flash movie (legacy).',null],
+      ]},
+      { id:'pageblocks', title:'Page Blocks', desc:'The signature Visualforce detail layout — bordered blocks, sections, and field grids that match standard record pages.', items:[
+        ['Page Block','apex:pageBlock','built','A bordered content area with a title bar — the standard detail/edit container.','PageBlock'],
+        ['Page Block Section','apex:pageBlockSection','built','A collapsible, multi-column group of fields inside a page block.','PageBlockSection'],
+        ['Page Block Section Item','apex:pageBlockSectionItem','doc','A single label-plus-field cell within a page block section.',null],
+        ['Page Block Buttons','apex:pageBlockButtons','doc','The button row (top/bottom) of a page block — typically Save / Cancel.',null],
+        ['Section Header','apex:sectionHeader','built','The page title + subtitle bar shown above the content.','SectionHeader'],
+        ['Detail','apex:detail','built','Renders the standard record detail — highlights, fields, related lists & actions.','Detail'],
+        ['Facet','apex:facet','doc','Supplies named content (e.g. header/footer) to a parent component that declares facets.',null],
+      ]},
+      { id:'input', title:'Input', desc:'Form and field components that capture and validate user data.', items:[
+        ['Form','apex:form','doc','The form that wraps inputs and posts back to the controller. One per page region.',null],
+        ['Input','apex:input','built','An HTML5 type-aware input that works with or without an SObject binding.','InputGeneric'],
+        ['Input Field','apex:inputField','built','A schema-aware, bound edit field that renders the right control for the SObject field type.','InputField'],
+        ['Inline Edit Support','apex:inlineEditSupport','built','Adds click-to-edit inline editing to a field, table, or related list.','InlineEdit'],
+        ['Input Text','apex:inputText','built','A single-line text input bound to a controller value.','InputText'],
+        ['Input Textarea','apex:inputTextarea','built','A multi-line text input, optionally rich-text.','InputTextarea'],
+        ['Input Checkbox','apex:inputCheckbox','built','A single boolean checkbox.','InputCheckbox'],
+        ['Input Secret','apex:inputSecret','built','A masked password-style input.','InputSecret'],
+        ['Input File','apex:inputFile','built','An attachment / document upload control.','InputFile'],
+        ['Input Hidden','apex:inputHidden','doc','A hidden form value posted with the form.',null],
+        ['Select List','apex:selectList','built','A single- or multi-select dropdown populated by selectOptions.','SelectList'],
+        ['Select Checkboxes','apex:selectCheckboxes','built','A multi-select group rendered as checkboxes.','SelectCheckboxes'],
+        ['Select Radio','apex:selectRadio','built','A single-select group rendered as radio buttons.','SelectRadio'],
+        ['Select Option(s)','apex:selectOption','doc','Supplies the items for a select control — one option or a bound collection (selectOptions).',null],
+        ['Slider','apex:slider','built','A numeric range slider bound to a controller value.','SliderVF'],
+      ]},
+      { id:'output', title:'Output', desc:'Components that display bound, formatted, read-only values.', items:[
+        ['Output Field','apex:outputField','built','A schema-aware, formatted read-only field with its label.','OutputField'],
+        ['Output Text','apex:outputText','built','Displays a string value, with optional {n} merge parameters and escaping.','OutputText'],
+        ['Output Label','apex:outputLabel','built','A label associated with an input via for=.','OutputLabel'],
+        ['Output Link','apex:outputLink','built','A navigational hyperlink (no controller action).','OutputLink'],
+        ['Output Panel','apex:outputPanel','doc','A container (div/span) used as a rerender target for AJAX actions.',null],
+      ]},
+      { id:'actions', title:'Buttons & Actions', desc:'Components that invoke controller actions, including partial-page AJAX.', items:[
+        ['Command Button','apex:commandButton','built','A button that submits the form and invokes a controller action.','CommandButton'],
+        ['Command Link','apex:commandLink','built','An action rendered as a hyperlink instead of a button.','CommandLink'],
+        ['Action Function','apex:actionFunction','built','Generates a JavaScript function that invokes a controller action from script.','ActionFunction'],
+        ['Action Support','apex:actionSupport','built','Adds an AJAX action to another component on a DOM event (e.g. onchange).','ActionSupport'],
+        ['Action Poller','apex:actionPoller','built','Reruns an action on a timed interval to refresh part of the page.','ActionPoller'],
+        ['Action Status','apex:actionStatus','built','Displays start/stop facets (e.g. a spinner) while an AJAX request runs.','ActionStatus'],
+        ['Action Region','apex:actionRegion','built','Limits the portion of the page processed/submitted by an AJAX request.','ActionRegion'],
+        ['Param','apex:param','doc','Passes a name/value parameter to the parent action or link.',null],
+      ]},
+      { id:'data', title:'Data Tables & Iteration', desc:'Components that render collections as tables, related lists, or repeated markup.', items:[
+        ['Page Block Table','apex:pageBlockTable','built','A styled, value-bound table that matches standard related-list grids.','PageBlockTable'],
+        ['Data Table','apex:dataTable','built','A generic HTML table rendered over a collection.','DataTableVF'],
+        ['Column','apex:column','doc','A single column (header + cell body) inside a dataTable / pageBlockTable.',null],
+        ['Repeat','apex:repeat','built','Iterates a collection, emitting arbitrary markup for each item.','Repeat'],
+        ['Data List','apex:dataList','built','Renders a collection as an HTML ordered or unordered list.','DataList'],
+        ['Related List','apex:relatedList','built','Renders a standard child related list with header, New, and columns.','RelatedList'],
+        ['List Views','apex:listViews','doc','Renders the standard list-view picker and grid for an object.',null],
+        ['Enhanced List','apex:enhancedList','doc','The interactive enhanced list view with inline editing & pagination.',null],
+      ]},
+      { id:'messages', title:'Messages', desc:'Components that surface validation and status messages.', items:[
+        ['Page Messages','apex:pageMessages','built','Displays all page-level messages (errors, warnings, confirmations, info).','PageMessages'],
+        ['Page Message','apex:pageMessage','built','Displays a single custom message with a chosen severity.','PageMessage'],
+        ['Messages','apex:messages','doc','Displays all messages as a plain list (unstyled).',null],
+        ['Message','apex:message','built','Displays a single field-level error next to its input.','FieldMessage'],
+      ]},
+      { id:'panels', title:'Panels & Tabs', desc:'Components that group and switch between regions of a page.', items:[
+        ['Tab Panel','apex:tabPanel','built','A set of switchable tabs (apex:tab children).','TabPanel'],
+        ['Tab','apex:tab','doc','A single tab pane inside a tab panel.',null],
+        ['Panel Bar','apex:panelBar','built','A vertical accordion of expandable items (apex:panelBarItem).','PanelBar'],
+        ['Panel Grid','apex:panelGrid','built','An HTML table laid out across a fixed number of columns.','PanelGrid'],
+        ['Panel Group','apex:panelGroup','doc','Groups components inside a panelGrid cell.',null],
+        ['Toolbar','apex:toolbar','built','A horizontal action bar with left/right-aligned toolbar groups.','Toolbar'],
+      ]},
+      { id:'charting', title:'Charting', desc:'Visualforce Charting — render data-driven charts on the page.', items:[
+        ['Chart','apex:chart','built','The chart canvas that hosts one or more data series.','ChartBar'],
+        ['Bar Series','apex:barSeries','built','Renders bars/columns for a numeric series.','ChartBar'],
+        ['Line Series','apex:lineSeries','built','Renders a trend line, optionally with a filled area.','ChartLine'],
+        ['Pie Series','apex:pieSeries','built','Renders a pie / donut from a single series.','ChartPie'],
+        ['Gauge Series','apex:gaugeSeries','built','Renders a single-value gauge (e.g. quota attainment).','ChartGauge'],
+        ['Scatter Series','apex:scatterSeries','built','Plots discrete points against two numeric axes.','ChartScatter'],
+        ['Area Series','apex:areaSeries','built','Renders a filled area for one or more numeric series.','ChartArea'],
+        ['Radar Series','apex:radarSeries','doc','Plots a series on a radial (radar) chart.',null],
+        ['Axis','apex:axis','built','Configures a chart axis (type, fields, title, grid).','AxisChart'],
+        ['Legend','apex:legend','doc','Renders the chart legend at a given position.',null],
+        ['Chart Label','apex:chartLabel','doc','Displays value labels on the data points of a series.',null],
+        ['Chart Tips','apex:chartTips','doc','Adds hover tooltips to a chart series.',null],
+      ]},
+      { id:'components', title:'Components & Utilities', desc:'Reusable custom components, page variables, and dynamic markup.', items:[
+        ['Variable','apex:variable','doc','Declares a local variable for use within the page (often inside apex:repeat).',null],
+        ['Attribute','apex:attribute','doc','Declares an attribute on a custom apex:component.',null],
+        ['Component','apex:component','doc','Defines a reusable custom Visualforce component.',null],
+        ['Component Body','apex:componentBody','doc','Renders the body passed into a custom component.',null],
+        ['Dynamic Component','apex:dynamicComponent','doc','Renders a component built in Apex at runtime.',null],
+        ['Include Lightning','apex:includeLightning','doc','Loads Lightning Components for use inside a Visualforce page.',null],
+        ['Canvas App','apex:canvasApp','built','Embeds a Canvas (third-party) app on the page.','CanvasApp'],
+        ['Milestone Tracker','apex:milestoneTracker','built','Displays entitlement milestone progress for a case.','MilestoneTracker'],
+        ['Remote Objects','apex:remoteObjects','doc','Declares SObjects (with remoteObjectModel / remoteObjectField) for JavaScript DML without Apex.',null],
+        ['SControl','apex:scontrol','doc','Embeds a legacy s-control (deprecated).',null],
+        ['Map','apex:map','built','An interactive map centered on a location.','MapVF'],
+        ['Map Marker','apex:mapMarker','doc','A pin placed on an apex:map at a given address or coordinate.',null],
+        ['Map Info Window','apex:mapInfoWindow','doc','An info popup shown when a map marker is selected.',null],
+        ['Vote','apex:vote','built','Up/down voting control for a knowledge article.','Vote'],
+      ]},
+      { id:'email', title:'Email Templates', desc:'The messaging: namespace for building HTML and text Visualforce email templates.', items:[
+        ['Email Template','messaging:emailTemplate','built','The root of a Visualforce email template, bound to a recipient and related object.','EmailTemplate'],
+        ['HTML Email Body','messaging:htmlEmailBody','doc','The HTML body content of an email template.',null],
+        ['Plain Text Email Body','messaging:plainTextEmailBody','doc','The plain-text body of an email template.',null],
+        ['Attachment','messaging:attachment','doc','Attaches a file (e.g. a rendered PDF) to the email.',null],
+        ['Email Header','messaging:emailHeader','doc','Adds a custom header to the outgoing email.',null],
+    ]},
+      { id:'service', title:'Service & Knowledge', desc:'Service Console, knowledge, and live-agent components for support experiences.', items:[
+        ['Email Publisher','apex:emailPublisher','built','The case-feed email composer for replying to a customer.','EmailPublisher'],
+        ['Log Call Publisher','apex:logCallPublisher','built','The case-feed composer for logging a call against the case.','LogCallPublisher'],
+        ['Click To Dial','support:clickToDial','built','A CTI-enabled phone number that dials through the softphone.','ClickToDial'],
+        ['Portal Publisher','support:portalPublisher','doc','A publisher for posting customer-facing answers to a case.',null],
+        ['Case Articles','support:caseArticles','doc','Knowledge articles attached to or suggested for a case.',null],
+        ['Article List','knowledge:articleList','built','Lists knowledge articles for a data category or search.','KnowledgeList'],
+        ['Category List','knowledge:categoryList','doc','Renders the data-category tree for browsing articles.',null],
+        ['Client Chat','liveAgent:clientChat','doc','The Live Agent / chat window components for an embedded chat.',null],
+    ]},
+      { id:'analytics', title:'Analytics', desc:'Embed saved report charts and CRM Analytics dashboards directly on a page.', items:[
+        ['Report Chart','analytics:reportChart','built','Embeds the chart from a saved report, filtered and cached for the page.','ReportChart'],
+        ['Wave Dashboard','wave:dashboard','built','Embeds a CRM Analytics (Wave) dashboard, optionally filtered.','WaveDashboard'],
+    ]},
+      { id:'social', title:'Chatter & Social', desc:'Chatter feed, follow, and status components for collaboration.', items:[
+        ['Chatter Feed','chatter:feed','built','The record/user feed — posts, comments, and likes.','ChatterFeed'],
+        ['Follow','chatter:follow','built','A follow / unfollow toggle for a record.','ChatterFollow'],
+        ['Followers','chatter:followers','built','Displays who is following a record.','ChatterFollowers'],
+        ['New Status','chatter:newStatus','built','A composer for posting a new status update.','ChatterNewStatus'],
+        ['Feed With Followers','chatter:feedWithFollowers','doc','A combined feed plus followers list in one component.',null],
+        ['Flow Interview','flow:interview','doc','Embeds and runs a screen flow on the page.',null],
+      ]},
+    ];
+
+    const slug = s => 'c-'+String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+
+    function Entry({ row }) {
+      const [name, tag, status, desc, exKey] = row;
+      const wide = exKey && WIDE.has(exKey);
+      let demo;
+      if (status === 'built' && exKey && Ex[exKey]) {
+        const Comp = Ex[exKey];
+        demo = <div className="demo block"><Comp /></div>;
+      } else {
+        demo = <div className="demo empty">Documented — see description.</div>;
+      }
+      return (
+        <div className={`entry ${wide?'wide':''}`} id={slug(name)} style={{scrollMarginTop:'1rem'}}>
+          <header>
+            <div className="nm">
+              <span className={`dot ${status}`}></span>
+              <strong>{name}</strong>
+              <code>{tag}</code>
+              <span style={{flex:1}}></span>
+              <span className={`pill ${status}`}>{status === 'built' ? 'In this kit' : 'Documented'}</span>
+            </div>
+            <p className="desc">{desc}</p>
+          </header>
+          {demo}
+        </div>
+      );
+    }
+
+    function App() {
+      const builtAll = CAT.reduce((s,c)=>s+c.items.filter(i=>i[2]==='built').length,0);
+      const totalAll = CAT.reduce((s,c)=>s+c.items.length,0);
+      const allItems = React.useMemo(()=>CAT.flatMap(c=>c.items.map(i=>({name:i[0],tag:i[1],status:i[2]}))).sort((a,b)=>a.name.localeCompare(b.name)),[]);
+      const [q,setQ]=React.useState('');
+      const searchRef=React.useRef(null);
+      React.useEffect(()=>{const h=e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='j'){e.preventDefault();searchRef.current&&searchRef.current.focus();}};window.addEventListener('keydown',h);return()=>window.removeEventListener('keydown',h);},[]);
+      const ql=q.trim().toLowerCase();
+      const matches=ql?allItems.filter(i=>i.name.toLowerCase().includes(ql)||i.tag.toLowerCase().includes(ql)):allItems;
+      return (
+        <>
+          <aside className="side">
+            <div className="side-head">
+              <div className="eyebrow"><span className="material-symbols-rounded" style={{fontSize:18}}>arrow_back</span><span className="material-symbols-rounded bolt">bolt</span><span>Platform</span></div>
+              <h1>Visualforce Component Reference</h1>
+              <div className="search">
+                <span className="material-symbols-rounded" style={{fontSize:18,color:'var(--slds-g-color-on-surface-3)'}}>search</span>
+                <input ref={searchRef} value={q} onChange={e=>setQ(e.target.value)} placeholder="Search apex: tags" aria-label="Search components" />
+                <span className="kbd">⌘J</span>
+              </div>
+            </div>
+            <nav className="navlist">
+              {matches.length ? matches.map(i => (
+                <a key={i.name} href={`#${slug(i.name)}`}>
+                  <span className={`sdot ${i.status}`}></span>
+                  <span>{i.name}</span>
+                </a>
+              )) : <div className="empty-nav">No components match “{q}”.</div>}
+            </nav>
+          </aside>
+          <main className="main">
+            <div className="lede">
+              <h2>Visualforce Component Reference</h2>
+              <p>The Visualforce <code style={{fontFamily:'var(--slds-g-font-family-mono)',fontSize:'0.9em'}}>apex:</code> standard component set, organized by what each tag does. The visually distinct tags — page blocks, forms, actions, charts, and Chatter — render live below in SLDS 2; markup-only and runtime tags are documented.</p>
+              <p className="note">Visualforce pages render in Salesforce Classic styling by default; with <code style={{fontFamily:'var(--slds-g-font-family-mono)',fontSize:'0.9em'}}>&lt;apex:page&gt;</code> applying the SLDS scoping class (or <code style={{fontFamily:'var(--slds-g-font-family-mono)',fontSize:'0.9em'}}>lightningStylesheets="true"</code>) they pick up the Lightning look shown here.</p>
+              <div className="legend">
+                <span className="lg-item"><span className="dot built"></span> Live SLDS 2 demo ({builtAll}/{totalAll})</span>
+                <span className="lg-item"><span className="dot doc"></span> Documented — markup-only or runtime tag</span>
+              </div>
+            </div>
+            {CAT.map(c => (
+              <section key={c.id} id={c.id} className="cat">
+                <h3>{c.title}</h3>
+                <p className="catdesc">{c.desc}</p>
+                <div className="grid">
+                  {c.items.map((row,i) => <Entry key={i} row={row} />)}
+                </div>
+              </section>
+            ))}
+          </main>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+  </script>
+</body>
+</html>

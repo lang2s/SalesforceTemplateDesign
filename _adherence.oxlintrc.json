@@ -25,7 +25,6 @@
               "components/navigation/**",
               "components/overlays/**",
               "components/progress/**",
-              "crm-builder/**",
               "ui_kits/lightning-crm/**",
               "ui_kits/lightning-crm/data/**"
             ],
